@@ -97,6 +97,7 @@ class Wentworth():
 
         self.scale = wentworth_scale_coarse if scale == 'coarse' else wentworth_scale_fine
 
+        # change this... index won't work like that
         self.lower_psi = self.scale.index(min_bin_name) if min_bin_name else floor(min(gs_psi))
         self.upper_psi = self.scale.index(max_bin_name) if max_bin_name else ceil(max(gs_psi))
 

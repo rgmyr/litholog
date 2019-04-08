@@ -7,8 +7,9 @@ from striplog import Interval
 
 class Bed(Interval):
     """
-    Represents an individual 'bed'. Basically a striplog.Interval with additional restrictions and logic.
-    Beds are required to have a top, base, and data.
+    Represents an individual bed or layer.
+    Basically a striplog.Interval with additional restrictions and logic.
+    Beds are required to have a top, base, and data. Data can be an array or dict-like.
 
     Parameters
     ----------
@@ -18,7 +19,7 @@ class Bed(Interval):
         Base depth or elevation of bed.
     data : array or dict-like
         Object from which to create `Bed` instance. If an array, must be 1- or 2-D.
-        Supported dict-like types include dict subclasses, pd.Series and `namedtuple` subclasses.
+        Supported dict-like types include dict subclasses, pd.Series and `namedtuple` instances.
     **kwargs
         Any additional keyword args for striplog.Interval constructor.
     """
@@ -31,16 +32,16 @@ class Bed(Interval):
 
         # `data` must either be ndarray or dict subclass now
         if isinstance(data, dict):
-            assert all(type(k) is str for k in data.keys), 'Only string keys allowed for dict-like Bed `data`'
+            assert all(type(k) is str for k in data.keys()), 'Only string keys allowed for dict-like Bed `data`'
             self.data = data
         elif isinstance(data, (np.ndarray, np.generic)):
             data = np.expand_dims(data, 0) if data.ndim == 1 else data
-            assert data.ndim == 2, 'Array `data` cannot have more then 2 dims'
+            assert data.ndim == 2, 'Array Bed `data` cannot have more than 2 dimensions'
             self.data = {'_values' : data}
         else:
-            raise TypeError(f'Bed `data` type must be array or dict-like, not {type(data)}')
+            raise TypeError(f'Bed `data` type must be np.ndarray or dict-like, not {type(data)}')
 
-        Interval.__init__(self, top, base=base, data=data, **kwargs)
+        Interval.__init__(self, top, base=base, data=self.data, **kwargs)
 
 
     @property
@@ -48,9 +49,9 @@ class Bed(Interval):
         if '_values' in self.data.keys():
             return self.data['_values']
         else:
-            max_len = max(safelen(v) for v in self.data.values())
+            max_len = max(utils.safelen(v) for v in self.data.values())
             # TODO: double check that this is safe and works right
-            return np.vstack([saferep(v, max_len) for v in self.data.values()]).T
+            return np.vstack([utils.saferep(v, max_len) for v in self.data.values()]).T
 
 
     def __getitem__(self, key):
@@ -66,7 +67,7 @@ class Bed(Interval):
 
     def max_field(self, key):
         """
-        Returns the maximum value of data[key], or None if it doesn't exist.
+        Return the maximum value of data[key], or None if it doesn't exist.
         """
         try:
             return max(self[field])
@@ -76,7 +77,7 @@ class Bed(Interval):
 
     def min_field(self, key):
         """
-        Returns the minimum value of data[key], or None if it doesn't exist.
+        Return the minimum value of data[key], or None if it doesn't exist.
         """
         try:
             return min(self[field])
@@ -100,7 +101,7 @@ class Bed(Interval):
                 width_field=None,
                 depth_field=None,
                 min_width=0.,
-                max_width=1.5, 
+                max_width=1.5,
                 **kwargs):
         """
         Return the instance as a `matplotlib.patches` object [Polygon or Rectangle].
@@ -108,13 +109,13 @@ class Bed(Interval):
         Parameters
         ----------
         legend : striplog.Legend
-            Legend to get matching Decor from.
+            Legend to get a matching Decor from.
         width_field : str or int, optional
-            Data key or values column index to use as width field
+            Data key or values column index to use as width field.
         depth_field : str or int, optional
             Data key or values column index to use as depths of `width_field` samples.
-            If not provided and `width_field` values are iterable, created from np.linspace(top, base).
-            Ignored if `width_field` is a scalar. Sizes must match if both return iterable/array.
+            If not provided and `width_field` values are iterable, create from np.linspace(top, base).
+            Ignored if `width_field` is a scalar. Sizes must match if both fields return iterable/array.
         """
         decor = legend.get_decor(self.primary)
 
