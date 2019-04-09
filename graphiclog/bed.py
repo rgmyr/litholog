@@ -4,6 +4,8 @@ import matplotlib as mpl
 
 from striplog import Interval
 
+from graphiclog import utils
+
 
 class Bed(Interval):
     """
@@ -49,9 +51,10 @@ class Bed(Interval):
         if '_values' in self.data.keys():
             return self.data['_values']
         else:
-            max_len = max(utils.safelen(v) for v in self.data.values())
+            lens = [utils.safelen(v) for v in self.data.values()]
+            assert len(set(lens)) <= 2, f'Lengths of `data` values must be [1,N] only, found: {set(lens)}'
             # TODO: double check that this is safe and works right
-            return np.vstack([utils.saferep(v, max_len) for v in self.data.values()]).T
+            return np.vstack([utils.saferep(v, max(lens)) for v in self.data.values()]).T
 
 
     def __getitem__(self, key):
@@ -70,9 +73,9 @@ class Bed(Interval):
         Return the maximum value of data[key], or None if it doesn't exist.
         """
         try:
-            return max(self[field])
+            return max(self[key])
         except TypeError:
-            return self[field]
+            return self[key]
 
 
     def min_field(self, key):
@@ -80,9 +83,9 @@ class Bed(Interval):
         Return the minimum value of data[key], or None if it doesn't exist.
         """
         try:
-            return min(self[field])
+            return min(self[key])
         except TypeError:
-            return self[field]
+            return self[key]
 
 
     def _compatible_with(self, other):
@@ -146,7 +149,6 @@ class Bed(Interval):
         # if `ws` is scalar, then make and return a plain Rectangle
         else:
             return self._as_rectangle(w, **patch_kwargs)
-
 
 
     def _as_rectangle(self, w, **kwargs):

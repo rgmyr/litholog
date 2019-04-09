@@ -9,7 +9,8 @@ import matplotlib as mpl
 
 from striplog import Striplog, Legend
 
-from depstrat.graphiclog import utils
+from graphiclog import Bed
+from graphiclog import utils
 
 
 class TableReader():
@@ -26,8 +27,9 @@ class BedSequence(Striplog):
     Ordered collection of `Bed` instances. Should we inherit from striplog.Striplog? Probably.
 
     """
-    def __init__(self, list_of_Beds):
-        Striplog.__init__(list_of_Beds)
+    def __init__(self, list_of_Beds, metadata={}):
+        self.metadata = metadata
+        Striplog.__init__(self, list_of_Beds)
 
 
     @property
@@ -35,8 +37,10 @@ class BedSequence(Striplog):
         """
         Get the instance as a 2D array w/ shape (nsamples, nfeatures).
         """
-        assert all(t._compatible_with(b) for t, b in zip(self.__list, self.__list[1:])), 'Beds must have compatible data'
-        return np.vstack([bed.values for bed in self.__list])
+        pairs = zip(self._Striplog__list[:-1], self._Striplog__list[1:])
+        assert all(t._compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
+        return np.vstack([bed.values for bed in self._Striplog__list])
+
 
     @property
     def nsamples(self):
@@ -51,26 +55,71 @@ class BedSequence(Striplog):
         """
         Return number of feature columns in `values`.
         """
+        return self.values.shape[1]
 
 
     @classmethod
-    def from_dataframe(self, df, datacols=None, metacols=None, component_map=None):
+    def from_dataframe(cls, df,
+                      topcol='top',
+                      basecol=None,
+                      thickcol=None,
+                      component_map=None,
+                      datacols=[],
+                      metacols=[],
+                      metasafe=True):
         """
-        Create an instance from a pd.DataFrame or subclass (e.g., a GroupBy object)
+        Create an instance from a pd.DataFrame or subclass (e.g., a GroupBy object).
+        Must provide `topcol` and one of `basecol` or `thickcol`.
 
         Parameters
         ----------
         df : pd.DataFrame or subclass
             Table from which to create `list_of_Beds`.
+        topcol : str
+            Name of top depth/elevation column. Must be present. Default='top'.
+        basecol, thickcol: str
+            Either provide a base depth/elevation column, or a thickness column.
+            Must provide at least one.
+        component_map : tuple(str, func), optional
+            Function that maps values of a column to a primary `striplog.Component` for individual Beds.
         datacols : list(str), optional
             Columns to use as `Bed` data. Should reference numeric columns only.
         metacols : list(str), optional
             Columns to read into `metadata` dict attribute. Should reference columns with a single unique value?
-        component_map : tuple(str, func), optional
-            Function that maps values of a column to a primary striplog.Component for individual Beds.
+        metasafe : bool, optional
+            If True, enforce that df[metacols] have a single unique value per-column. Otherwise attach all unique values.
         """
+        # Set up & check top/base columns
+        assert topcol in df.columns, f'`topcol` {topcol}  not present in `df`'
 
-        pass
+        assert basecol or thickcol, 'Must specify either `basecol` or `topcol`'
+        if basecol:
+            assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
+        else:
+            assert thickcol in df.columns, f'`thickcol` {thickcol} not present in `df`'
+            # TODO: elevation vs depth ordering, might need more specifics here
+            df['base'] = df[topcol] - df[thickcol]
+            basecol = 'base'
+
+        # Check for data/meta column presence
+        missing_data_cols = [c for c in datacols if c not in df.columns]
+        assert not missing_data_cols, f'datacols {missing_data_cols} not present in `df`'
+
+        missing_meta_cols = [c for c in metacols if c not in df.columns]
+        assert not missing_meta_cols, f'metacols {missing_meta_cols} not present in `df`'
+
+        metadata = {}
+        for metacol in metacols:
+            meta_values = df[metacol].unique()
+            if metasafe:
+                assert len(meta_values) == 1, f'`metacol` {metacol} has more than one unique value: {meta_values}'
+            metadata[metacol] = meta_values[0]
+
+        list_of_Beds = []
+        for _, row in df.iterrows():
+            list_of_Beds.append(Bed(row[topcol], row[basecol], row[datacols]))
+
+        return cls(list_of_Beds, metadata=metadata)
 
 
     def plot(self,
