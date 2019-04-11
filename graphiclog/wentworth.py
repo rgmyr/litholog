@@ -89,7 +89,7 @@ def psirange2names(min_psi, max_psi, return_tick_locs=False):
     return wentworth_names[min_idx:max_idx+1]
 """
 
-class Wentworth():
+class WentworthAxis():
     """
     Manage the transformation of grainsize psi values to Striplog x-axis, and locs of corresponding ticks.
     """
@@ -102,8 +102,10 @@ class Wentworth():
         self.upper_psi = self.scale.index(max_bin_name) if max_bin_name else ceil(max(gs_psi))
 
 
-    def psi2xcoord(self, psi):
-
+    def transform(self, gs_psi):
+        """
+        Map `psi` values to appropriate x-coords
+        """
         pass
 
     def prepare_ax(self, ax):

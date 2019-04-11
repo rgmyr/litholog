@@ -4,6 +4,31 @@ Also define default csv/DataFrame fields to map to `Bed` attributes/data.
 """
 from striplog import Component, Decor, Legend
 
+
+###+++++++++++++++++++++###
+### Default viz objects ###
+###+++++++++++++++++++++###
+shl_decor = Decor({
+    'component' : Component({'lithology' : 'shale'}),
+    'colour' : 'darkgray',
+    'hatch' : '-'
+})
+
+snd_decor = Decor({
+    'component' : Component({'lithology' : 'sand'}),
+    'colour' : 'gold',
+    'hatch' : '.'
+})
+
+grv_decor = Decor({
+    'component' : Component({'lithology' : 'gravel'}),
+    'colour' : 'darkorange',
+    'hatch' : 'o'
+})
+
+litholegend = Legend([shl_decor, snd_decor, grv_decor])
+
+
 ###++++++++++++++++++++###
 ### Default csv fields ###
 ###++++++++++++++++++++###
@@ -12,25 +37,8 @@ DEFAULT_FIELDS = {
     'base' : 'bases'
 }
 
+def 
 
-###++++++++++++++++++++++++###
-### Default viz properties ###
-###++++++++++++++++++++++++###
-lithofacies = [
-    Component({'lithology' : 'shale'}),
-    Component({'lithology' : 'sand'})
-]
-
-shl_decor = Decor({
-    'component' : facies[0],
-    'colour' : 'darkgray',
-    'hatch' : '-'
-})
-
-snd_decor = Decor({
-    'component' : facies[1],
-    'colour' : 'gold',
-    'hatch' : '.'
-})
-
-litholegend = Legend([shl_decor, snd_decor])
+DEFAULT_COMPONENT_MAP = {
+    ''
+}

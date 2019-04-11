@@ -23,11 +23,11 @@ class Bed(Interval):
         Object from which to create `Bed` instance. If an array, must be 1- or 2-D.
         Supported dict-like types include dict subclasses, pd.Series and `namedtuple` instances.
     **kwargs
-        Any additional keyword args for striplog.Interval constructor.
+        Any additional keyword args for striplog.Interval constructor. (Components, etc.)
     """
     def __init__(self, top, base, data, **kwargs):
 
-        if hasattr(data, 'to_dict'):        # handle pd.Series (e.g., from `df.iterrows()`)
+        if hasattr(data, 'to_dict'):        # handle `pd.Series` (e.g., from `df.iterrows()`)
             data = data.to_dict()
         elif hasattr(data, '_asdict'):      # handle `namedtuple` (e.g., from `df.itertuples()`)
             data = data._asdict()
@@ -41,7 +41,7 @@ class Bed(Interval):
             assert data.ndim == 2, 'Array Bed `data` cannot have more than 2 dimensions'
             self.data = {'_values' : data}
         else:
-            raise TypeError(f'Bed `data` type must be np.ndarray or dict-like, not {type(data)}')
+            raise TypeError(f'Bed `data` type must be array or dict-like, not {type(data)}')
 
         Interval.__init__(self, top, base=base, data=self.data, **kwargs)
 

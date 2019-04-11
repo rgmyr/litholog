@@ -10,7 +10,7 @@ def cast2float(x):
     pass
 
 
-def string2array(x):
+def string2array(s):
     """
     Parse csv array string to (float) array.
     """

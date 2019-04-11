@@ -58,6 +58,38 @@ class BedSequence(Striplog):
         return self.values.shape[1]
 
 
+    def max_field(self, field):
+        """
+        Override method from `Striplog`
+        """
+        return max(filter(None, [iv.max_field(field) for iv in self]))
+
+
+    def min_field(self, field):
+        """
+        Override method from `Striplog`
+        """
+        return min(filter(None, [iv.min_field(field) for iv in self]))
+
+
+    def get_field(self, field):
+        """
+        Get 'vertical' array of `field`
+        """
+        return np.concatenate(filter(None, [iv[field] for iv in self]))
+
+
+    def resample_data(self, depth_key, step):
+        """
+        Resample the data at approximate depth intervals of size `step`.
+        `depth_key` can be a `str` (for dict-like bed data) or column index (for array bed data).
+
+        I think we probably want to maintain top/base samples, and sample to the nearest `step` b/t.
+        Maybe this could be an option? Implement it as the default first though.
+        """
+        pass
+
+
     @classmethod
     def from_dataframe(cls, df,
                       topcol='top',
