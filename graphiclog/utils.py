@@ -3,13 +3,6 @@ Utility functions.
 """
 import numpy as np
 
-def cast2float(x):
-    """
-    Cast `x` to float. Raises ValueError if not castable.
-    """
-    pass
-
-
 def string2array(s):
     """
     Parse csv array string to (float) array.
@@ -48,11 +41,4 @@ def saferep(x, n):
         return x
     except TypeError:
         return np.repeat(x, n)
-
-
-def preproc_seq_df(df):
-    """
-    Need a function to infer relationship b/t top + base + thickness, etc. for an individual sequence.
-    Should probably standardize depth vs. elevation ordering?
-    """
-    pass
+        

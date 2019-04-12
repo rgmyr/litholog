@@ -7,8 +7,7 @@ from math import floor, ceil
 # Reference diameter (mm)
 D0 = 1.0
 
-# (name : upper PSI limit)
-# upper limits taken as inclusive
+# (name : upper PSI limit) ... upper limits taken as inclusive
 wentworth_scale_fine = [
     ('colloid', -10),
     ('clay',    -8),

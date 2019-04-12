@@ -8,25 +8,25 @@ from striplog import Component, Decor, Legend
 ###+++++++++++++++++++++###
 ### Default viz objects ###
 ###+++++++++++++++++++++###
-shl_decor = Decor({
+shale_decor = Decor({
     'component' : Component({'lithology' : 'shale'}),
     'colour' : 'darkgray',
     'hatch' : '-'
 })
 
-snd_decor = Decor({
+sand_decor = Decor({
     'component' : Component({'lithology' : 'sand'}),
     'colour' : 'gold',
     'hatch' : '.'
 })
 
-grv_decor = Decor({
+gravel_decor = Decor({
     'component' : Component({'lithology' : 'gravel'}),
     'colour' : 'darkorange',
     'hatch' : 'o'
 })
 
-litholegend = Legend([shl_decor, snd_decor, grv_decor])
+litholegend = Legend([shale_decor, sand_decor, gravel_decor])
 
 
 ###++++++++++++++++++++###
@@ -37,8 +37,25 @@ DEFAULT_FIELDS = {
     'base' : 'bases'
 }
 
-def 
 
-DEFAULT_COMPONENT_MAP = {
-    ''
-}
+def gs2litho(gs, units='psi'):
+    """
+    Map grainsize value `gs` to `striplog.Component`.
+    If `units` is 'mm' or 'phi', will convert to `psi` first.
+    """
+    if units is 'mm':
+        gs = wentworth.gs2psi(gs)
+    elif units is 'phi':
+        gs = wentworth.phi2psi(gs)
+    elif gs < -11 or gs > 10:
+        raise UserWarning(f'gs value of {gs} is suspect... is this in `psi` units?')
+
+    if gs <= -4:
+        return shale_decor.component
+    elif gs <= 1:
+        return sand_decor.component
+    else:
+        return gravel_decor.component
+
+
+DEFAULT_COMPONENT_MAP = ('grainsize_mm', lambda gs: gs2litho(gs, units='mm'))

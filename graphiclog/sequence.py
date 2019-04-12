@@ -1,5 +1,3 @@
-
-
 """
 Notes:
     - Just need top depths/elevations.
@@ -12,14 +10,6 @@ from striplog import Striplog, Legend
 from graphiclog import Bed
 from graphiclog import utils
 
-
-class TableReader():
-    """
-    Read rows of a csv as `Beds` and return `BedSequence`s.
-    I think `fields` will be a dict with certain required+default keys?
-    """
-    def __init__(self, fields):
-        pass
 
 
 class BedSequence(Striplog):
@@ -38,14 +28,14 @@ class BedSequence(Striplog):
         Get the instance as a 2D array w/ shape (nsamples, nfeatures).
         """
         pairs = zip(self._Striplog__list[:-1], self._Striplog__list[1:])
-        assert all(t._compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
+        assert all(t.compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
         return np.vstack([bed.values for bed in self._Striplog__list])
 
 
     @property
     def nsamples(self):
         """
-        Return number of sample rows in `values`.
+        The number of sample rows in `values`.
         ** Note: len(Striplog) will already give number of beds.
         """
         return self.values.shape[0]
@@ -53,7 +43,7 @@ class BedSequence(Striplog):
     @property
     def nfeatures(self):
         """
-        Return number of feature columns in `values`.
+        The number of feature columns in `values`.
         """
         return self.values.shape[1]
 
@@ -74,7 +64,7 @@ class BedSequence(Striplog):
 
     def get_field(self, field):
         """
-        Get 'vertical' array of `field`
+        Get 'vertical' array of `field` values
         """
         return np.concatenate(filter(None, [iv[field] for iv in self]))
 
@@ -85,8 +75,9 @@ class BedSequence(Striplog):
         `depth_key` can be a `str` (for dict-like bed data) or column index (for array bed data).
 
         I think we probably want to maintain top/base samples, and sample to the nearest `step` b/t.
-        Maybe this could be an option? Implement it as the default first though.
+        Maybe this could be the default of multiple options? Implement it as the default first though.
         """
+        # Note: implement as `Bed` method than can just be mapped over self.__list
         pass
 
 
@@ -110,10 +101,10 @@ class BedSequence(Striplog):
         topcol : str
             Name of top depth/elevation column. Must be present. Default='top'.
         basecol, thickcol: str
-            Either provide a base depth/elevation column, or a thickness column.
-            Must provide at least one.
+            Either provide a base depth/elevation column, or a thickness column. Must provide at least one.
         component_map : tuple(str, func), optional
             Function that maps values of a column to a primary `striplog.Component` for individual Beds.
+            TODO: if `func` is a str with 'wentworth', maybe just map using grainsize bins?
         datacols : list(str), optional
             Columns to use as `Bed` data. Should reference numeric columns only.
         metacols : list(str), optional

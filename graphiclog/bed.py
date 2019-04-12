@@ -68,6 +68,16 @@ class Bed(Interval):
             return self.data.get(key)
 
 
+    def resample_data(self, depth_key, step):
+        """
+        Resample data to approximately `step`, but preserving top/base samples if they exist.
+        """
+        ds = self[depth_key]
+        assert ds, f'`depth_key` {depth_key} doesnt match anything in `Bed.data`'
+        # TODO: finish this
+        pass
+
+
     def max_field(self, key):
         """
         Return the maximum value of data[key], or None if it doesn't exist.
@@ -88,7 +98,7 @@ class Bed(Interval):
             return self[key]
 
 
-    def _compatible_with(self, other):
+    def compatible_with(self, other):
         """
         Check that `self.data` and `other.data` have compatible `values` shapes and matching `data` key order.
 
