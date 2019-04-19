@@ -52,7 +52,7 @@ class Bed(Interval):
             return self.data['_values']
         else:
             lens = [utils.safelen(v) for v in self.data.values()]
-            assert len(set(lens)) <= 2, f'Lengths of `data` values must be [1,N] only, found: {set(lens)}'
+            assert len(set(lens)) <= 2, f'Lengths of `.data` values must be [1,N] only, found: {set(lens)}'
             # TODO: double check that this is safe and works right
             return np.vstack([utils.saferep(v, max(lens)) for v in self.data.values()]).T
 
@@ -124,9 +124,9 @@ class Bed(Interval):
         legend : striplog.Legend
             Legend to get a matching Decor from.
         width_field : str or int, optional
-            Data key or values column index to use as width field.
+            Data key or `.values` column index to use as width field.
         depth_field : str or int, optional
-            Data key or values column index to use as depths of `width_field` samples.
+            Data key or `.values` column index to use as depths of `width_field` samples.
             If not provided and `width_field` values are iterable, create from np.linspace(top, base).
             Ignored if `width_field` is a scalar. Sizes must match if both fields return iterable/array.
         """
@@ -134,7 +134,9 @@ class Bed(Interval):
 
         ws = self[width_field] or decor.width or 1
         ws = (ws - min_width) / (max_width - min_width)
-        ds = self[depth_field]
+
+        # if we don't have depths, assumed samples are evenly spaced b/t `top` and `base`
+        ds = self[depth_field] or np.linspace(self.top.z, self.base.z, num=utils.safelen(ws))
 
         patch_kwargs = {
             'fc' : kwargs.pop('fc') or decor.colour,
@@ -146,19 +148,14 @@ class Bed(Interval):
 
         # if `ws` is iterable, then make and return a Polygon
         if hasattr(ws, '__iter__'):
-            try:
-                assert len(ws) == len(ds), 'Must have equal number of width and depth sample values'
-                assert all(self.spans(d) for d in ds), 'Depth sample values must fall between Bed top and base'
-
-            # if we don't have depths, assumed samples are evenly spaced b/t `top` and `base`
-            except TypeError:
-                ds = np.linspace(self.top.z, self.base.z, num=len(ws))
+            assert len(ws) == len(ds), 'Must have equal number of width and depth sample values'
+            assert all(self.spans(d) for d in ds), 'Depth sample values must fall between Bed top and base'
 
             return self._as_polygon(np.array(ws), np.array(ds), **patch_kwargs)
 
         # if `ws` is scalar, then make and return a plain Rectangle
         else:
-            return self._as_rectangle(w, **patch_kwargs)
+            return self._as_rectangle(ws, **patch_kwargs)
 
 
     def _as_rectangle(self, w, **kwargs):

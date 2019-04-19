@@ -41,7 +41,7 @@ DEFAULT_FIELDS = {
 def gs2litho(gs, units='psi'):
     """
     Map grainsize value `gs` to `striplog.Component`.
-    If `units` is 'mm' or 'phi', will convert to `psi` first.
+    If `units` is 'mm' or 'phi', will convert to 'psi' first.
     """
     if units is 'mm':
         gs = wentworth.gs2psi(gs)
