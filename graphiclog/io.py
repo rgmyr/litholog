@@ -19,19 +19,17 @@ def preprocess_bed_seq(df, topcol, basecol, thickcol, sort='elevation'):
     assert topcol in df.columns, f'`topcol` {topcol}  not present in `df`'
     assert basecol or thickcol, '`basecol` and `thickcol` cannot both be `None`'
 
-    # TODO: check that if basecol and thickcol both present, they agree
-    if basecol:
-        assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
-
-    if thickcol:
-        assert thickcol in df.columns, f'`thickcol` {basecol} not present in `df`'
-
-
     # Depth vs. Elevation checks
     depth_sorted = df[topcol].is_monotonic_increasing
     elevation_sorted = df[topcol].is_monotonic_decreasing
 
     assert depth_sorted or elevation_sorted, f'Bed sequence `topcol` must be sorted (depth or elev.)'
+
+    # TODO: check that if basecol and thickcol both present, they agree
+    if basecol:
+        assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
+    if thickcol:
+        assert thickcol in df.columns, f'`thickcol` {basecol} not present in `df`'
 
     if depth_sorted:
         assert (df[basecol] >= df[topcol]).all(), f'depth ordering implies all bases >= tops'

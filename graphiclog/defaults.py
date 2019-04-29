@@ -1,7 +1,8 @@
 """
 Define default `striplog.Decor`s when using grainsize as the width field.
-Also define default csv/DataFrame fields to map to `Bed` attributes/data.
+Also specify default csv/DataFrame fields to map to `Bed` attributes/data.
 """
+from graphiclog import wentworth
 from striplog import Component, Decor, Legend
 
 
@@ -33,7 +34,7 @@ litholegend = Legend([shale_decor, sand_decor, gravel_decor])
 ### Default csv fields ###
 ###++++++++++++++++++++###
 DEFAULT_FIELDS = {
-    'top' : 'tops'
+    'top' : 'tops',
     'base' : 'bases'
 }
 
@@ -58,4 +59,4 @@ def gs2litho(gs, units='psi'):
         return gravel_decor.component
 
 
-DEFAULT_COMPONENT_MAP = ('grainsize_mm', lambda gs: gs2litho(gs, units='mm'))
+DEFAULT_COMPONENT_MAP = ('mean_gs_mm', lambda gs: gs2litho(gs, units='mm'))

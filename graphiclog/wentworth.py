@@ -95,10 +95,11 @@ class WentworthAxis():
     def __init__(self, gs_psi, scale='fine', min_bin_name=None, max_bin_name=None):
 
         self.scale = wentworth_scale_coarse if scale == 'coarse' else wentworth_scale_fine
+        self.names, self.psis = zip(*self.scale)
 
         # change this... index won't work like that
-        self.lower_psi = self.scale.index(min_bin_name) if min_bin_name else floor(min(gs_psi))
-        self.upper_psi = self.scale.index(max_bin_name) if max_bin_name else ceil(max(gs_psi))
+        self.lower_psi = self.psis[self.names.index(min_bin_name)] if min_bin_name else floor(min(gs_psi))
+        self.upper_psi = self.psis[self.names.index(max_bin_name)] if max_bin_name else ceil(max(gs_psi))
 
 
     def transform(self, gs_psi):
@@ -106,6 +107,7 @@ class WentworthAxis():
         Map `psi` values to appropriate x-coords
         """
         pass
+
 
     def prepare_ax(self, ax):
         """

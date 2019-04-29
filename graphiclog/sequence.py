@@ -83,7 +83,7 @@ class BedSequence(Striplog):
 
     @classmethod
     def from_dataframe(cls, df,
-                      topcol='top',
+                      topcol='tops',
                       basecol=None,
                       thickcol=None,
                       component_map=None,
@@ -140,7 +140,13 @@ class BedSequence(Striplog):
 
         list_of_Beds = []
         for _, row in df.iterrows():
-            list_of_Beds.append(Bed(row[topcol], row[basecol], row[datacols]))
+            if component_map:
+                field, field_fn = component_map
+                component = field_fn(row[field])
+                bed = Bed(row[topcol], row[basecol], row[datacols], components=[component])
+            else:
+                bed = Bed(row[topcol], row[basecol], row[datacols])
+            list_of_Beds.append(bed)
 
         return cls(list_of_Beds, metadata=metadata)
 

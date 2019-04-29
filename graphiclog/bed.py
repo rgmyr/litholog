@@ -10,8 +10,8 @@ from graphiclog import utils
 class Bed(Interval):
     """
     Represents an individual bed or layer.
-    Basically a striplog.Interval with additional restrictions and logic.
-    Beds are required to have a top, base, and data. Data can be an array or dict-like.
+    Basically a striplog.Interval with some additional restrictions and logic.
+    Beds are required to have a `top`, `base`, and `data` (which can be an array or dict-like).
 
     Parameters
     ----------
@@ -73,8 +73,10 @@ class Bed(Interval):
         Resample data to approximately `step`, but preserving top/base samples if they exist.
         """
         ds = self[depth_key]
-        assert ds, f'`depth_key` {depth_key} doesnt match anything in `Bed.data`'
+        assert ds is not None, f'`depth_key` {depth_key} doesnt match anything in `Bed.data`'
         # TODO: finish this
+
+
         pass
 
 
@@ -136,7 +138,7 @@ class Bed(Interval):
         ws = (ws - min_width) / (max_width - min_width)
 
         # if we don't have depths, assumed samples are evenly spaced b/t `top` and `base`
-        ds = self[depth_field] or np.linspace(self.top.z, self.base.z, num=utils.safelen(ws))
+        ds = self[depth_field] if depth_field else np.linspace(self.top.z, self.base.z, num=utils.safelen(ws))
 
         patch_kwargs = {
             'fc' : kwargs.pop('fc') or decor.colour,

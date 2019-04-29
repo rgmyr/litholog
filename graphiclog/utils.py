@@ -3,6 +3,7 @@ Utility functions.
 """
 import numpy as np
 
+
 def string2array(s):
     """
     Parse csv array string to (float) array.
@@ -41,4 +42,3 @@ def saferep(x, n):
         return x
     except TypeError:
         return np.repeat(x, n)
-        
