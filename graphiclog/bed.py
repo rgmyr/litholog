@@ -1,6 +1,7 @@
 
 import numpy as np
 import matplotlib as mpl
+from scipy import interpolate
 
 from striplog import Interval
 
@@ -10,7 +11,7 @@ from graphiclog import utils
 class Bed(Interval):
     """
     Represents an individual bed or layer.
-    Basically a striplog.Interval with some additional restrictions and logic.
+    Basically a `striplog.Interval` with some additional restrictions and logic.
     Beds are required to have a `top`, `base`, and `data` (which can be an array or dict-like).
 
     Parameters
@@ -56,6 +57,32 @@ class Bed(Interval):
             # TODO: double check that this is safe and works right
             return np.vstack([utils.saferep(v, max(lens)) for v in self.data.values()]).T
 
+    @values.setter
+    def values(self, new_values):
+        assert new_values.ndim == 2, f'`values` can only be set with 2D array, not {new_values.ndim}D'
+        if '_values' in self.data.keys():
+            assert new_values.shape[1] == self.nfeatures, '`values` shape must have `nfeatures` columns'
+            self.data['_values'] = new_values
+        else:
+            assert new_values.shape[1] == len(self.data.keys()), 'Number of columns must match len(self.data.keys())'
+            for i, k in enumerate(self.data.keys()):
+                new_col = new_values[:, i]
+                self.data[k] = new_col[0] if np.unique(new_col).size == 1 else new_col
+
+    @property
+    def nsamples(self):
+        """
+        The number of sample rows in `values`.
+        """
+        return self.values.shape[0]
+
+    @property
+    def nfeatures(self):
+        """
+        The number of feature columns in `values`.
+        """
+        return self.values.shape[1]
+
 
     def __getitem__(self, key):
         """
@@ -68,16 +95,45 @@ class Bed(Interval):
             return self.data.get(key)
 
 
-    def resample_data(self, depth_key, step):
+    def resample_data(self, depth_key, step, kind='linear'):
         """
-        Resample data to approximately `step`, but preserving top/base samples if they exist.
+        Resample data to approximately `step`, but preserving at least top/base samples.
+
+        Parameters
+        ----------
+        depth_key : str, int, or None
+            Dict key or column index pointing to sample depths
+        step : float
+            Depth step at which to (approximately) resample data values
+        kind : one of {'linear','slinear','quadratic','cubic',...}, optional
+            Kind of interpolation to use, default='linear'. See `scipy.intepolate.interp1d` docs.
         """
-        ds = self[depth_key]
-        assert ds is not None, f'`depth_key` {depth_key} doesnt match anything in `Bed.data`'
+        old_ds = self[depth_key]
+        single_sample = True if utils.safelen(old_ds) == 1 else False
+
         # TODO: finish this
+        new_ds = np.linspace(self.top.z, self.base.z, num=max(2, (abs(self.top.z-self.base.z) // step)))
 
+        if type(depth_key) is str:
+            try:
+                depth_idx = list(self.data.keys()).index(depth_key)
+            except IndexError:
+                raise ValueError(f'`depth_key` {depth_key} not in keys {self.data.keys()}')
+        elif type(depth_key) is int:
+            assert depth_key < self.nfeatures, f'`depth_key` {depth_key} too large for values shape {self.values.shape}'
+            depth_idx = depth_key
+        else:
+            raise ValueError(f'`depth_key` must be `str` or `int`, not {type(depth_key)}')
 
-        pass
+        old_xs = np.delete(self.values, depth_idx, axis=1)
+
+        if single_sample:
+            old_ds = np.array([self.top.z, self.base.z])
+            old_xs = np.repeat(old_xs, 2, axis=0)
+
+        interp_fn = interpolate.interp1d(old_ds, old_xs, kind=kind, axis=0, fill_value='extrapolate')
+
+        self.values = np.insert(interp_fn(new_ds), depth_idx, new_ds, axis=1)
 
 
     def max_field(self, key):
@@ -110,6 +166,14 @@ class Bed(Interval):
         shapes_match = self.values.shape[1] == other.values.shape[1]
 
         return keys_match and shapes_match
+
+
+    @classmethod
+    def from_numpy(self, arr):
+        """
+        Implement a method to convert numpy (e.g., from GAN) to `Bed` instance.
+        """
+        pass
 
 
     def as_patch(self, legend,

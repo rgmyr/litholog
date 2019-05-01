@@ -151,6 +151,14 @@ class BedSequence(Striplog):
         return cls(list_of_Beds, metadata=metadata)
 
 
+    @classmethod
+    def from_numpy(self, arr):
+        """
+        Implement a method to convert numpy (e.g., from GAN) to `BedSequence` instance.
+        """
+        pass
+
+
     def plot(self,
              legend=None,
              fig_width=1.5,
