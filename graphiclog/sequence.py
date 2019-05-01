@@ -3,12 +3,14 @@ Notes:
     - Just need top depths/elevations.
 """
 import numpy as np
-import matplotlib as mpl
+from math import floor, ceil
+import matplotlib.pyplot as plt
 
 from striplog import Striplog, Legend
 
 from graphiclog import Bed
 from graphiclog import utils
+from graphiclog.wentworth import wentworth_scale_fine, wentworth_scale_coarse
 
 
 
@@ -69,7 +71,7 @@ class BedSequence(Striplog):
         return np.concatenate(filter(None, [iv[field] for iv in self]))
 
 
-    def resample_data(self, depth_key, step):
+    def resample_data(self, depth_key, step, kind='linear'):
         """
         Resample the data at approximate depth intervals of size `step`.
         `depth_key` can be a `str` (for dict-like bed data) or column index (for array bed data).
@@ -78,7 +80,9 @@ class BedSequence(Striplog):
         Maybe this could be the default of multiple options? Implement it as the default first though.
         """
         # Note: implement as `Bed` method than can just be mapped over self.__list
-        pass
+        for iv in self:
+            iv.resample_data(depth_key, step, kind=kind)
+        return self.values
 
 
     @classmethod
@@ -121,7 +125,7 @@ class BedSequence(Striplog):
         else:
             assert thickcol in df.columns, f'`thickcol` {thickcol} not present in `df`'
             # TODO: elevation vs depth ordering, might need more specifics here
-            df['base'] = df[topcol] - df[thickcol]
+            df['base'] = df[topcol] + df[thickcol]
             basecol = 'base'
 
         # Check for data/meta column presence
@@ -183,20 +187,60 @@ class BedSequence(Striplog):
         else:
             return_ax = True
 
+        if self.order is 'depth':
+            ax.invert_yaxis()
+
+        ax.set_ylim([self.start.z, self.stop.z])
+
         if width_field:
-            min_width = min(bed.min_field(width_field) for bed in self.__list if bed[width_field] is not None)
-            max_width = max(bed.max_field(width_field) for bed in self.__list if bed[width_field] is not None)
-            ax.set_xlim([0, max_width-min_width])
+            min_width = floor(self.min_field(width_field)-1)
+            max_width = ceil(self.max_field(width_field)+1)
+            ax.set_xlim([min_width, max_width])
+            self.set_wentworth_ticks(ax, min_width, max_width, wentworth=wentworth)
 
         patches = []
-        for bed in self.__list:
-            patches.append(
-                bed.as_patch(legend, width_field, depth_field,
-                             min_width, max_width, **kwargs)
-            )
+        for bed in self:
+            ax.add_patch(bed.as_patch(legend, width_field, depth_field,
+                                      min_width, max_width, **kwargs))
+
+        if self.order is 'depth':
+            ax.invert_yaxis()
 
         if return_ax:
             return ax
+
+
+    def set_wentworth_ticks(self, ax, min_psi, max_psi, wentworth='fine'):
+        """
+        Set the `xticks` for Wentworth grainsizes.
+        """
+        scale = wentworth_scale_coarse if wentworth == 'coarse' else wentworth_scale_fine
+
+        scale_names, scale_psis = zip(*scale)
+
+        locs, labels = [], []
+        for i, (name, psi) in enumerate(scale):
+            psi = psi or max(10, max_psi)
+            if psi < min_psi or psi > max_psi:
+                continue
+            lower = min_psi if i == 0 else scale_psis[i-1]
+            upper = max_psi if i == (len(scale)-1) else scale_psis[i]
+
+            locs.append((lower + upper) / 2.)
+            labels.append(name)
+
+            if upper < max_psi:
+                locs.append(upper)
+                labels.append('')
+
+        ax.set_xticks(locs)
+        ax.set_xticklabels(labels)
+
+        ax.tick_params('x', labelsize=12, labelrotation=60)
+        ax.tick_params('y', labelsize=16)
+
+        return ax
+
 
 
 

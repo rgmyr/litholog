@@ -1,4 +1,4 @@
-
+import operator
 import numpy as np
 import matplotlib as mpl
 from scipy import interpolate
@@ -23,24 +23,37 @@ class Bed(Interval):
     data : array or dict-like
         Object from which to create `Bed` instance. If an array, must be 1- or 2-D.
         Supported dict-like types include dict subclasses, pd.Series and `namedtuple` instances.
+    keys : list(str), optional
+        If `data` is an array, `keys` can be a list of string keys corresponding to array columns.
+        Columns with a single unique value are mapped to that value, while multi-value columns are kept as arrays.
+        If `data` is an array and `keys` is `None`, whole array is added under `'_values'` key.
     **kwargs
         Any additional keyword args for striplog.Interval constructor. (Components, etc.)
     """
-    def __init__(self, top, base, data, **kwargs):
+    def __init__(self, top, base, data, keys=None, **kwargs):
 
         if hasattr(data, 'to_dict'):        # handle `pd.Series` (e.g., from `df.iterrows()`)
             data = data.to_dict()
         elif hasattr(data, '_asdict'):      # handle `namedtuple` (e.g., from `df.itertuples()`)
             data = data._asdict()
 
-        # `data` must either be ndarray or dict subclass now
+        # `data` must either be dict subclass or np.ndarray now
         if isinstance(data, dict):
             assert all(type(k) is str for k in data.keys()), 'Only string keys allowed for dict-like Bed `data`'
             self.data = data
+
         elif isinstance(data, (np.ndarray, np.generic)):
             data = np.expand_dims(data, 0) if data.ndim == 1 else data
             assert data.ndim == 2, 'Array Bed `data` cannot have more than 2 dimensions'
-            self.data = {'_values' : data}
+
+            if keys:
+                assert len(keys) == data.shape[-1], 'Number of `keys` must match columns in array `data`'
+            else:
+                keys = ['_values']
+
+            self.data = {k : None for k in keys}
+            self.values = data
+
         else:
             raise TypeError(f'Bed `data` type must be array or dict-like, not {type(data)}')
 
@@ -61,7 +74,9 @@ class Bed(Interval):
     def values(self, new_values):
         assert new_values.ndim == 2, f'`values` can only be set with 2D array, not {new_values.ndim}D'
         if '_values' in self.data.keys():
-            assert new_values.shape[1] == self.nfeatures, '`values` shape must have `nfeatures` columns'
+            # only check shape if `values` already exist
+            if self['_values']:
+                assert new_values.shape[1] == self.nfeatures, '`values` shape must have `nfeatures` columns'
             self.data['_values'] = new_values
         else:
             assert new_values.shape[1] == len(self.data.keys()), 'Number of columns must match len(self.data.keys())'
@@ -156,6 +171,21 @@ class Bed(Interval):
             return self[key]
 
 
+    def spans(self, d, eps=0.01):
+        """
+        Determines if depth d is within this interval.
+        * Overridden from `striplog.Interval` to accomodate small tolerance `epsilon`
+        Args:
+            d (float): Level or 'depth' to evaluate.
+        Returns:
+            bool. Whether the depth is in the interval.
+        """
+        o = {'depth': operator.le, 'elevation': operator.ge}[self.order]
+        adjusted_top = self.top.z - eps if self.order is 'depth' else self.top.z + eps
+        adjusted_base = self.base.z + eps if self.order is 'depth' else self.base.z - eps
+        return (o(d, adjusted_base) and o(adjusted_top, d))
+
+
     def compatible_with(self, other):
         """
         Check that `self.data` and `other.data` have compatible `values` shapes and matching `data` key order.
@@ -166,14 +196,6 @@ class Bed(Interval):
         shapes_match = self.values.shape[1] == other.values.shape[1]
 
         return keys_match and shapes_match
-
-
-    @classmethod
-    def from_numpy(self, arr):
-        """
-        Implement a method to convert numpy (e.g., from GAN) to `Bed` instance.
-        """
-        pass
 
 
     def as_patch(self, legend,
@@ -198,40 +220,45 @@ class Bed(Interval):
         """
         decor = legend.get_decor(self.primary)
 
-        ws = self[width_field] or decor.width or 1
-        ws = (ws - min_width) / (max_width - min_width)
+        ws = self[width_field]
+        if ws is None:
+            ws = decor.width or 1
+        #ws = (ws - min_width) / (max_width - min_width)
 
         # if we don't have depths, assumed samples are evenly spaced b/t `top` and `base`
         ds = self[depth_field] if depth_field else np.linspace(self.top.z, self.base.z, num=utils.safelen(ws))
 
         patch_kwargs = {
-            'fc' : kwargs.pop('fc') or decor.colour,
-            'lw' : kwargs.pop('lw', 0),
+            'fc' : kwargs.get('fc') or decor.colour,
+            'lw' : kwargs.get('lw', 0),
             'hatch' : decor.hatch,
-            'ec' : kwargs.pop('ec', 'k'),
+            'ec' : kwargs.get('ec', 'k'),
             **kwargs
         }
 
         # if `ws` is iterable, then make and return a Polygon
         if hasattr(ws, '__iter__'):
             assert len(ws) == len(ds), 'Must have equal number of width and depth sample values'
-            assert all(self.spans(d) for d in ds), 'Depth sample values must fall between Bed top and base'
+            # Need new `spans` function with small tolerance (from rounding, etc.)
+            if not all(self.spans(d) for d in ds):
+                raise ValueError(f'Depth sample values {ds} must fall between Bed top {self.top.z} and base {self.base.z}')
 
-            return self._as_polygon(np.array(ws), np.array(ds), **patch_kwargs)
+            return self._as_polygon(np.array(ws), np.array(ds), min_width, **patch_kwargs)
 
         # if `ws` is scalar, then make and return a plain Rectangle
         else:
-            return self._as_rectangle(ws, **patch_kwargs)
+            print(f'Rectangle here: {self}')
+            return self._as_rectangle(ws, min_width, **patch_kwargs)
 
 
-    def _as_rectangle(self, w, **kwargs):
+    def _as_rectangle(self, w, min_width, **kwargs):
         """
         Return the instance as a Rectangle of width `w`.
         """
-        return mpl.patches.Rectangle((0, self.top.z), w, self.thickness, **kwargs)
+        return mpl.patches.Rectangle((min_width, self.base.z), w, self.thickness, **kwargs)
 
 
-    def _as_polygon(self, ws, ds, **kwargs):
+    def _as_polygon(self, ws, ds, min_width, **kwargs):
         """
         Return the instance as a multi-width Polygon with the RHS defined by `ws` and `ds`.
         """
@@ -245,6 +272,6 @@ class Bed(Interval):
 
         # add the two points along the y-axis
         ds = np.array([self.top.z] + list(ds) + [self.base.z])
-        ws = np.array([0.] + list(ws) + [0.])
+        ws = np.array([min_width] + list(ws) + [min_width])
 
         return mpl.patches.Polygon(np.vstack((ws, ds)).T, closed=True, **kwargs)
