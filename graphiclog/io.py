@@ -14,6 +14,26 @@ class TableReader():
         pass
 
 
+def check_order_consistency(df, topcol, basecol):
+    """
+    Check that all rows are either depth ordered or elevation_ordered.
+    Returns 'elevation' or 'depth'. Raises a `ValueError` if neither.
+    """
+    assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
+    if (df[topcol] > df[basecol]).all():
+        return 'elevation'
+    elif (df[topcol] < df[basecol]).all():
+        return 'depth'
+    else:
+        raise ValueError('Dataframe has inconsistent top/base conventions')
+
+
+def handle_sample_depths(df, depth_col, value_column):
+    """
+    Check that `depth_col` and `sample_col` have equal number
+    """
+
+
 def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
     """
     Check for position order + consistency in `df`, return preprocessed DataFrame.
@@ -28,24 +48,17 @@ def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
     depth_sorted = df.sort_values(topcol, ascending=True)
 
     if basecol:
-        assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
-        if (df[topcol] > df[basecol]).all():
-            return elevation_sorted
-        elif (df[topcol] < df[basecol]).all():
-            return depth_sorted
-        else:
-            raise ValueError('Dataframe has inconsistent top/base conventions')
+        order = check_order_consistency(df, topcol, basecol)
+        return elevation_sorted if order is 'elevation' else depth_sorted
 
     else:
         assert thickcol in df.columns, f'`thickcol` {thickcol} not present in `df`'
 
         elev_bases = (elev_sorted[topcol] - elev_sorted[thickcol]).values
         elev_gap = np.abs(elev_bases[:-1]-elev_sorted[topcol].values[1:]).sum()
-        print(f'elev_gap: {elev_gap}')
 
         depth_bases = (depth_sorted[topcol] + depth_sorted[thickcol]).values
         depth_gap = np.abs(depth_bases[:-1]-depth_sorted[topcol].values[1:]).sum()
-        print(f'depth_gap: {depth_gap}')
 
         min_total_gap = min(elev_gap, depth_gap)
         if min_total_gap > eps*df.shape[0]:

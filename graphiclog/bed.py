@@ -66,7 +66,7 @@ class Bed(Interval):
             return self.data['_values']
         else:
             lens = [utils.safelen(v) for v in self.data.values()]
-            assert len(set(lens)) <= 2, f'Lengths of `.data` values must be [1,N] only, found: {set(lens)}'
+            assert len(set(lens)) <= 2, f'Lengths of `.data` values must be [1,N] only, found: {set(lens)} {self.data}'
             # TODO: double check that this is safe and works right
             return np.vstack([utils.saferep(v, max(lens)) for v in self.data.values()]).T
 
@@ -184,7 +184,7 @@ class Bed(Interval):
             return self[key]
 
 
-    def spans(self, d, eps=0.01):
+    def spans(self, d, eps=1e-3):
         """
         Determines if depth d is within this interval.
         * Overridden from `striplog.Interval` to accomodate small tolerance `epsilon`
@@ -251,7 +251,7 @@ class Bed(Interval):
 
         # if `ws` is iterable, then make and return a Polygon
         if hasattr(ws, '__iter__'):
-            assert len(ws) == len(ds), 'Must have equal number of width and depth sample values'
+            assert len(ws) == len(ds), f'Must have equal number of width and depth sample values  {self.data}'
             # Need new `spans` function with small tolerance (from rounding, etc.)
             if not all(self.spans(d) for d in ds):
                 raise ValueError(f'Depth sample values {ds} must fall between Bed top {self.top.z} and base {self.base.z}')

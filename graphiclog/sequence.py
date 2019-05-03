@@ -222,25 +222,32 @@ class BedSequence(Striplog):
 
         scale_names, scale_psis = zip(*scale)
 
-        locs, labels = [], []
-        for i, (name, psi) in enumerate(scale):
-            psi = psi or max(10, max_psi)
-            if psi < min_psi or psi > max_psi:
+        minor_locs, minor_labels, major_locs = [], [], []
+
+        #for i, (name, psi) in enumerate(scale):
+        for i in range(len(scale)):
+
+            psi = scale_psis[i] if i != (len(scale)-1) else max(10, max_psi)
+            prev_psi = scale_psis[i-1] if i != 0 else min_psi
+            next_psi = scale_psis[i+1] if i < (len(scale)-2) else max_psi
+
+            if next_psi < min_psi:
                 continue
-            lower = min_psi if i == 0 else scale_psis[i-1]
-            upper = max_psi if i == (len(scale)-1) else scale_psis[i]
+            elif prev_psi >= max_psi:
+                break
 
-            locs.append((lower + upper) / 2.)
-            labels.append(name)
+            minor_locs.append((prev_psi + psi) / 2.)
+            minor_labels.append(scale_names[i])
 
-            if upper < max_psi:
-                locs.append(upper)
-                labels.append('')
+            major_locs.append(psi)
 
-        ax.set_xticks(locs)
-        ax.set_xticklabels(labels)
+        ax.set_xticks(minor_locs, minor=True)
+        ax.set_xticklabels(minor_labels, minor=True)
 
-        ax.tick_params('x', labelsize=12, labelrotation=60)
+        ax.set_xticks(major_locs)
+        ax.set_xticklabels(['']*len(major_locs))
+
+        ax.tick_params('x', which='minor', labelsize=12, labelrotation=60)
         ax.tick_params('y', labelsize=16)
 
         return ax
