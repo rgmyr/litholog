@@ -95,7 +95,7 @@ class Bed(Interval):
 
         exclude_idxs = [i for i, k in enumerate(self.data.keys()) if k in exclude_idxs]
         return np.delete(values, exclude_idxs, axis=1)
-        
+
 
     @property
     def nsamples(self):
@@ -158,7 +158,8 @@ class Bed(Interval):
             old_ds = np.array([self.top.z, self.base.z])
             old_xs = np.repeat(old_xs, 2, axis=0)
 
-        interp_fn = interpolate.interp1d(old_ds, old_xs, kind=kind, axis=0, fill_value='extrapolate')
+        fill_value = (old_xs[0,:], old_xs[-1,:]) if self.order is 'depth' else (old_xs[-1,:], old_xs[0,:])
+        interp_fn = interpolate.interp1d(old_ds, old_xs, kind=kind, axis=0, bounds_error=False, fill_value=fill_value)
 
         self.values = np.insert(interp_fn(new_ds), depth_idx, new_ds, axis=1)
 
@@ -242,7 +243,7 @@ class Bed(Interval):
 
         patch_kwargs = {
             'fc' : kwargs.get('fc') or decor.colour,
-            'lw' : kwargs.get('lw', 0),
+            'lw' : kwargs.get('lw', 1),
             'hatch' : decor.hatch,
             'ec' : kwargs.get('ec', 'k'),
             **kwargs
@@ -259,15 +260,7 @@ class Bed(Interval):
 
         # if `ws` is scalar, then make and return a plain Rectangle
         else:
-            print(f'Rectangle here: {self}')
-            return self._as_rectangle(ws, min_width, **patch_kwargs)
-
-
-    def _as_rectangle(self, w, min_width, **kwargs):
-        """
-        Return the instance as a Rectangle of width `w`.
-        """
-        return mpl.patches.Rectangle((min_width, self.base.z), w, self.thickness, **kwargs)
+            return self._as_polygon(np.array([ws, ws]), np.array([self.top.z, self.base.z]), min_width, **patch_kwargs)
 
 
     def _as_polygon(self, ws, ds, min_width, **kwargs):
