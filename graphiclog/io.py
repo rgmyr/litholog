@@ -1,3 +1,8 @@
+"""
+IO classes & functions
+"""
+
+import numpy as np
 
 
 class TableReader():
@@ -9,31 +14,46 @@ class TableReader():
         pass
 
 
-def preprocess_bed_seq(df, topcol, basecol, thickcol, sort='elevation'):
+def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
     """
-    Infer relationship b/t top + base + thickness, etc. for an individual sequence.
-    Must provide either `basecol` or `thickcol` (one of the two may be None).
+    Check for position order + consistency in `df`, return preprocessed DataFrame.
 
-    TODO: Should probably standardize depth vs. elevation ordering?
+    This doesn't check for all possible inconsistencies, just the most obvious ones.
     """
     assert topcol in df.columns, f'`topcol` {topcol}  not present in `df`'
-    assert basecol or thickcol, '`basecol` and `thickcol` cannot both be `None`'
 
-    # Depth vs. Elevation checks
-    depth_sorted = df[topcol].is_monotonic_increasing
-    elevation_sorted = df[topcol].is_monotonic_decreasing
+    assert basecol or thickcol, 'Must specify either `basecol` or `topcol`'
 
-    assert depth_sorted or elevation_sorted, f'Bed sequence `topcol` must be sorted (depth or elev.)'
+    elev_sorted = df.sort_values(topcol, ascending=False)
+    depth_sorted = df.sort_values(topcol, ascending=True)
 
-    # TODO: check that if basecol and thickcol both present, they agree
     if basecol:
         assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
-    if thickcol:
-        assert thickcol in df.columns, f'`thickcol` {basecol} not present in `df`'
+        if (df[topcol] > df[basecol]).all():
+            return elevation_sorted
+        elif (df[topcol] < df[basecol]).all():
+            return depth_sorted
+        else:
+            raise ValueError('Dataframe has inconsistent top/base conventions')
 
-    if depth_sorted:
-        assert (df[basecol] >= df[topcol]).all(), f'depth ordering implies all bases >= tops'
     else:
-        assert (df[basecol] <= df[topcol]).all(), f'elevation ordering implies all bases <= tops'
+        assert thickcol in df.columns, f'`thickcol` {thickcol} not present in `df`'
 
-    pass
+        elev_bases = (elev_sorted[topcol] - elev_sorted[thickcol]).values
+        elev_gap = np.abs(elev_bases[:-1]-elev_sorted[topcol].values[1:]).sum()
+        print(f'elev_gap: {elev_gap}')
+
+        depth_bases = (depth_sorted[topcol] + depth_sorted[thickcol]).values
+        depth_gap = np.abs(depth_bases[:-1]-depth_sorted[topcol].values[1:]).sum()
+        print(f'depth_gap: {depth_gap}')
+
+        min_total_gap = min(elev_gap, depth_gap)
+        if min_total_gap > eps*df.shape[0]:
+            raise UserWarning('Check that thicknesses are consistent! '
+                             f'Total gap: {min_total_gap}, Allowed: {eps*df.shape[0]}')
+        elif elev_gap < depth_gap:
+            elev_sorted['bases'] = elev_bases
+            return elev_sorted
+        else:
+            depth_sorted['bases'] = depth_bases
+            return depth_sorted

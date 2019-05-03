@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from striplog import Striplog, Legend
 
 from graphiclog import Bed
-from graphiclog import utils
+from graphiclog import io, utils
 from graphiclog.wentworth import wentworth_scale_fine, wentworth_scale_coarse
 
 
@@ -133,7 +133,8 @@ class BedSequence(Striplog):
         assert not missing_meta_cols, f'metacols {missing_meta_cols} not present in `df`'
 
         # Preprocess the data
-        df = self._preproc_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, eps=eps)
+        df = io.preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, eps=eps)
+        basecol = basecol or 'bases'
 
         metadata = {}
         for metacol in metacols:
@@ -155,51 +156,13 @@ class BedSequence(Striplog):
         return cls(list_of_Beds, metadata=metadata)
 
 
-    def _preproc_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
-        """
-        Check for position order + consistency in `df`, return preprocessed DataFrame.
-
-        This doesn't check for all possible inconsistencies, just the most obvious ones.
-        """
-        assert topcol in df.columns, f'`topcol` {topcol}  not present in `df`'
-
-        assert basecol or thickcol, 'Must specify either `basecol` or `topcol`'
-
-        elev_sorted = df.sort_values(topcol, ascending=False)
-        depth_sorted = df.sort_values(topcol, ascending=True)
-
-        if basecol:
-            assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
-            if (df[topcol] > df[basecol]).all():
-                return elevation_sorted
-            elif (df[topcol] < df[basecol]).all():
-                return depth_sorted
-            else:
-                raise ValueError('Dataframe has inconsistent top/base conventions')
-
-        else:
-            assert thickcol in df.columns, f'`thickcol` {thickcol} not present in `df`'
-
-            elev_bases = (elev_sorted[topcol] - elev_sorted[thickcol]).values
-            elev_gap = np.abs(elev_bases[:-1]-elev_sorted[topcol].values[1:]).sum()
-
-            depth_bases = (depth_sorted[topcol] + depth_sorted[thickcol]).values
-            depth_gap = np.abs(depth_base[:-1]-elev_sorted[topcol].values[1:]]).sum()
-
-            if min(elev_gap, depth_gap) > eps*df.shape[0]:
-                raise UserWarning('Check that thicknesses are consistent!')
-            elif depth_gap < elev_gap:
-                elev_sorted['bases'] = elev_bases
-                return elev_sorted
-            else:
-                depth_sorted['bases'] = depth_bases
-                return depth_sorted
-
-
     @classmethod
-    def from_numpy(self, arr):
+    def from_numpy(self, arr, other=None, keys=None, component_map=None):
         """
         Implement a method to convert numpy (e.g., from GAN) to `BedSequence` instance.
+
+        Use keys from `other`, or provide list of `keys`.
+        Provide a `component_map` to group samples into `Bed`s.
         """
         pass
 
