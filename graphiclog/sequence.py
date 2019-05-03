@@ -29,9 +29,17 @@ class BedSequence(Striplog):
         """
         Get the instance as a 2D array w/ shape (nsamples, nfeatures).
         """
-        pairs = zip(self._Striplog__list[:-1], self._Striplog__list[1:])
+        return self.get_values()
+
+
+    def get_values(self, exclude_keys=[]):
+        """
+        Getter for `values` that allows dropping `exclude_keys` (e.g., sample depths) from array
+        """
+        pairs = zip(self[:-1], self[1:])
         assert all(t.compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
-        return np.vstack([bed.values for bed in self._Striplog__list])
+        vals = [bed.get_values(exclude_keys=exclude_keys) for bed in self]
+        return np.vstack(vals)
 
 
     @property
@@ -93,7 +101,8 @@ class BedSequence(Striplog):
                       component_map=None,
                       datacols=[],
                       metacols=[],
-                      metasafe=True):
+                      metasafe=True,
+                      eps=1e-3):
         """
         Create an instance from a pd.DataFrame or subclass (e.g., a GroupBy object).
         Must provide `topcol` and one of `basecol` or `thickcol`.
@@ -116,24 +125,15 @@ class BedSequence(Striplog):
         metasafe : bool, optional
             If True, enforce that df[metacols] have a single unique value per-column. Otherwise attach all unique values.
         """
-        # Set up & check top/base columns
-        assert topcol in df.columns, f'`topcol` {topcol}  not present in `df`'
-
-        assert basecol or thickcol, 'Must specify either `basecol` or `topcol`'
-        if basecol:
-            assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
-        else:
-            assert thickcol in df.columns, f'`thickcol` {thickcol} not present in `df`'
-            # TODO: elevation vs depth ordering, might need more specifics here
-            df['base'] = df[topcol] + df[thickcol]
-            basecol = 'base'
-
         # Check for data/meta column presence
         missing_data_cols = [c for c in datacols if c not in df.columns]
         assert not missing_data_cols, f'datacols {missing_data_cols} not present in `df`'
 
         missing_meta_cols = [c for c in metacols if c not in df.columns]
         assert not missing_meta_cols, f'metacols {missing_meta_cols} not present in `df`'
+
+        # Preprocess the data
+        df = self._preproc_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, eps=eps)
 
         metadata = {}
         for metacol in metacols:
@@ -153,6 +153,47 @@ class BedSequence(Striplog):
             list_of_Beds.append(bed)
 
         return cls(list_of_Beds, metadata=metadata)
+
+
+    def _preproc_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
+        """
+        Check for position order + consistency in `df`, return preprocessed DataFrame.
+
+        This doesn't check for all possible inconsistencies, just the most obvious ones.
+        """
+        assert topcol in df.columns, f'`topcol` {topcol}  not present in `df`'
+
+        assert basecol or thickcol, 'Must specify either `basecol` or `topcol`'
+
+        elev_sorted = df.sort_values(topcol, ascending=False)
+        depth_sorted = df.sort_values(topcol, ascending=True)
+
+        if basecol:
+            assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
+            if (df[topcol] > df[basecol]).all():
+                return elevation_sorted
+            elif (df[topcol] < df[basecol]).all():
+                return depth_sorted
+            else:
+                raise ValueError('Dataframe has inconsistent top/base conventions')
+
+        else:
+            assert thickcol in df.columns, f'`thickcol` {thickcol} not present in `df`'
+
+            elev_bases = (elev_sorted[topcol] - elev_sorted[thickcol]).values
+            elev_gap = np.abs(elev_bases[:-1]-elev_sorted[topcol].values[1:]).sum()
+
+            depth_bases = (depth_sorted[topcol] + depth_sorted[thickcol]).values
+            depth_gap = np.abs(depth_base[:-1]-elev_sorted[topcol].values[1:]]).sum()
+
+            if min(elev_gap, depth_gap) > eps*df.shape[0]:
+                raise UserWarning('Check that thicknesses are consistent!')
+            elif depth_gap < elev_gap:
+                elev_sorted['bases'] = elev_bases
+                return elev_sorted
+            else:
+                depth_sorted['bases'] = depth_bases
+                return depth_sorted
 
 
     @classmethod

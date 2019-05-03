@@ -28,7 +28,7 @@ class Bed(Interval):
         Columns with a single unique value are mapped to that value, while multi-value columns are kept as arrays.
         If `data` is an array and `keys` is `None`, whole array is added under `'_values'` key.
     **kwargs
-        Any additional keyword args for striplog.Interval constructor. (Components, etc.)
+        Any additional keyword args for striplog.Interval constructor. (`components`, etc.)
     """
     def __init__(self, top, base, data, keys=None, **kwargs):
 
@@ -84,6 +84,19 @@ class Bed(Interval):
                 new_col = new_values[:, i]
                 self.data[k] = new_col[0] if np.unique(new_col).size == 1 else new_col
 
+
+    def get_values(self, exclude_keys=[]):
+        """
+        Getter for `values` that allows dropping `exclude_keys` (e.g., sample depths) from array
+        """
+        values = self.values
+        if not exclude_keys:
+            return values
+
+        exclude_idxs = [i for i, k in enumerate(self.data.keys()) if k in exclude_idxs]
+        return np.delete(values, exclude_idxs, axis=1)
+        
+
     @property
     def nsamples(self):
         """
@@ -126,7 +139,6 @@ class Bed(Interval):
         old_ds = self[depth_key]
         single_sample = True if utils.safelen(old_ds) == 1 else False
 
-        # TODO: finish this
         new_ds = np.linspace(self.top.z, self.base.z, num=max(2, (abs(self.top.z-self.base.z) // step)))
 
         if type(depth_key) is str:
