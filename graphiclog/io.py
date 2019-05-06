@@ -28,10 +28,12 @@ def check_order_consistency(df, topcol, basecol):
         raise ValueError('Dataframe has inconsistent top/base conventions')
 
 
-def handle_sample_depths(df, depth_col, value_column):
+def check_sample_depths(df, depth_col, value_column):
     """
-    Check that `depth_col` and `sample_col` have equal number
+    Check that `depth_col` and `sample_col` have equal number of entries per bed,
+    (and that `depths` fall between `topcol` and `basecol`?)
     """
+    pass
 
 
 def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
