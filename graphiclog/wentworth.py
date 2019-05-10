@@ -43,7 +43,9 @@ wentworth_scale_coarse = [
 
 # PSI functions
 def gs2psi(gs):
-    # TODO: handle zeros
+    # TODO: handle zeros?
+    if type(gs) is list:
+        gs = np.array(gs)
     return np.log2(gs / D0)
 
 def psi2gs(psi):

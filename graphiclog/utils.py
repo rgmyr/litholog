@@ -4,17 +4,32 @@ Utility functions.
 import numpy as np
 
 
-def string2array(s):
+def strings2array(elems):
     """
-    Parse csv array string to (float) array.
+    Convert iterable of numeric strings to (float) array.
     """
     vals = []
-    for snum in s.split(','):
+    for elem in elems:
         try:
-            vals.append(float(snum))
+            vals.append(float(elem))
         except ValueError:
             pass
     return np.array(vals)
+
+
+def string2array_matlab(s):
+    """
+    Parse matlab-style array string (e.g., "1.0, 2.0, 3.0") to float array.
+    """
+    elems = s.split(',')
+    return strings2array(elems)
+
+def string2array_pandas(s):
+    """
+    Parse pandas-style array string (e.g, "[1.0 2.0 3.0]") to float array.
+    """
+    elems = s.strip('[]').split(' ')
+    return strings2array(elems)
 
 
 def safelen(x):

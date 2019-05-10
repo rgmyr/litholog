@@ -17,7 +17,6 @@ from graphiclog.wentworth import wentworth_scale_fine, wentworth_scale_coarse
 class BedSequence(Striplog):
     """
     Ordered collection of `Bed` instances. Should we inherit from striplog.Striplog? Probably.
-
     """
     def __init__(self, list_of_Beds, metadata={}):
         self.metadata = metadata
@@ -102,7 +101,7 @@ class BedSequence(Striplog):
                       datacols=[],
                       metacols=[],
                       metasafe=True,
-                      eps=1e-3):
+                      tol=1e-3):
         """
         Create an instance from a pd.DataFrame or subclass (e.g., a GroupBy object).
         Must provide `topcol` and one of `basecol` or `thickcol`.
@@ -133,7 +132,7 @@ class BedSequence(Striplog):
         assert not missing_meta_cols, f'metacols {missing_meta_cols} not present in `df`'
 
         # Preprocess the data
-        df = io.preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, eps=eps)
+        df = io.preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, tol=tol)
         basecol = basecol or 'bases'
 
         metadata = {}
@@ -247,8 +246,9 @@ class BedSequence(Striplog):
         ax.set_xticks(major_locs)
         ax.set_xticklabels(['']*len(major_locs))
 
-        ax.tick_params('x', which='minor', labelsize=12, labelrotation=60)
         ax.tick_params('y', labelsize=16)
+        ax.tick_params('x', which='minor', labelsize=12, labelrotation=60)
+        ax.tick_params('y', which='major', ticksize=16)
 
         return ax
 

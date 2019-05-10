@@ -99,6 +99,13 @@ class DataFrameChecker():
         pass
 
 
+def fill_column_nan(df, col, fill_value, indicator='missing'):
+    """
+    Fill missing values in `col` with `fill_value`.
+    Add a new bool column '`indicator`_`col`'.
+    """
+
+
 
 def check_order(df, topcol, basecol, raise_error=True):
     """
@@ -155,14 +162,14 @@ def check_thicknesses(df, topcol, thickcol, order, basecol='bases', tol=1e-3):
 
     gap = np.abs(bases[:-1] - df[topcol].values[1:]).sum()
 
-    df[basecol] = bases
+    df.loc[:, basecol] = bases
 
     within_tolerance = True if gap <= tol*bases.size else False
 
     return df, within_tolerance
 
 
-def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
+def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, tol=1e-3):
     """
     Check for position order + consistency in `df`, return preprocessed DataFrame.
 
@@ -176,17 +183,17 @@ def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, eps=1e-3):
     depth_sorted = df.sort_values(topcol, ascending=True)
 
     if basecol:
-        order = check_order_consistency(df, topcol, basecol)
-        return elevation_sorted if order is 'elevation' else depth_sorted
+        order = check_order(df, topcol, basecol)
+        return elev_sorted if order is 'elevation' else depth_sorted
 
     else:
-        elev_sorted, elev_good = check_bases(elev_sorted, topcol, thickcol,
-                                            'elevation', basecol='bases', tol=tol)
+        elev_sorted, elev_good = check_thicknesses(elev_sorted, topcol, thickcol,
+                                                  'elevation', basecol='bases', tol=tol)
         if elev_good:
             return elev_sorted
 
-        depth_sorted, depth_good = check_bases(depth_sorted, topcol, thickcol,
-                                              'depth', basecol='bases', tol=tol)
+        depth_sorted, depth_good = check_thicknesses(depth_sorted, topcol, thickcol,
+                                                    'depth', basecol='bases', tol=tol)
         if depth_good:
             return depth_sorted
 
