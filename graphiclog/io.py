@@ -112,7 +112,7 @@ def check_order(df, topcol, basecol, raise_error=True):
     Check that all rows are either depth ordered or elevation_ordered.
     Returns 'elevation' or 'depth'. Returns False
     """
-    assert basecol in df.columns, f'`basecol` {basecol} not present in `df`'
+    assert basecol in df.columns, f'`basecol` {basecol} not present in {df.columns}'
 
     if (df[topcol] > df[basecol]).all():
         return 'elevation'
@@ -154,7 +154,7 @@ def check_thicknesses(df, topcol, thickcol, order, basecol='bases', tol=1e-3):
         `good` is `True` if the average gap < `tol`, else `False`
     """
     assert order in {'elevation', 'depth'}, f'{order} not a valid `order`'
-    assert thickcol in df.columns, f'{thickcol} not in `df.columns`'
+    assert thickcol in df.columns, f'{thickcol} not in {df.columns}'
 
     op = operator.sub if order is 'elevation' else operator.add
 
@@ -175,7 +175,7 @@ def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, tol=1e-3):
 
     This doesn't check for all possible inconsistencies, just the most obvious ones.
     """
-    assert topcol in df.columns, f'`topcol` {topcol}  not present in `df`'
+    assert topcol in df.columns, f'`topcol` {topcol}  not present in {df.columns}'
 
     assert basecol or thickcol, 'Must specify either `basecol` or `topcol`'
 

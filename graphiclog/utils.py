@@ -53,7 +53,9 @@ def saferep(x, n):
     Repeat `x` to array of length `n` if it's a literal, or check that `len(x) == n` if it's iterable.
     """
     try:
-        assert len(x) == n, f'`len({x})` != n'
+        if len(x) == 1:
+            raise TypeError
+        assert len(x) == n, f'`len({x})` != {n}'
         return x
     except TypeError:
         return np.repeat(x, n)

@@ -71,11 +71,43 @@ class BedSequence(Striplog):
         return min(filter(None, [iv.min_field(field) for iv in self]))
 
 
-    def get_field(self, field):
+    def get_field(self, field, default_value=0.0):
         """
         Get 'vertical' array of `field` values
         """
-        return np.concatenate(filter(None, [iv[field] for iv in self]))
+        vals = [iv[field] for iv in self]
+        vals = [default_value] if len(vals) == 0 else vals
+        try:
+            return np.concatenate(vals)
+        except ValueError:
+            return np.array(vals)
+
+
+    def reduce_field(self, field, fn):
+        """
+        Get concatenated `field` values array and apply `fn`.
+        """
+        result = fn(self.get_field(field))
+        if not hasattr(result, '__iter__'):
+            result = [result]
+        return np.array(result)
+
+
+    def reduce_fields(self, field_fn_dict):
+        """
+        Return 1D array, result of apply `fn` values to `field` keys.
+        """
+        try:
+            vals = [self.reduce_field(field, fn) for field, fn in field_fn_dict.items()]
+        except Exception as e:
+            print(f'Error reducing fields for: {self.metadata}')
+            raise(e)
+
+        try:
+            return np.concatenate(vals)
+        except ValueError as ve:
+            print([(v, np.shape(v)) for v in vals])
+            raise(ve)
 
 
     def resample_data(self, depth_key, step, kind='linear'):
@@ -248,7 +280,7 @@ class BedSequence(Striplog):
 
         ax.tick_params('y', labelsize=16)
         ax.tick_params('x', which='minor', labelsize=12, labelrotation=60)
-        ax.tick_params('y', which='major', ticksize=16)
+        #ax.tick_params('y', which='major', ticksize=16)
 
         return ax
 
