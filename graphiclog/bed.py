@@ -93,7 +93,7 @@ class Bed(Interval):
         if not exclude_keys:
             return values
 
-        exclude_idxs = [i for i, k in enumerate(self.data.keys()) if k in exclude_idxs]
+        exclude_idxs = [i for i, k in enumerate(self.data.keys()) if k in exclude_keys]
         return np.delete(values, exclude_idxs, axis=1)
 
 
