@@ -1,0 +1,3 @@
+[submodule "striplog"]
+	path = striplog
+	url = https://github.com/agile-geoscience/striplog
