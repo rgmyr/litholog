@@ -117,8 +117,9 @@ class BedSequence(Striplog):
 
         I think we probably want to maintain top/base samples, and sample to the nearest `step` b/t.
         Maybe this could be the default of multiple options? Implement it as the default first though.
+
+        NOTE: We could return a new instance rather than modify inplace, since it's hard to undo.
         """
-        # Note: implement as `Bed` method than can just be mapped over self.__list
         for iv in self:
             iv.resample_data(depth_key, step, kind=kind)
         return self.values
