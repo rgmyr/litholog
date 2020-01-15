@@ -284,22 +284,3 @@ class BedSequence(Striplog):
         #ax.tick_params('y', which='major', ticksize=16)
 
         return ax
-
-
-
-
-
-class Dataset():
-    """
-    Collection of (optionally grouped) `BedSequences`. Maybe this is just part of modeling project?
-    """
-    def __init__(self, table):
-        pass
-
-    @classmethod
-    def from_csv(self, fpath):
-        # somehow should handle the loading and coercing
-        pass
-
-    def fold_generator(self):
-        pass
