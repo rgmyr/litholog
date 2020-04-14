@@ -166,6 +166,7 @@ class BedSequence(Striplog):
 
         # Preprocess the data
         df = io.preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, tol=tol)
+        # print(df)
         basecol = basecol or 'bases'
 
         metadata = {}

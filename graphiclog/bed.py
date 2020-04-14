@@ -240,6 +240,7 @@ class Bed(Interval):
 
         # if we don't have depths, assumed samples are evenly spaced b/t `top` and `base`
         ds = self[depth_field] if depth_field else np.linspace(self.top.z, self.base.z, num=utils.safelen(ws))
+        #print(self.top.z, self.base.z, '\n', ws, ds)
 
         patch_kwargs = {
             'fc' : kwargs.get('fc') or decor.colour,
@@ -251,8 +252,8 @@ class Bed(Interval):
 
         # if `ws` is iterable, then make and return a Polygon
         if hasattr(ws, '__iter__'):
-            assert len(ws) == len(ds), f'Must have equal number of width and depth sample values  {self.data}'
-            # Need new `spans` function with small tolerance (from rounding, etc.)
+            assert len(ws) == len(ds), f'Must have equal number of width and depth sample values {self.data}'
+
             if not all(self.spans(d) for d in ds):
                 raise ValueError(f'Depth sample values {ds} must fall between Bed top {self.top.z} and base {self.base.z}')
 
@@ -267,6 +268,10 @@ class Bed(Interval):
         """
         Return the instance as a multi-width Polygon with the RHS defined by `ws` and `ds`.
         """
+        # make sure that `ws` and `ds` are sorted for drawing
+        idxs = np.argsort(ds)[::-1]
+        ws, ds = ws[idxs], ds[idxs]
+
         # extend sample points to `top` and `base` if necessary
         if ds[0] != self.top.z:
             ds = [self.top.z] + list(ds)
@@ -278,5 +283,7 @@ class Bed(Interval):
         # add the two points along the y-axis
         ds = np.array([self.top.z] + list(ds) + [self.base.z])
         ws = np.array([min_width] + list(ws) + [min_width])
+
+        #print(self.top.z, self.base.z, '\n', ws, ds)
 
         return mpl.patches.Polygon(np.vstack((ws, ds)).T, closed=True, **kwargs)
