@@ -1,5 +1,5 @@
 """
-Utility functions for Wentworth/Krumbein logarithmic grainsize scale.
+Utility functions for Wentworth/Krumbein logarithmic grainsize scale. See this link for a nice chart https://en.wikipedia.org/wiki/Grain_size#/media/File:Wentworth_scale.png
 """
 import numpy as np
 from math import floor, ceil
