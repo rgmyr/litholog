@@ -11,26 +11,29 @@ from graphiclog import utils
 class Bed(Interval):
     """
     Represents an individual bed or layer.
-    Basically a `striplog.Interval` with some additional restrictions and logic.
-    Beds are required to have a `top`, `base`, and `data` (which can be an array or dict-like).
 
-    Parameters
-    ----------
-    top : float
-        Top depth or elevation of bed.
-    base : float
-        Base depth or elevation of bed.
-    data : array or dict-like
-        Object from which to create `Bed` instance. If an array, must be 1- or 2-D.
-        Supported dict-like types include dict subclasses, pd.Series and `namedtuple` instances.
-    keys : list(str), optional
-        If `data` is an array, `keys` can be a list of string keys corresponding to array columns.
-        Columns with a single unique value are mapped to that value, while multi-value columns are kept as arrays.
-        If `data` is an array and `keys` is `None`, whole array is added under `'_values'` key.
-    **kwargs
-        Any additional keyword args for striplog.Interval constructor. (`components`, etc.)
+    Essentially a ``striplog.Interval`` with some additional restrictions and logic.
+
+    Beds are required to have a ``top``, ``base``, and ``data`` (which can be an array or dict-like).
     """
     def __init__(self, top, base, data, keys=None, **kwargs):
+        """
+        Parameters
+        ----------
+        top : float
+            Top depth or elevation of bed.
+        base : float
+            Base depth or elevation of bed.
+        data : array or dict-like
+            Object from which to populate ``Bed`` data. If an array, must be 1-D or 2-D.
+            Supported dict-like types include ``dict`` subclasses, ``pd.Series`` and ``namedtuple`` instances.
+        keys : list(str), optional
+            If ``data`` is an array, ``keys`` can be a list of string keys corresponding to array columns.
+            Columns with a single unique value are collapsed to that value, while multi-value columns are kept as arrays.
+            If ``data`` is an array and ``keys`` is ``None``, whole array is added under ``'_values'`` key.
+        **kwargs
+            Any additional keyword args for ``striplog.Interval`` constructor. (``components``, etc.)
+        """
 
         if hasattr(data, 'to_dict'):        # handle `pd.Series` (e.g., from `df.iterrows()`)
             data = data.to_dict()
@@ -87,7 +90,7 @@ class Bed(Interval):
 
     def get_values(self, exclude_keys=[]):
         """
-        Getter for `values` that allows dropping `exclude_keys` (e.g., sample depths) from array
+        Getter for ``values`` that allows dropping ``exclude_keys`` (e.g., sample depths) from array
         """
         values = self.values
         if not exclude_keys:
@@ -100,21 +103,21 @@ class Bed(Interval):
     @property
     def nsamples(self):
         """
-        The number of sample rows in `values`.
+        The number of sample rows in ``values``.
         """
         return self.values.shape[0]
 
     @property
     def nfeatures(self):
         """
-        The number of feature columns in `values`.
+        The number of columns in ``values``.
         """
         return self.values.shape[1]
 
 
     def __getitem__(self, key):
         """
-        Make the Bed instance indexable by `data` key or `values` column index.
+        Make the Bed instance indexable by ``data`` key or ``values`` column index.
         TODO: support for slices?
         """
         if type(key) is int and '_values' in self.data.keys():
@@ -125,7 +128,7 @@ class Bed(Interval):
 
     def resample_data(self, depth_key, step, kind='linear'):
         """
-        Resample data to approximately `step`, but preserving at least top/base samples.
+        Resample data to approximately ``step``, but preserving at least top/base samples.
 
         Parameters
         ----------
@@ -134,7 +137,7 @@ class Bed(Interval):
         step : float
             Depth step at which to (approximately) resample data values
         kind : one of {'linear','slinear','quadratic','cubic',...}, optional
-            Kind of interpolation to use, default='linear'. See `scipy.intepolate.interp1d` docs.
+            Kind of interpolation to use, default='linear'. See ``scipy.intepolate.interp1d`` docs.
         """
         old_ds = self[depth_key]
         single_sample = True if utils.safelen(old_ds) == 1 else False
@@ -166,7 +169,7 @@ class Bed(Interval):
 
     def max_field(self, key):
         """
-        Return the maximum value of data[key], or None if it doesn't exist.
+        Return the maximum value of ``data[key]``, or ``None`` if it doesn't exist.
         """
         try:
             return max(self[key])
@@ -176,7 +179,7 @@ class Bed(Interval):
 
     def min_field(self, key):
         """
-        Return the minimum value of data[key], or None if it doesn't exist.
+        Return the minimum value of ``data[key]``, or ``None`` if it doesn't exist.
         """
         try:
             return min(self[key])
@@ -186,12 +189,18 @@ class Bed(Interval):
 
     def spans(self, d, eps=1e-3):
         """
-        Determines if depth d is within this interval.
-        * Overridden from `striplog.Interval` to accomodate small tolerance `epsilon`
-        Args:
-            d (float): Level or 'depth' to evaluate.
-        Returns:
-            bool. Whether the depth is in the interval.
+        Determines if position ``d`` is within this ``Bed``.
+        Overridden from ``striplog.Interval`` to accomodate small tolerance `epsilon`
+
+        Parameters
+        ----------
+        d : float
+            Position (depth or elevation) to evaluate.
+
+        Returns
+        -------
+        in_bed : bool
+            True if ``d`` is within the ``Bed``, False otherwise.
         """
         o = {'depth': operator.le, 'elevation': operator.ge}[self.order]
         adjusted_top = self.top.z - eps if self.order is 'depth' else self.top.z + eps
@@ -201,9 +210,9 @@ class Bed(Interval):
 
     def compatible_with(self, other):
         """
-        Check that `self.data` and `other.data` have compatible `values` shapes and matching `data` key order.
+        Check that ``self.data`` and ``other.data`` have compatible ``values`` shapes and matching ``data`` key order.
 
-        ** Should both have to be constructed from similar dtypes, or just have concatable `values`?
+        NOTE: Should both have to be constructed from similar dtypes, or just have concatable `values`?
         """
         keys_match = all([sk == ok for sk, ok in zip(self.data.keys(), other.data.keys())])
         shapes_match = self.values.shape[1] == other.values.shape[1]
@@ -218,18 +227,22 @@ class Bed(Interval):
                 max_width=1.5,
                 **kwargs):
         """
-        Return the instance as a `matplotlib.patches` object [Polygon or Rectangle].
+        Representation of the ``Bed`` as a ``matplotlib.patches`` object [``Polygon`` or ``Rectangle``].
 
         Parameters
         ----------
-        legend : striplog.Legend
-            Legend to get a matching Decor from.
+        legend : ``striplog.Legend``
+            Legend to get a matching ``striplog.Decor`` from.
         width_field : str or int, optional
-            Data key or `.values` column index to use as width field.
+            ``data`` key or ``values`` column index to use as width field.
         depth_field : str or int, optional
-            Data key or `.values` column index to use as depths of `width_field` samples.
-            If not provided and `width_field` values are iterable, create from np.linspace(top, base).
-            Ignored if `width_field` is a scalar. Sizes must match if both fields return iterable/array.
+            Data key or ``values`` column index to use as positions of ``width_field`` samples.
+            If not provided and ``width_field`` values are iterable, created from ``np.linspace(top, base)``.
+            Ignored if ``width_field`` is a scalar. Sizes must match if both fields return iterables.
+
+        Returns
+        -------
+        patch : instance from ``matplotlib.patches``
         """
         decor = legend.get_decor(self.primary)
 
@@ -266,7 +279,9 @@ class Bed(Interval):
 
     def _as_polygon(self, ws, ds, min_width, **kwargs):
         """
-        Return the instance as a multi-width Polygon with the RHS defined by `ws` and `ds`.
+        Return the instance as a multi-width Polygon with the RHS defined by ``ws`` and ``ds``.
+
+        ``min_width`` should be a reference to the ``width_field`` value at the y-axis (LHS).
         """
         # make sure that `ws` and `ds` are sorted for drawing
         idxs = np.argsort(ds)[::-1]
@@ -283,7 +298,5 @@ class Bed(Interval):
         # add the two points along the y-axis
         ds = np.array([self.top.z] + list(ds) + [self.base.z])
         ws = np.array([min_width] + list(ws) + [min_width])
-
-        #print(self.top.z, self.base.z, '\n', ws, ds)
 
         return mpl.patches.Polygon(np.vstack((ws, ds)).T, closed=True, **kwargs)
