@@ -7,35 +7,37 @@ Also specify default csv/DataFrame fields to map to `Bed` attributes/data.
     # Added missing interval decor, but we also need to assign these a default grain size so that they plot. I would assign them a grain size of -4 Psi
     # added a comment in gs2litho - at the beginning of that comment, there is a f' - is that on purpose?
     # I didnt yet add missing_interval_decor to component part of gs2litho becasue I'm not sure how we should deal with the grain size of a missing interval...
-    
+
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+
 from graphiclog import wentworth
 from striplog import Component, Decor, Legend
-
 
 ###+++++++++++++++++++++###
 ### Default viz objects ###
 ###+++++++++++++++++++++###
 mud_decor = Decor({
     'component' : Component({'lithology' : 'mud'}),
-    'colour' : 'xkcd:LightBrown',
+    'colour' : 'peru', #'xkcd:LightBrown',
     'hatch' : 'none'
 })
 
 sand_decor = Decor({
     'component' : Component({'lithology' : 'sand'}),
-    'colour' : 'xkcd:LightYellow',
+    'colour' : 'yellow', #'xkcd:LightYellow',
     'hatch' : '.'
 })
 
 gravel_decor = Decor({
     'component' : Component({'lithology' : 'gravel'}),
-    'colour' : 'xkcd:tangerine',
+    'colour' : 'orange', #'xkcd:tangerine',
     'hatch' : 'o'
 })
 
 missing_interval_decor = Decor({
     'component' : Component({'lithology' : 'missing'}),
-    'colour' : 'xkcd:white',
+    'colour' : 'white', #'xkcd:white',
     'hatch' : 'x'
 })
 
