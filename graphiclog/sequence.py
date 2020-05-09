@@ -16,9 +16,17 @@ from graphiclog.wentworth import wentworth_scale_fine, wentworth_scale_coarse
 
 class BedSequence(Striplog):
     """
-    Ordered collection of `Bed` instances. Should we inherit from striplog.Striplog? Probably.
+    Ordered collection of ``Bed`` instances.
     """
     def __init__(self, list_of_Beds, metadata={}):
+        """
+        Parameters
+        ----------
+        list_of_Beds : list(``graphiclog.Bed``)
+            A list containing the Bed(s) comprising the sequence.
+        metadata : dict, optional
+            Any additional metadata about the sequence as a whole.
+        """
         self.metadata = metadata
         Striplog.__init__(self, list_of_Beds)
 
@@ -26,14 +34,14 @@ class BedSequence(Striplog):
     @property
     def values(self):
         """
-        Get the instance as a 2D array w/ shape (nsamples, nfeatures).
+        Get the instance as a 2D array w/ shape (``nsamples``, ``nfeatures``).
         """
         return self.get_values()
 
 
     def get_values(self, exclude_keys=[]):
         """
-        Getter for `values` that allows dropping `exclude_keys` (e.g., sample depths) from array
+        Getter for ``values`` that allows dropping ``exclude_keys`` (e.g., sample depths) from array
         """
         pairs = zip(self[:-1], self[1:])
         assert all(t.compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
@@ -44,36 +52,36 @@ class BedSequence(Striplog):
     @property
     def nsamples(self):
         """
-        The number of sample rows in `values`.
-        ** Note: len(Striplog) will already give number of beds.
+        The number of sample rows in ``values``.
+        NOTE: ``len(striplog.Striplog)`` will already give number of beds.
         """
         return self.values.shape[0]
 
     @property
     def nfeatures(self):
         """
-        The number of feature columns in `values`.
+        The number of columns in ``values``.
         """
         return self.values.shape[1]
 
 
     def max_field(self, field):
         """
-        Override method from `Striplog`
+        Override method from ``striplog.Striplog`` to account for iterable ``Bed`` data.
         """
         return max(filter(None, [iv.max_field(field) for iv in self]))
 
 
     def min_field(self, field):
         """
-        Override method from `Striplog`
+        Override method from ``striplog.Striplog`` to account for iterable ``Bed`` data.
         """
         return min(filter(None, [iv.min_field(field) for iv in self]))
 
 
     def get_field(self, field, default_value=0.0):
         """
-        Get 'vertical' array of `field` values
+        Get 'vertical' array of ``field`` values
         """
         vals = [iv[field] for iv in self]
         vals = [default_value] if len(vals) == 0 else vals
@@ -85,7 +93,7 @@ class BedSequence(Striplog):
 
     def reduce_field(self, field, fn):
         """
-        Get concatenated `field` values array and apply `fn`.
+        Apply ``fn`` to the output of ``get_field(field)``
         """
         result = fn(self.get_field(field))
         if not hasattr(result, '__iter__'):
