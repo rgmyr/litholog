@@ -7,7 +7,7 @@ from abc import abstractmethod
 import numpy as np
 import pandas as pd
 
-from graphiclog import utils
+from litholog import utils
 
 
 def check_order(df, topcol, basecol, raise_error=True):

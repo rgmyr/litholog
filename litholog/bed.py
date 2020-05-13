@@ -5,7 +5,7 @@ from scipy import interpolate
 
 from striplog import Interval
 
-from graphiclog import utils
+from litholog import utils
 
 
 class Bed(Interval):

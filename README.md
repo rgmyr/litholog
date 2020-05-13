@@ -2,7 +2,7 @@
 
 ### Overview
 
-`graphiclog` is a package-level extension of [striplog](https://github.com/agile-geoscience/striplog), with an API and additional features that are geared toward facilitating machine learning experiments and quantitative analysis of stratigraphic log datasets.
+`litholog` is a package-level extension of [striplog](https://github.com/agile-geoscience/striplog), with an API and additional features that are geared toward facilitating machine learning experiments and quantitative analysis of stratigraphic log datasets.
 
 ### Data Structures
 

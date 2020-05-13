@@ -13,10 +13,10 @@ except ImportError:
 PACKAGE_PATH = os.path.abspath(os.path.join(__file__, os.pardir))
 print(PACKAGE_PATH)
 
-setup(name='graphiclog',
+setup(name='litholog',
       version='0.1',
       description='File IO, data management, and viz for geological graphic logs/measured sections',
-      url='https://github.com/rgmyr/graphiclog',
+      url='https://github.com/rgmyr/litholog',
       author='Ross Meyer',
       author_email='ross.meyer@utexas.edu',
       packages=find_packages(PACKAGE_PATH),

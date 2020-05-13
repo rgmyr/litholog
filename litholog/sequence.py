@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 
 from striplog import Striplog, Legend
 
-from graphiclog import Bed
-from graphiclog import io, utils
-from graphiclog.wentworth import wentworth_scale_fine, wentworth_scale_coarse
+from litholog import Bed
+from litholog import io, utils
+from litholog.wentworth import wentworth_scale_fine, wentworth_scale_coarse
 
 
 
@@ -22,7 +22,7 @@ class BedSequence(Striplog):
         """
         Parameters
         ----------
-        list_of_Beds : list(``graphiclog.Bed``)
+        list_of_Beds : list(``litholog.Bed``)
             A list containing the Bed(s) comprising the sequence.
         metadata : dict, optional
             Any additional metadata about the sequence as a whole.
@@ -47,6 +47,7 @@ class BedSequence(Striplog):
         vals = [bed.get_values(exclude_keys=exclude_keys) for bed in self]
         return np.vstack(vals)
 
+
     @property
     def interfaces(self):
         """
@@ -67,6 +68,7 @@ class BedSequence(Striplog):
 
         return sand_th / total_th
 
+
     @property
     def amalgamation_ratio(self):
         """
@@ -83,6 +85,7 @@ class BedSequence(Striplog):
             total_contacts += 1
 
         return sand_contacts / total_contacts
+
 
     @property
     def nsamples(self):

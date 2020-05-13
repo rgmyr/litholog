@@ -1,6 +1,6 @@
 import pytest
 
-from graphiclog import Bed
+from litholog import Bed
 
 
 

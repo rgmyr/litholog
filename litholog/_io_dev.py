@@ -9,7 +9,7 @@ from abc import abstractmethod
 
 import pandas as pd
 
-from graphiclog import utils
+from litholog import utils
 
 
 class BaseCheck():

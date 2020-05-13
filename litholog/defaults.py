@@ -9,7 +9,7 @@ Also specify default csv/DataFrame fields to map to `Bed` attributes/data.
 import numpy as np
 from striplog import Component, Decor, Legend
 
-from graphiclog import wentworth
+from litholog import wentworth
 
 
 ###+++++++++++++++++++++###
