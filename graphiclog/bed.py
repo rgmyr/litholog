@@ -64,6 +64,14 @@ class Bed(Interval):
 
 
     @property
+    def lithology(self):
+        """Just shorthand."""
+        try:
+            return self.primary.lithology
+        except AttributeError:
+            raise AttributeError(f'{self} doesnt have a lithology component')
+
+    @property
     def values(self):
         if '_values' in self.data.keys():
             return self.data['_values']

@@ -38,6 +38,40 @@ class BedSequence(Striplog):
         """
         return self.get_values()
 
+    @property
+    def interfaces(self):
+        """
+        Get all pairs of adjacent Beds.
+        """
+        return zip(self[:-1], self[1:])
+
+    @property
+    def net_to_gross(self):
+        """
+        Returns (total thickness of 'sand' Beds) / (total thickness of all Beds)
+        """
+        is_sand = lambda bed: True if bed.lithology == 'sand' else False
+        sand_th = sum([bed.thickness for bed in filter(is_sand, self)])
+        total_th = sum([bed.thickness for bed in self])
+        return sand_th / total_th
+
+    @property
+    def amalgamation_ratio(self):
+        """
+        1. dont count mud on mud contacts
+        2. find sand on sand contacts
+        3. divide sand-on-sand contacts by total number of contacts
+        """
+        total_contacts, sand_contacts = 0, 0
+        for upper, lower in self.interfaces:
+            if upper.lithology == lower.lithology == 'sand':
+                sand_contacts += 1
+            elif upper.lithology == lower.lithology == 'mud':
+                continue
+            total_contacts += 1
+
+        return sand_contacts / total_contacts
+
 
     def get_values(self, exclude_keys=[]):
         """
@@ -103,7 +137,7 @@ class BedSequence(Striplog):
 
     def reduce_fields(self, field_fn_dict):
         """
-        Return 1D array, result of apply `fn` values to `field` keys.
+        Return 1D array, result of applying `fn` values to `field` keys.
         """
         try:
             vals = [self.reduce_field(field, fn) for field, fn in field_fn_dict.items()]

@@ -18,9 +18,9 @@ class BaseCheck():
 
     Parameters
     ----------
-    check_fn : func
+    check_fn : FunctionType
         Function that should return True if the check passes, False if it doesnt.
-    action : func or Exception
+    action : FunctionType or Exception
         Action to take when `check_fn` fails (returns False).
         If function, will apply action to operand and return result.
         If Exception, will raise the Exception.
@@ -85,10 +85,10 @@ class DataFrameChecker():
 
     def read(self, fpath, converters={}, **kwargs):
         try:
-            return pd.read_csv(df, converters=converters, **kwargs)
+            return pd.read_csv(fpath, converters=converters, **kwargs)
         except UnicodeDecodeError:
             kwargs['encoding'] = 'latin-1'
-            return pd.read_csv(df, converters=converters, **kwargs)
+            return pd.read_csv(fpath, converters=converters, **kwargs)
 
 
     def add_check(self, check):

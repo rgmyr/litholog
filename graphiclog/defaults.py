@@ -17,25 +17,25 @@ from graphiclog import wentworth
 ###+++++++++++++++++++++###
 mud_decor = Decor({
     'component' : Component({'lithology' : 'mud'}),
-    'colour' : '#ad8150', # 'xkcd:LightBrown',
+    'colour' : '#ad8150', # 'xkcd:LightBrown'
     'hatch' : 'none'
 })
 
 sand_decor = Decor({
     'component' : Component({'lithology' : 'sand'}),
-    'colour' : '#fffe7a', #'xkcd:LightYellow',
+    'colour' : '#fffe7a', # 'xkcd:LightYellow'
     'hatch' : '.'
 })
 
 gravel_decor = Decor({
     'component' : Component({'lithology' : 'gravel'}),
-    'colour' : '#ff9408', #'xkcd:tangerine',
+    'colour' : '#ff9408', # 'xkcd:tangerine'
     'hatch' : 'o'
 })
 
 missing_decor = Decor({
     'component' : Component({'lithology' : 'missing'}),
-    'colour' : '#ffffff', #'xkcd:white',
+    'colour' : '#ffffff', # 'xkcd:white'
     'hatch' : 'x'
 })
 
@@ -80,4 +80,4 @@ def gs2litho(gs, units='psi'):
         return gravel_decor.component
 
 
-DEFAULT_COMPONENT_MAP = ('mean_gs_mm', lambda gs: gs2litho(gs, units='mm'))
+DEFAULT_COMPONENT_MAP = ('max_gs_mm', lambda gs: gs2litho(gs, units='mm'))
