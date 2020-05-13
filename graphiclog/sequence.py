@@ -38,6 +38,15 @@ class BedSequence(Striplog):
         """
         return self.get_values()
 
+    def get_values(self, exclude_keys=[]):
+        """
+        Getter for ``values`` that allows dropping ``exclude_keys`` (e.g., sample depths) from array
+        """
+        pairs = zip(self[:-1], self[1:])
+        assert all(t.compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
+        vals = [bed.get_values(exclude_keys=exclude_keys) for bed in self]
+        return np.vstack(vals)
+
     @property
     def interfaces(self):
         """
@@ -51,8 +60,11 @@ class BedSequence(Striplog):
         Returns (total thickness of 'sand' Beds) / (total thickness of all Beds)
         """
         is_sand = lambda bed: True if bed.lithology == 'sand' else False
+        not_missing = lambda bed: False if bed.lithology == 'missing' else True
+
         sand_th = sum([bed.thickness for bed in filter(is_sand, self)])
-        total_th = sum([bed.thickness for bed in self])
+        total_th = sum([bed.thickness for bed in filter(not_missing, self)])
+
         return sand_th / total_th
 
     @property
@@ -71,17 +83,6 @@ class BedSequence(Striplog):
             total_contacts += 1
 
         return sand_contacts / total_contacts
-
-
-    def get_values(self, exclude_keys=[]):
-        """
-        Getter for ``values`` that allows dropping ``exclude_keys`` (e.g., sample depths) from array
-        """
-        pairs = zip(self[:-1], self[1:])
-        assert all(t.compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
-        vals = [bed.get_values(exclude_keys=exclude_keys) for bed in self]
-        return np.vstack(vals)
-
 
     @property
     def nsamples(self):
