@@ -69,8 +69,8 @@ class DataFrameChecker():
     def __init__(self, checks, df=None, **kwargs):
         assert all(isinstance(chk, BaseCheck) for chk in checks), '`checks` must be an iterable of `Check`s'
 
-        self.row_checks = [c for c in checks if c.level is 'row']
-        self.group_checks = [c for c in checks if c.level is 'group']
+        for check in checks:
+            self.add_check(check)
 
         if df:
             if isinstance(df, pd.DataFrame):

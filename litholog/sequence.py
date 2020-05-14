@@ -51,19 +51,20 @@ class BedSequence(Striplog):
     @property
     def interfaces(self):
         """
-        Get all pairs of adjacent Beds.
+        Get all pairs of adjacent Beds, ignoring any pairs with either Bed 'missing'
         """
-        return zip(self[:-1], self[1:])
+        non_missing = lambda t: 'missing' not in [t[0].lithology, t[1].lithology]
+        return filter(non_missing, zip(self[:-1], self[1:]))
 
     @property
     def net_to_gross(self):
         """
         Returns (total thickness of 'sand' Beds) / (total thickness of all Beds)
         """
-        is_sand = lambda bed: True if bed.lithology == 'sand' else False
-        not_missing = lambda bed: False if bed.lithology == 'missing' else True
-
+        is_sand = lambda bed: bed.lithology == 'sand'
         sand_th = sum([bed.thickness for bed in filter(is_sand, self)])
+
+        not_missing = lambda bed: bed.lithology != 'missing'
         total_th = sum([bed.thickness for bed in filter(not_missing, self)])
 
         return sand_th / total_th
