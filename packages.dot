@@ -1,0 +1,31 @@
+digraph "packages" {
+charset="utf-8"
+rankdir=BT
+"0" [label="litholog", shape="box"];
+"1" [label="litholog._io_dev", shape="box"];
+"2" [label="litholog.bed", shape="box"];
+"3" [label="litholog.defaults", shape="box"];
+"4" [label="litholog.io", shape="box"];
+"5" [label="litholog.sequence", shape="box"];
+"6" [label="litholog.utils", shape="box"];
+"7" [label="litholog.wentworth", shape="box"];
+"0" -> "0" [arrowhead="open", arrowtail="none"];
+"0" -> "2" [arrowhead="open", arrowtail="none"];
+"0" -> "3" [arrowhead="open", arrowtail="none"];
+"0" -> "4" [arrowhead="open", arrowtail="none"];
+"0" -> "5" [arrowhead="open", arrowtail="none"];
+"0" -> "6" [arrowhead="open", arrowtail="none"];
+"0" -> "7" [arrowhead="open", arrowtail="none"];
+"1" -> "0" [arrowhead="open", arrowtail="none"];
+"1" -> "6" [arrowhead="open", arrowtail="none"];
+"2" -> "0" [arrowhead="open", arrowtail="none"];
+"2" -> "6" [arrowhead="open", arrowtail="none"];
+"3" -> "0" [arrowhead="open", arrowtail="none"];
+"3" -> "7" [arrowhead="open", arrowtail="none"];
+"4" -> "0" [arrowhead="open", arrowtail="none"];
+"4" -> "6" [arrowhead="open", arrowtail="none"];
+"5" -> "0" [arrowhead="open", arrowtail="none"];
+"5" -> "4" [arrowhead="open", arrowtail="none"];
+"5" -> "6" [arrowhead="open", arrowtail="none"];
+"5" -> "7" [arrowhead="open", arrowtail="none"];
+}

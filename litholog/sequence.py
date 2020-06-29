@@ -6,15 +6,15 @@ import numpy as np
 from math import floor, ceil
 import matplotlib.pyplot as plt
 
-from striplog import Striplog, Legend
+from striplog import Striplog
 
 from litholog import Bed
-from litholog import io, utils
-from litholog.wentworth import wentworth_scale_fine, wentworth_scale_coarse
+from litholog import utils
+from litholog.io import SequenceIOMixin
+from litholog.viz import SequenceVizMixin
 
 
-
-class BedSequence(Striplog):
+class BedSequence(SequenceIOMixin, SequenceVizMixin, Striplog):
     """
     Ordered collection of ``Bed`` instances.
     """
@@ -85,7 +85,10 @@ class BedSequence(Striplog):
                 continue
             total_contacts += 1
 
-        return sand_contacts / total_contacts
+        try:
+            return sand_contacts / total_contacts
+        except ZeroDivisionError:
+            return 0.
 
 
     @property
@@ -170,165 +173,3 @@ class BedSequence(Striplog):
         for iv in self:
             iv.resample_data(depth_key, step, kind=kind)
         return self.values
-
-
-    @classmethod
-    def from_dataframe(cls, df,
-                      topcol='tops',
-                      basecol=None,
-                      thickcol=None,
-                      component_map=None,
-                      datacols=[],
-                      metacols=[],
-                      metasafe=True,
-                      tol=1e-3):
-        """
-        Create an instance from a pd.DataFrame or subclass (e.g., a GroupBy object).
-        Must provide `topcol` and one of `basecol` or `thickcol`.
-
-        Parameters
-        ----------
-        df : pd.DataFrame or subclass
-            Table from which to create `list_of_Beds`.
-        topcol : str
-            Name of top depth/elevation column. Must be present. Default='top'.
-        basecol, thickcol: str
-            Either provide a base depth/elevation column, or a thickness column. Must provide at least one.
-        component_map : tuple(str, func), optional
-            Function that maps values of a column to a primary `striplog.Component` for individual Beds.
-            TODO: if `func` is a str with 'wentworth', maybe just map using grainsize bins?
-        datacols : list(str), optional
-            Columns to use as `Bed` data. Should reference numeric columns only.
-        metacols : list(str), optional
-            Columns to read into `metadata` dict attribute. Should reference columns with a single unique value?
-        metasafe : bool, optional
-            If True, enforce that df[metacols] have a single unique value per-column. Otherwise attach all unique values.
-        """
-        # Check for data/meta column presence
-        missing_data_cols = [c for c in datacols if c not in df.columns]
-        assert not missing_data_cols, f'datacols {missing_data_cols} not present in `df`'
-
-        missing_meta_cols = [c for c in metacols if c not in df.columns]
-        assert not missing_meta_cols, f'metacols {missing_meta_cols} not present in `df`'
-
-        # Preprocess the data
-        df = io.preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, tol=tol)
-        # print(df)
-        basecol = basecol or 'bases'
-
-        metadata = {}
-        for metacol in metacols:
-            meta_values = df[metacol].unique()
-            if metasafe:
-                assert len(meta_values) == 1, f'`metacol` {metacol} has more than one unique value: {meta_values}'
-            metadata[metacol] = meta_values[0]
-
-        list_of_Beds = []
-        for _, row in df.iterrows():
-            if component_map:
-                field, field_fn = component_map
-                component = field_fn(row[field])
-                bed = Bed(row[topcol], row[basecol], row[datacols], components=[component])
-            else:
-                bed = Bed(row[topcol], row[basecol], row[datacols])
-            list_of_Beds.append(bed)
-
-        return cls(list_of_Beds, metadata=metadata)
-
-
-    @classmethod
-    def from_numpy(self, arr, other=None, keys=None, component_map=None):
-        """
-        Implement a method to convert numpy (e.g., from GAN) to `BedSequence` instance.
-
-        Use keys from `other`, or provide list of `keys`.
-        Provide a `component_map` to group samples into `Bed`s.
-        """
-        pass
-
-
-    def plot(self,
-             legend=None,
-             fig_width=1.5,
-             aspect=10,
-             width_field=None,
-             depth_field=None,
-             wentworth='fine',
-             ax=None,
-             **kwargs):
-        """
-        Plot as a `Striplog` of `Bed`s.
-
-        Might need additional arg to specify Wentworth stuff? Can we assume this will *only* be used for grainsize?
-        """
-        if legend is None:
-            legend = Legend.random(self.components)
-
-        if ax is None:
-            return_ax = False
-            fig = plt.figure(figsize=(fig_width, aspect*fig_width))
-            ax = fig.add_axes([0.35, 0.05, 0.6, 0.95])
-        else:
-            return_ax = True
-
-        if self.order is 'depth':
-            ax.invert_yaxis()
-
-        ax.set_ylim([self.start.z, self.stop.z])
-
-        if width_field:
-            min_width = floor(self.min_field(width_field)-1)
-            max_width = ceil(self.max_field(width_field)+1)
-            ax.set_xlim([min_width, max_width])
-            self.set_wentworth_ticks(ax, min_width, max_width, wentworth=wentworth)
-
-        patches = []
-        for bed in self:
-            ax.add_patch(bed.as_patch(legend, width_field, depth_field,
-                                      min_width, max_width, **kwargs))
-
-        if self.order is 'depth':
-            ax.invert_yaxis()
-
-        if return_ax:
-            return ax
-
-
-    def set_wentworth_ticks(self, ax, min_psi, max_psi, wentworth='fine'):
-        """
-        Set the `xticks` for Wentworth grainsizes.
-        """
-        scale = wentworth_scale_coarse if wentworth == 'coarse' else wentworth_scale_fine
-
-        scale_names, scale_psis = zip(*scale)
-
-        minor_locs, minor_labels, major_locs = [], [], []
-
-        #for i, (name, psi) in enumerate(scale):
-        for i in range(len(scale)):
-
-            psi = scale_psis[i] if i != (len(scale)-1) else max(10, max_psi)
-            prev_psi = scale_psis[i-1] if i != 0 else min_psi
-            next_psi = scale_psis[i+1] if i < (len(scale)-2) else max_psi
-
-            if next_psi < min_psi:
-                continue
-            elif prev_psi >= max_psi:
-                break
-
-            minor_locs.append((prev_psi + psi) / 2.)
-            minor_labels.append(scale_names[i])
-
-            major_locs.append(psi)
-
-        ax.set_xticks(minor_locs, minor=True)
-        ax.set_xticklabels(minor_labels, minor=True)
-
-        ax.set_xticks(major_locs)
-        ax.set_xticklabels(['']*len(major_locs))
-
-        ax.tick_params('y', labelsize=16)
-        ax.tick_params('x', which='minor', labelsize=12, labelrotation=60)
-        #ax.tick_params('y', which='major', ticksize=16)
-
-        return ax

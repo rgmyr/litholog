@@ -18,25 +18,29 @@ from litholog import wentworth
 mud_decor = Decor({
     'component' : Component({'lithology' : 'mud'}),
     'colour' : '#ad8150', # 'xkcd:LightBrown'
-    'hatch' : 'none'
+    'hatch' : 'none',
+    'width' : -6,
 })
 
 sand_decor = Decor({
     'component' : Component({'lithology' : 'sand'}),
     'colour' : '#fffe7a', # 'xkcd:LightYellow'
-    'hatch' : '.'
+    'hatch' : '.',
+    'width' : -1
 })
 
 gravel_decor = Decor({
     'component' : Component({'lithology' : 'gravel'}),
     'colour' : '#ff9408', # 'xkcd:tangerine'
-    'hatch' : 'o'
+    'hatch' : 'o',
+    'width' : 4
 })
 
 missing_decor = Decor({
     'component' : Component({'lithology' : 'missing'}),
     'colour' : '#ffffff', # 'xkcd:white'
-    'hatch' : 'x'
+    'hatch' : 'x',
+    'width' : -1
 })
 
 litholegend = Legend([mud_decor, sand_decor, gravel_decor, missing_decor])

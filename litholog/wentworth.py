@@ -11,7 +11,7 @@ from math import floor, ceil
 D0 = 1.0
 
 # (name : upper PSI limit) ... upper limits taken as inclusive
-wentworth_scale_fine = [
+fine_scale = [
     ('colloid', -10),
     ('clay',    -8),
     ('vf_silt', -7),
@@ -32,7 +32,7 @@ wentworth_scale_fine = [
     ('boulder',  None)  # anything bigger than 8
 ]
 
-wentworth_scale_coarse = [
+coarse_scale = [
     ('clay',  -8),
     ('silt',  -4),
     ('sand',   1),
@@ -70,7 +70,7 @@ def phi2psi(phi):
 
 
 # Name funcs
-def psi2name(psi, scale=wentworth_scale_fine):
+def psi2name(psi, scale=fine_scale):
     """Map single `psi` value to Wentworth bin name."""
     for name, upper_psi in scale[:-1]:
         if psi <= upper_psi:
@@ -92,13 +92,11 @@ def psirange2names(min_psi, max_psi, return_tick_locs=False):
     names = wentworth_names[min_idx:max_idx+1]
 
     return wentworth_names[min_idx:max_idx+1]
-"""
+
 
 class WentworthAxis():
-    """
-    Manage the transformation of grainsize psi values to Striplog x-axis, and locs of corresponding ticks.
-    """
-    def __init__(self, gs_psi, scale='fine', min_bin_name=None, max_bin_name=None):
+
+    def __init__(self, scale='fine', fig_width=1.5, aspect=10):
 
         self.scale = wentworth_scale_coarse if scale == 'coarse' else wentworth_scale_fine
         self.names, self.psis = zip(*self.scale)
@@ -109,19 +107,15 @@ class WentworthAxis():
 
 
     def transform(self, gs_psi):
-        """
-        Map `psi` values to appropriate x-coords
-        """
+
         pass
 
 
     def prepare_ax(self, ax):
-        """
-        Set x_lim and add gs ticks to axis.
-        """
+
         ax.set_xlim([0.0, self.upper_psi - self.lower_psi])
 
-
+"""
 
 
 

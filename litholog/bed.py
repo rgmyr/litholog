@@ -44,6 +44,7 @@ class Bed(Interval):
         if isinstance(data, dict):
             assert all(type(k) is str for k in data.keys()), 'Only string keys allowed for dict-like Bed `data`'
             self.data = data
+            _ = self.values     # just to catch bad data
 
         elif isinstance(data, (np.ndarray, np.generic)):
             data = np.expand_dims(data, 0) if data.ndim == 1 else data
@@ -198,7 +199,7 @@ class Bed(Interval):
     def spans(self, d, eps=1e-3):
         """
         Determines if position ``d`` is within this ``Bed``.
-        Overridden from ``striplog.Interval`` to accomodate small tolerance `epsilon`
+        Overridden from ``striplog.Interval`` to accomodate small tolerance ``eps``
 
         Parameters
         ----------
@@ -292,14 +293,15 @@ class Bed(Interval):
         ``min_width`` should be a reference to the ``width_field`` value at the y-axis (LHS).
         """
         # make sure that `ws` and `ds` are sorted for drawing
-        idxs = np.argsort(ds)[::-1]
+        idxs = np.argsort(ds) if self.order=='depth' else np.argsort(ds)[::-1]
         ws, ds = ws[idxs], ds[idxs]
 
         # extend sample points to `top` and `base` if necessary
-        if ds[0] != self.top.z:
+        atol = 1e-3 # hard-coded absolute tolerance
+        if np.isclose(ds[0], self.top.z, atol=atol):
             ds = [self.top.z] + list(ds)
             ws = [ws[0]] + list(ws)
-        if ds[-1] != self.base.z:
+        if np.isclose(ds[-1], self.base.z, atol=atol):
             ds = list(ds) + [self.base.z]
             ws = list(ws) + [ws[-1]]
 

@@ -2,7 +2,7 @@
 
 ### Overview
 
-`litholog` is a package-level extension of [agile-geoscience/striplog](https://github.com/agile-geoscience/striplog), with an API and additional features that are geared toward facilitating machine learning experiments and quantitative analysis of stratigraphic log datasets.
+`litholog` is a package-level extension of [agile-geoscience/striplog](https://github.com/agile-geoscience/striplog), with additional features that focus on lithology and an API that is geared toward facilitating machine learning experiments and quantitative analysis.
 
 ### Data Structures
 
