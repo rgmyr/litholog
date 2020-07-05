@@ -35,7 +35,7 @@ def set_wentworth_ticks(ax, min_psi, max_psi, wentworth='fine', **kwargs):
     **kwargs:
 
     """
-    print(f'min_psi: {min_psi}')
+    #print(f'min_psi: {min_psi}')
     scale = coarse_scale if wentworth == 'coarse' else fine_scale
 
     scale_names, scale_psis = zip(*scale)
@@ -53,7 +53,7 @@ def set_wentworth_ticks(ax, min_psi, max_psi, wentworth='fine', **kwargs):
         elif prev_psi >= max_psi:
             break
 
-        print('(', prev_psi, ', ', psi, ', ', next_psi, ')')
+        #print('(', prev_psi, ', ', psi, ', ', next_psi, ')')
         minor_locs.append((prev_psi + psi) / 2.)
         minor_labels.append(scale_names[i])
 
@@ -124,6 +124,7 @@ class SequenceVizMixin(ABC):
             return_ax = True
 
         ax.set_ylim([self.start.z, self.stop.z])
+        print('Set_ylim: ', [self.start.z, self.stop.z])
 
         # Determine xlimits
         if width_field:
@@ -139,16 +140,6 @@ class SequenceVizMixin(ABC):
         ax.set_xlim([min_width, max_width])
         set_wentworth_ticks(ax, min_width, max_width, wentworth=wentworth)
 
-        # Tick params settable with kwargs
-        ax.tick_params('y', which='major',
-            labelsize=kwargs.get('ylabelsize', 16),
-            ticksize=kwargs.get('yticksize', 16)
-        )
-        ax.tick_params('x', which='minor',
-            labelsize=kwargs.get('xlabelsize', 12),
-            labelrotation=kwargs.get('xlabelrotation', 60)
-        )
-
         # Plot the individual Beds as patches
         for bed in self:
             ax.add_patch(bed.as_patch(legend, width_field, depth_field,
@@ -156,6 +147,7 @@ class SequenceVizMixin(ABC):
 
         # Finalize axis settings
         if self.order is 'depth':
+            print('Called invert_yaxis()')
             ax.invert_yaxis()
 
         if yticks_right:
@@ -164,6 +156,16 @@ class SequenceVizMixin(ABC):
 
         if exxon_style:
             ax.invert_xaxis()
+
+        # Tick params settable with kwargs
+        ax.tick_params('y', which='major',
+            labelsize=kwargs.get('ylabelsize', 16),
+            size=kwargs.get('yticksize', 16)
+        )
+        ax.tick_params('x', which='minor',
+            labelsize=kwargs.get('xlabelsize', 12),
+            labelrotation=kwargs.get('xlabelrotation', 60)
+        )
 
         if return_ax:
             return ax
