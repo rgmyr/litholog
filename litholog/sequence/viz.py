@@ -81,6 +81,7 @@ class SequenceVizMixin(ABC):
              wentworth='fine',
              yticks_right=False,
              exxon_style=False,
+             set_ylim=True,
              ax=None,
              **kwargs):
         """
@@ -123,8 +124,9 @@ class SequenceVizMixin(ABC):
         else:
             return_ax = True
 
-        ax.set_ylim([self.start.z, self.stop.z])
-        print('Set_ylim: ', [self.start.z, self.stop.z])
+        if set_ylim:
+            ax.set_ylim([self.start.z, self.stop.z])
+            print('Set_ylim: ', [self.start.z, self.stop.z])
 
         # Determine xlimits
         if width_field:
@@ -146,8 +148,8 @@ class SequenceVizMixin(ABC):
                                       min_width, max_width, **kwargs))
 
         # Finalize axis settings
-        if self.order is 'depth':
-            print('Called invert_yaxis()')
+        ybase, ytop = ax.get_ylim()
+        if self.order is 'depth' and ytop > ybase:
             ax.invert_yaxis()
 
         if yticks_right:

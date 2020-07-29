@@ -1,4 +1,3 @@
 from .bed import Bed
-from .sequence import BedSequence
-
-from litholog import defaults, io, utils, wentworth
+from litholog import sequence, defaults, utils, wentworth
+from litholog.sequence import BedSequence

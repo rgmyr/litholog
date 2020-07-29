@@ -10,11 +10,10 @@ from striplog import Striplog
 
 from litholog import Bed
 from litholog import utils
-from litholog.io import SequenceIOMixin
-from litholog.viz import SequenceVizMixin
+from litholog.sequence import SequenceIOMixin, SequenceVizMixin, SequenceStatsMixin
 
 
-class BedSequence(SequenceIOMixin, SequenceVizMixin, Striplog):
+class BedSequence(SequenceIOMixin, SequenceVizMixin, SequenceStatsMixin, Striplog):
     """
     Ordered collection of ``Bed`` instances.
     """
@@ -31,6 +30,16 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, Striplog):
         Striplog.__init__(self, list_of_Beds)
 
 
+    def motif(self, location, size):
+        assert size % 2 == 1, 'Should only do odd sizes.'
+
+        first = location - (size // 2)
+        last = location + (size // 2)
+
+        assert first > 0 and last < len(self), f'Motif at {location, size} incompatible with {len(self)}'
+
+        beds = self[first:last+1]
+
     @property
     def values(self):
         """
@@ -46,49 +55,6 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, Striplog):
         assert all(t.compatible_with(b) for t, b in pairs), 'Beds must have compatible data'
         vals = [bed.get_values(exclude_keys=exclude_keys) for bed in self]
         return np.vstack(vals)
-
-
-    @property
-    def interfaces(self):
-        """
-        Get all pairs of adjacent Beds, ignoring any pairs with either Bed 'missing'
-        """
-        non_missing = lambda t: 'missing' not in [t[0].lithology, t[1].lithology]
-        return filter(non_missing, zip(self[:-1], self[1:]))
-
-    @property
-    def net_to_gross(self):
-        """
-        Returns (total thickness of 'sand' Beds) / (total thickness of all Beds)
-        """
-        is_sand = lambda bed: bed.lithology == 'sand'
-        sand_th = sum([bed.thickness for bed in filter(is_sand, self)])
-
-        not_missing = lambda bed: bed.lithology != 'missing'
-        total_th = sum([bed.thickness for bed in filter(not_missing, self)])
-
-        return sand_th / total_th
-
-
-    @property
-    def amalgamation_ratio(self):
-        """
-        1. dont count mud on mud contacts
-        2. find sand on sand contacts
-        3. divide sand-on-sand contacts by total number of contacts
-        """
-        total_contacts, sand_contacts = 0, 0
-        for upper, lower in self.interfaces:
-            if upper.lithology == lower.lithology == 'sand':
-                sand_contacts += 1
-            elif upper.lithology == lower.lithology == 'mud':
-                continue
-            total_contacts += 1
-
-        try:
-            return sand_contacts / total_contacts
-        except ZeroDivisionError:
-            return 0.
 
 
     @property
@@ -145,7 +111,10 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, Striplog):
 
     def reduce_fields(self, field_fn_dict):
         """
-        Return 1D array, result of applying `fn` values to `field` keys.
+        Return array, result of applying `fn` values to `field` keys.
+
+        The funcs can return scalars or arrays, but all of the return values
+        should be numpy-concatable. The concatenation
         """
         try:
             vals = [self.reduce_field(field, fn) for field, fn in field_fn_dict.items()]
@@ -156,7 +125,7 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, Striplog):
         try:
             return np.concatenate(vals)
         except ValueError as ve:
-            print([(v, np.shape(v)) for v in vals])
+            print(f'Incompatible shapes: {[v.shape for v in vals]}')
             raise(ve)
 
 

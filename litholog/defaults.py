@@ -73,7 +73,7 @@ def gs2litho(gs, units='psi'):
         gs = wentworth.gs2psi(gs)
     elif units is 'phi':
         gs = wentworth.phi2psi(gs)
-    elif gs < -11 or gs > 10:
+    elif gs < -11 or gs > 12:
         raise UserWarning(f'gs value of {gs} is suspect... is this in `psi` units?')
 
     if gs <= -4:
