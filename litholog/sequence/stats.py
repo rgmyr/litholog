@@ -52,7 +52,7 @@ class SequenceStatsMixin(ABC):
         try:
             return sand_contacts / total_contacts
         except ZeroDivisionError:
-            return 0.
+            return -1.
 
 
     def hurst_K(self, field, safe=True):
@@ -66,30 +66,30 @@ class SequenceStatsMixin(ABC):
         return self._hurst_K(values, safe=safe)
 
 
-    def hurst_D(self, field, safe=True, nsamples=1000, return_K=True):
+    def hurst_D(self, field, take_log=True, safe=True, nsamples=1000, return_K=True):
         """
-        Returns (K, D, p) if ``return_K``, else (D, p)
+        Returns (D, p, K) if ``return_K``, else (D, p)
         where:
-            K : Hurst K value with original values
             D : Bootstrapped Hurst value from ``nsamples`` resamples
             p : p-value of ``D``
+            K : Hurst K value with original values
         """
         values = self.get_field(field)
-        K = self._hurst_K(values, safe=safe)
+        K = self._hurst_K(values, take_log=take_log, safe=safe)
 
         ks = np.zeros(nsamples)
         for i in range(nsamples):
             _sample = np.random.choice(values, size=values.size, replace=True)
-            ks[i] = self._hurst_K(_sample, safe=safe)
+            ks[i] = self._hurst_K(_sample, take_log=take_log, safe=safe)
 
-        D = ks.mean() / ks.std()
+        D = (K - ks.mean()) / ks.std()
         p = np.sum(ks >= K) / nsamples
 
-        return (K, D, p) if return_K else (D, p)
+        return (D, p, K) if return_K else (D, p)
 
 
     @staticmethod
-    def _hurst_K(x, safe=True):
+    def _hurst_K(x, take_log=True, safe=True):
         """
         Computes Hurst K ``log(R(n)/S(n)) / log(x.size / 2)`` for 1D array ``x``
         """
@@ -98,10 +98,13 @@ class SequenceStatsMixin(ABC):
         if safe and x.size < 20:
             raise UserWarning(f'Cannot use field of size {x.size} with ``safe=True``')
 
+        if take_log:
+            x = np.log10(x)
+
         y = x - x.mean()
         z = np.cumsum(y)
 
         Rn = z.max() - z.min()
         Sn = np.std(y)
 
-        return np.log(Rn / Sn) / np.log(x.shape[0] / 2.)
+        return np.log10(Rn / Sn) / np.log10(x.size / 2.)
