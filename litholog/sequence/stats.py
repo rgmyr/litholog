@@ -55,18 +55,18 @@ class SequenceStatsMixin(ABC):
             return -1.
 
 
-    def hurst_K(self, field, safe=True):
+    def hurst_K(self, field, lithology, safe=True):
         """
         Hurst K value for data from a sequence ``field``.
 
         If ``safe``, will only accept fields with at least 20 values.
         """
-        values = self.get_field(field)
+        values = self.get_field(field, lithology)
 
         return self._hurst_K(values, safe=safe)
 
 
-    def hurst_D(self, field, take_log=True, safe=True, nsamples=1000, return_K=True):
+    def hurst_D(self, field, lithology, take_log=True, safe=True, nsamples=1000, return_K=True):
         """
         Returns (D, p, K) if ``return_K``, else (D, p)
         where:
@@ -74,7 +74,7 @@ class SequenceStatsMixin(ABC):
             p : p-value of ``D``
             K : Hurst K value with original values
         """
-        values = self.get_field(field)
+        values = self.get_field(field, lithology)
         K = self._hurst_K(values, take_log=take_log, safe=safe)
 
         ks = np.zeros(nsamples)

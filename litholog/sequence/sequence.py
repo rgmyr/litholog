@@ -87,11 +87,18 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, SequenceStatsMixin, Striplo
         return min(filter(None, [iv.min_field(field) for iv in self]))
 
 
-    def get_field(self, field, default_value=0.0):
+    def get_field(self, field, lithology=None, default_value=0.0):
         """
-        Get 'vertical' array of ``field`` values
+        Get 'vertical' array of ``field`` values.
+
+        If `lithology` provided, will only use the beds matching that lithology (in primary component).
         """
-        vals = [iv[field] for iv in self]
+        if lithology is not None:
+            ivs = [iv for iv in self if iv.primary.lithology == lithology]
+        else:
+            ivs = self
+
+        vals = [iv[field] for iv in ivs]
         vals = [default_value] if len(vals) == 0 else vals
         try:
             return np.concatenate(vals)
