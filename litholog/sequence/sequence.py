@@ -29,6 +29,8 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, SequenceStatsMixin, Striplo
         self.metadata = metadata
         Striplog.__init__(self, list_of_Beds)
 
+    """
+    Possible `stumpy` stuff:
 
     def motif(self, location, size):
         assert size % 2 == 1, 'Should only do odd sizes.'
@@ -39,6 +41,7 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, SequenceStatsMixin, Striplo
         assert first > 0 and last < len(self), f'Motif at {location, size} incompatible with {len(self)}'
 
         beds = self[first:last+1]
+    """
 
     @property
     def values(self):
