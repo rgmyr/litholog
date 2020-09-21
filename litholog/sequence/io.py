@@ -80,7 +80,7 @@ def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, tol=1e-3):
     """
     assert topcol in df.columns, f'`topcol` {topcol}  not present in {df.columns}'
 
-    assert basecol or thickcol, 'Must specify either `basecol` or `topcol`'
+    assert basecol or thickcol, 'Must specify either `basecol` or `thickcol`'
 
     elev_sorted = df.sort_values(topcol, ascending=False)
     depth_sorted = df.sort_values(topcol, ascending=True)

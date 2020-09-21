@@ -55,6 +55,30 @@ class SequenceStatsMixin(ABC):
             return -1.
 
 
+    @staticmethod
+    def _hurst_K(x, take_log=True, safe=True):
+        """
+        Computes Hurst K ``log(R(n)/S(n)) / log(x.size / 2)`` for 1D array ``x``
+
+        Used below in public ``hurst_K`` and ``hurst_D`` methods.
+        """
+        x = np.array(x).squeeze()
+        assert x.ndim == 1, 'Can only compute _rescaled_range on 1D series `x`'
+        if safe and x.size < 20:
+            raise UserWarning(f'Cannot use field of size {x.size} with ``safe=True``')
+
+        if take_log:
+            x = np.log10(x)
+
+        y = x - x.mean()
+        z = np.cumsum(y)
+
+        Rn = z.max() - z.min()
+        Sn = np.std(y)
+
+        return np.log10(Rn / Sn) / np.log10(x.size / 2.)
+
+
     def hurst_K(self, field, lithology, safe=True):
         """
         Hurst K value for data from a sequence ``field``.
@@ -86,25 +110,3 @@ class SequenceStatsMixin(ABC):
         p = np.sum(ks >= K) / nsamples
 
         return (D, p, K) if return_K else (D, p)
-
-
-    @staticmethod
-    def _hurst_K(x, take_log=True, safe=True):
-        """
-        Computes Hurst K ``log(R(n)/S(n)) / log(x.size / 2)`` for 1D array ``x``
-        """
-        x = np.array(x).squeeze()
-        assert x.ndim == 1, 'Can only compute _rescaled_range on 1D series `x`'
-        if safe and x.size < 20:
-            raise UserWarning(f'Cannot use field of size {x.size} with ``safe=True``')
-
-        if take_log:
-            x = np.log10(x)
-
-        y = x - x.mean()
-        z = np.cumsum(y)
-
-        Rn = z.max() - z.min()
-        Sn = np.std(y)
-
-        return np.log10(Rn / Sn) / np.log10(x.size / 2.)
