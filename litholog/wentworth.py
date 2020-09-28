@@ -43,7 +43,6 @@ coarse_scale = [
 
 #wentworth_names, wentworth_psis = zip(*wentworth_scale)
 
-
 # PSI functions
 def gs2psi(gs):
     # TODO: handle zeros?

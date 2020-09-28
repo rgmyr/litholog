@@ -80,7 +80,10 @@ class Bed(Interval):
             lens = [utils.safelen(v) for v in self.data.values()]
             assert len(set(lens)) <= 2, f'Lengths of `.data` values must be [1,N] only, found: {set(lens)} {self.data}'
             # TODO: double check that this is safe and works right
-            return np.vstack([utils.saferep(v, max(lens)) for v in self.data.values()]).T
+            try:
+                return np.vstack([utils.saferep(v, max(lens)) for v in self.data.values()]).T
+            except AssertionError:
+                raise AssertionError(f'Error on: {self.data}')
 
     @values.setter
     def values(self, new_values):
