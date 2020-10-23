@@ -4,6 +4,40 @@ Sequence stats + related.
 from abc import ABC
 
 import numpy as np
+from scipy.ndimage import gaussian_filter1d
+
+
+def filter_nan_gaussian(arr, sigma, noise=None):
+    """
+    Gaussian convolution. (Allows intensity to leak into the NaN area.)
+
+    If `noise` magnitude given, adds uniform noise.
+
+    Implementation from stackoverflow answer:
+        https://stackoverflow.com/a/36307291/7128154
+    """
+    gauss = arr.copy()
+    gauss[np.isnan(gauss)] = 0
+    gauss = gaussian_filter1d(gauss, sigma=sigma, mode='constant', cval=0)
+
+    norm = np.ones(shape=arr.shape)
+    norm[np.isnan(arr)] = 0
+    norm = gaussian_filter1d(norm, sigma=sigma, mode='constant', cval=0)
+
+    # avoid RuntimeWarning: invalid value encountered in true_divide
+    norm = np.where(norm==0, 1, norm)
+    gauss = gauss / norm
+
+    # Add uniform noise, restricted positive
+    if noise is not None:
+        gauss += np.random.uniform(-noise, noise, size=gauss.size)
+        gauss[gauss < 0.] = 0
+
+    # Restore NaN
+    gauss[np.isnan(arr)] = np.nan
+
+    return gauss
+
 
 
 class SequenceStatsMixin(ABC):
@@ -17,6 +51,7 @@ class SequenceStatsMixin(ABC):
         """
         non_missing = lambda t: 'missing' not in [t[0].lithology, t[1].lithology]
         return filter(non_missing, zip(self[:-1], self[1:]))
+
 
     @property
     def net_to_gross(self):
@@ -110,3 +145,61 @@ class SequenceStatsMixin(ABC):
         p = np.sum(ks >= K) / nsamples
 
         return (D, p, K) if return_K else (D, p)
+
+
+    def pseudo_gamma_simple(self,
+                        gs_field='grain_size_mm',
+                        depth_field='depth_m',
+                        resolution=0.2,
+                        gs_cutoff=0.0625,
+                        gamma_range=(30, 180),
+                        sigma=0.1,
+                        noise=10.):
+        """
+        Compute a 'pseudo' gamma ray log by thresholding `gs_field` + Gaussian convolution.
+
+        Parameters
+        ----------
+        gs_field: str
+            Which field to use for grainsize
+        depth_field: str
+            Which field to use for depth
+        resolution: float
+            Scale at which to resample (in `depth_field` units)
+        gs_cutoff: float
+            Cutoff for grainsize thresholding. Values above/below get mapped to `gamma_range`.
+        sigma: float
+            Width of Gaussian, in depth units.
+        noise: float
+            Magnitude of uniform noise to add, or None to add no noise.
+        """
+        ds, gs = self.get_field(depth_field), self.get_field(gs_field)
+
+        # Make sure depth field is monotonic
+        step_pos = np.diff(ds) > 0
+        assert np.unique(step_pos).size == 1, '{depth_field} data is non-monotonic'
+
+        # Must be increasing to use `np.interp`
+        if not step_pos.all():
+            ds, gs = ds[::-1], gs[::-1]
+
+        # Resample `gs_field` at `resolution`
+        nsamples = (np.abs(self.start.z-self.stop.z) // resolution) + 1
+        sampled_ds = np.linspace(self.start.z, self.stop.z, num=int(nsamples), endpoint=True)
+        sampled_gs = np.interp(sampled_ds, ds, gs)
+
+        # Threshold `sampled_gs` to `gamma_range`
+        nan_idxs = np.argwhere(np.isnan(sampled_gs))
+        sampled_gs[nan_idxs] = gamma_range[1]
+        pseudo_gr = np.where(sampled_gs < gs_cutoff, gamma_range[1], gamma_range[0])
+
+        # Convolution
+        pseudo_gr = gaussian_filter1d(pseudo_gr, sigma / resolution).astype('float64')
+
+        if noise is not None:
+            pseudo_gr += np.random.uniform(-noise, noise, size=pseudo_gr.size)
+            pseudo_gr[pseudo_gr < 0.] = 0
+
+        pseudo_gr[nan_idxs] = np.nan
+
+        return sampled_ds, pseudo_gr

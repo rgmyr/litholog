@@ -32,6 +32,18 @@ fine_scale = [
     ('boulder',  None)  # anything bigger than 8
 ]
 
+medium_scale = [
+    ('mud',     -4),
+    ('vf_sand', -3),
+    ('f_sand',  -2),
+    ('m_sand',  -1),
+    ('c_sand',   0),
+    ('vc_sand',  1),
+    ('gravel',   6),
+    ('cobble',   8),
+    ('boulder', None)
+]
+
 coarse_scale = [
     ('clay',  -8),
     ('silt',  -4),

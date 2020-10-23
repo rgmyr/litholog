@@ -30,12 +30,13 @@ def set_wentworth_ticks(ax, min_psi, max_psi, wentworth='fine', **kwargs):
         Axes to modify.
     min_psi, max_psi: float
         Define the `xlim` for the axis.
-    wentworth: one of {'fine', 'coarse'}
+    wentworth: one of {'fine', 'medium', 'coarse'}
         Which scale to use. Default='fine'.
     **kwargs:
 
     """
     #print(f'min_psi: {min_psi}')
+
     scale = coarse_scale if wentworth == 'coarse' else fine_scale
 
     scale_names, scale_psis = zip(*scale)
@@ -126,7 +127,7 @@ class SequenceVizMixin(ABC):
 
         if set_ylim:
             ax.set_ylim([self.start.z, self.stop.z])
-            print('Set_ylim: ', [self.start.z, self.stop.z])
+            #print('Set_ylim: ', [self.start.z, self.stop.z])
 
         # Determine xlimits
         if width_field:
@@ -135,7 +136,6 @@ class SequenceVizMixin(ABC):
             max_width = ceil(self.max_field(width_field) + 1)
         else:
             # Fall back to component decors if not
-
             min_width = min(d.width for d in legend) - 1
             max_width = legend.max_width + 1
 

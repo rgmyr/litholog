@@ -66,7 +66,7 @@ def gs2litho(gs, units='psi'):
     Psi is log2(gs_mm), so medium sand is -1 to -2.
     See more at https://en.wikipedia.org/wiki/Grain_size#/media/File:Wentworth_scale.png
     """
-    if gs is None or gs is np.nan:
+    if gs is None or np.isnan(gs).all():
         return missing_decor.component
 
     if units is 'mm':

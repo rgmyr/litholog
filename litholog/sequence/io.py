@@ -148,8 +148,12 @@ class SequenceIOMixin(ABC):
         assert not missing_meta_cols, f'metacols {missing_meta_cols} not present in `df`'
 
         # Preprocess the data
-        df = preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, tol=tol)
-        # print(df)
+        try:
+            df = preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, tol=tol)
+        except Exception as e:
+            print('Problem with:', df)
+            raise(e)
+
         basecol = basecol or 'bases'
 
         metadata = {}
@@ -171,6 +175,8 @@ class SequenceIOMixin(ABC):
 
         return cls(list_of_Beds, metadata=metadata)
 
+
+    #def to_dataframe(self):
 
     @classmethod
     def from_numpy(self, arr, other=None, keys=None, split_key=None, component_map=None):
