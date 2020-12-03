@@ -2,6 +2,8 @@
 Notes:
     - Just need top depths/elevations.
 """
+import copy
+
 import numpy as np
 from math import floor, ceil
 import matplotlib.pyplot as plt
@@ -152,3 +154,42 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, SequenceStatsMixin, Striplo
         for iv in self:
             iv.resample_data(depth_key, step, kind=kind)
         return self.values
+
+
+    def flip_convention(self, depth_key=None):
+        """
+        Changes the depth convention (elevation <-> depth), setting to base or top to 0.0, respectively.
+
+        If `depth_key` is given, that data column in each bed should be shifted the same amount.
+        """
+        return self.shift(delta=-self.stop.z, depth_key=depth_key)
+
+
+    def shift(self, delta=None, start=None, depth_key=None):
+        """
+        Shift all the intervals by `delta` (negative numbers are 'up'), or by setting a new start depth.
+        Returns a new copy of the BedSequence.
+        """
+        if delta is None:
+            if start is None:
+                raise ValueError("You must provide a delta or a new start.")
+            delta = start - self.start.z
+
+        new_beds = []
+        for bed in self:
+            try:
+                components = bed.components
+            except AttributeError:
+                components = []
+
+            data = copy.deepcopy(bed.data)
+            if depth_key is not None:
+                data[depth_key] = np.abs(data[depth_key] + delta)
+
+            new_bed = Bed(
+                np.abs(bed.top.z + delta), np.abs(bed.base.z + delta),
+                data=data, components=components
+            )
+            new_beds.append(new_bed)
+
+        return BedSequence(new_beds, metadata=self.metadata)
