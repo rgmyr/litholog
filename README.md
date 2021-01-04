@@ -4,7 +4,7 @@
 
 `litholog` is focused on providing a framework to digitize, store, plot, and analyze sedimentary graphic logs (example log shown below).
 
-![A graphic log](/data/example_log.png =300x)
+<img src="/data/example_log.png" alt="Example graphic log from Jobe et al. (2012)" width="300"/>
 
 `litholog` is a package-level extension of [agile-geoscience/striplog](https://github.com/agile-geoscience/striplog), with additional features that focus on lithology, and an API that is geared toward facilitating machine learning and quantitative analysis.
 
