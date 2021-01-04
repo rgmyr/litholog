@@ -2,10 +2,13 @@
 
 ### Overview
 
+`litholog` is focused on providing a framework to digitize, store, plot, and analyze sedimentary graphic logs (Fig. 1).
+
+![A graphic log]()
+
 `litholog` is a package-level extension of [agile-geoscience/striplog](https://github.com/agile-geoscience/striplog), with additional features that focus on lithology, and an API that is geared toward facilitating machine learning and quantitative analysis.
 
-###
-
+UDPATE: IMAGE OF GRAPHIC LOG (maybe from Danny's repo?)
 
 ### Data Structures
 
@@ -20,6 +23,8 @@ The package provides two primary data structures:
 
 ### Utilities
 
+Several utilities for working with graphic logs are included:
+
 - transformations for grain-size data from millimeter (mm) to log2 (a.k.a. *Psi*) units, which are far easier to work with than mm.
 - calculation of the following metrics at the `BedSequence` level:
     - net-to-gross
@@ -28,7 +33,7 @@ The package provides two primary data structures:
     - Hurst statistics (for determining facies clustering)
 - default lithology colors for Beds
 
-### Data provided
+### Data
 
 The data provided with this demo come from a paper by Zane Jobe et al. ([html](https://doi.org/10.1111/j.1365-3091.2011.01283.x), [pdf](http://www.academia.edu/download/31596179/Jobe_et_al_2012_Sed-_Climbing_ripple_successions_in_turbidite_systems.pdf)), and there are 19 graphic logs in that paper, all of which were digitized using the Matlab digitizer included with this release.
 
