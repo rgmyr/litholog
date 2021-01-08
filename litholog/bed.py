@@ -154,7 +154,7 @@ class Bed(Interval):
         old_ds = self[depth_key]
         single_sample = True if utils.safelen(old_ds) == 1 else False
 
-        new_ds = np.linspace(self.top.z, self.base.z, num=max(2, (abs(self.top.z-self.base.z) // step)))
+        new_ds = np.linspace(self.top.z, self.base.z, num=max(2, int((abs(self.top.z-self.base.z) // step))))
 
         if type(depth_key) is str:
             try:
