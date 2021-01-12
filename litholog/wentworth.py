@@ -91,7 +91,7 @@ def psi2name(psi, scale=fine_scale):
 def phi2name(phi):
     return psi2name(-phi)
 
-def gs2name(psi):
+def gs2name(gs):
     return psi2name(gs2psi(gs))
 
 """
