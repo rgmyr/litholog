@@ -167,10 +167,12 @@ class SequenceStatsMixin(ABC):
         resolution: float
             Scale at which to resample (in `depth_field` units)
         gs_cutoff: float
-            Cutoff for grainsize thresholding. Values above/below get mapped to `gamma_range`.
+            Cutoff for `gs_field` thresholding. Values above/below get mapped to `gamma_range`.
+        gamma_range: tuple or list
+            (low, high) sample values for `gs_field` values (above, below) `gs_cuttoff`.
         sigma: float
             Width of Gaussian, in depth units.
-        noise: float
+        noise: float or None
             Magnitude of uniform noise to add, or None to add no noise.
         """
         ds, gs = self.get_field(depth_field), self.get_field(gs_field)

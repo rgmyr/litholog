@@ -259,7 +259,7 @@ class Bed(Interval):
         decor = legend.get_decor(self.primary)
 
         ws = self[width_field]
-        if ws is None:
+        if ws is None or np.isnan(ws).all():
             ws = decor.width or 1
         #ws = (ws - min_width) / (max_width - min_width)
 

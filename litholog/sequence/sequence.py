@@ -192,4 +192,6 @@ class BedSequence(SequenceIOMixin, SequenceVizMixin, SequenceStatsMixin, Striplo
             )
             new_beds.append(new_bed)
 
+        # Should we reverse beds order here?
+
         return BedSequence(new_beds, metadata=self.metadata)
