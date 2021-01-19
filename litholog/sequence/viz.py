@@ -71,7 +71,7 @@ def set_wentworth_ticks(ax, min_psi, max_psi, wentworth='fine', **kwargs):
 
 class SequenceVizMixin(ABC):
     """
-    Defines the plot/viz interface for `BedSequence`.
+    Defines the plot/viz interface for ``BedSequence``.
     """
     def plot(self,
              legend=None,
@@ -80,34 +80,36 @@ class SequenceVizMixin(ABC):
              width_field=None,
              depth_field=None,
              wentworth='fine',
-             yticks_right=False,
              exxon_style=False,
+             yticks_right=False,
              set_ylim=True,
              ax=None,
              **kwargs):
         """
-        Plot as a `Striplog` of `Bed`s.
+        Plot as a ``Striplog`` of ``Bed``s.
 
         Parameters
         ----------
-        legend : striplog.Legend, optional
-            If beds have primary `lithology` component, will use defaults.litholegend, otherwise random.
-        fig_width : int, optional
+        legend: striplog.Legend, optional
+            If beds have primary component with 'lithology' field, will use ``defaults.litholegend``, otherwise random.
+        fig_width: int, optional
             Width of figure, if creating one.
-        aspect : int, optional
+        aspect: int, optional
             Aspect ratio of figure, if creating one.
-        width_field : str or in
-            The `Bed.data` field or `Bed.values` column used to define polyon widths.
+        width_field: str or int
+            The ``Bed.data``` field or ``Bed.values`` column used to define polyon widths.
         depth_field :
-            The `Bed.data` field or `Bed.values` column defining depths of `width_field` samples
-        wentworth : one of {'fine', 'coarse'}
+            The ``Bed.data`` field or ``Bed.values`` column defining depths of ``width_field`` samples
+        wentworth: one of {'fine', 'coarse'}
             Which Wentworth scale to use for xlabels/ticks.
-        y_right : bool, optional
-            If True, will move yticks/labels to right side. Defualt=False.
-        exxon_style : bool, optional
+        exxon_style: bool, optional
             Set to true to invert the x-axis (so GS increases to the left).
+        yticks_right: bool, optional
+            If True, will move yticks/labels to right side. Defualt=False.
+        set_ylim: bool, optional
+            Whether to set the y-limits of the ax to [self.start, self.stop]. Default=True.
         **kwargs : optional
-            ylabelsize, yticksize, xlabelsize, x
+            ylabelsize, yticksize, xlabelsize, xlabelrotation
         """
         if legend is None:
             # If beds have lithology, use litholegend

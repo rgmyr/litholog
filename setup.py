@@ -21,7 +21,10 @@ setup(name='litholog',
       author_email='ross.meyer@utexas.edu',
       packages=find_packages(PACKAGE_PATH),
       install_requires=[
-            'numpy >= 1.13.0',
+        'numpy>=1.13.0',
+        'scipy>=1.5',
+        'matplotlib>=3.2',
+        'pandas>=1.0',
       ],
       zip_safe=False
 )
