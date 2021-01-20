@@ -6,7 +6,9 @@
 
 Graphic logs are the most common way geologists characterize and communicate the composition and variability of clastic sedimentary successions; through a simple drawing, a graphic log imparts complex geological concepts (e.g., the Bouma turbidite sequence or a shoreface parasequence). The term ‘graphic log’ originates from a geologist graphically drawing (i.e., ‘logging’) an outcrop or core; other synonymous terms include measured section and stratigraphic column.
 
-<img src="/images/Example_log.png" alt="Example graphic log" width="600"/>
+<img src="/images/example_log_drawing.png" alt="Graphic log as drawn in a field notebook" width="600"/>
+
+<img src="/images/example_log_litholog.png" alt="Graphic log produced by litholog" width="600"/>
 
 `litholog` is a package-level extension of [agile-geoscience/striplog](https://github.com/agile-geoscience/striplog), with additional features that focus on lithology, and an API that is geared toward facilitating machine learning and quantitative analysis.
 
