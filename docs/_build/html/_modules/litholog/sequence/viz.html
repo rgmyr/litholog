@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>litholog.sequence.viz &mdash; litholog 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> litholog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">litholog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>litholog.sequence.viz</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for litholog.sequence.viz</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Visualization funcs and the `SequenceVizMixin` interface for `BedSequence`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span><span class="p">,</span> <span class="n">ceil</span>
+
+<span class="kn">from</span> <span class="nn">striplog</span> <span class="kn">import</span> <span class="n">Legend</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">litholog</span> <span class="kn">import</span> <span class="n">defaults</span>
+<span class="kn">from</span> <span class="nn">litholog.wentworth</span> <span class="kn">import</span> <span class="n">fine_scale</span><span class="p">,</span> <span class="n">coarse_scale</span>
+
+
+<div class="viewcode-block" id="make_pair_figure"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.viz.make_pair_figure">[docs]</a><span class="k">def</span> <span class="nf">make_pair_figure</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a figure with two column axes and no space horizontal between them.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="mi">3</span><span class="p">))</span> <span class="c1">#subplot_kw=dict(frameon=False)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_wentworth_ticks"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.viz.set_wentworth_ticks">[docs]</a><span class="k">def</span> <span class="nf">set_wentworth_ticks</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">min_psi</span><span class="p">,</span> <span class="n">max_psi</span><span class="p">,</span> <span class="n">wentworth</span><span class="o">=</span><span class="s1">&#39;fine&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set the `xticks` of `ax` for Wentworth grainsizes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ax : matplotlib.Axes</span>
+<span class="sd">        Axes to modify.</span>
+<span class="sd">    min_psi, max_psi: float</span>
+<span class="sd">        Define the `xlim` for the axis.</span>
+<span class="sd">    wentworth: one of {&#39;fine&#39;, &#39;medium&#39;, &#39;coarse&#39;}</span>
+<span class="sd">        Which scale to use. Default=&#39;fine&#39;.</span>
+<span class="sd">    **kwargs:</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#print(f&#39;min_psi: {min_psi}&#39;)</span>
+
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">coarse_scale</span> <span class="k">if</span> <span class="n">wentworth</span> <span class="o">==</span> <span class="s1">&#39;coarse&#39;</span> <span class="k">else</span> <span class="n">fine_scale</span>
+
+    <span class="n">scale_names</span><span class="p">,</span> <span class="n">scale_psis</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">scale</span><span class="p">)</span>
+
+    <span class="n">minor_locs</span><span class="p">,</span> <span class="n">minor_labels</span><span class="p">,</span> <span class="n">major_locs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scale</span><span class="p">)):</span>
+
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">scale_psis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">max_psi</span><span class="p">)</span>
+        <span class="n">prev_psi</span> <span class="o">=</span> <span class="n">scale_psis</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">major_locs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">min_psi</span>
+        <span class="n">next_psi</span> <span class="o">=</span> <span class="n">scale_psis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="k">else</span> <span class="n">max_psi</span>
+
+        <span class="k">if</span> <span class="n">psi</span> <span class="o">&lt;=</span> <span class="n">min_psi</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">prev_psi</span> <span class="o">&gt;=</span> <span class="n">max_psi</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1">#print(&#39;(&#39;, prev_psi, &#39;, &#39;, psi, &#39;, &#39;, next_psi, &#39;)&#39;)</span>
+        <span class="n">minor_locs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">prev_psi</span> <span class="o">+</span> <span class="n">psi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
+        <span class="n">minor_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scale_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="n">major_locs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">minor_locs</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">minor_labels</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">major_locs</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">major_locs</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+<div class="viewcode-block" id="SequenceVizMixin"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.viz.SequenceVizMixin">[docs]</a><span class="k">class</span> <span class="nc">SequenceVizMixin</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the plot/viz interface for ``BedSequence``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SequenceVizMixin.plot"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.viz.SequenceVizMixin.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+             <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">fig_width</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+             <span class="n">aspect</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+             <span class="n">width_field</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">depth_field</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">wentworth</span><span class="o">=</span><span class="s1">&#39;fine&#39;</span><span class="p">,</span>
+             <span class="n">exxon_style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">yticks_right</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">set_ylim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot as a ``Striplog`` of ``Bed``s.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        legend: striplog.Legend, optional</span>
+<span class="sd">            If beds have primary component with &#39;lithology&#39; field, will use ``defaults.litholegend``, otherwise random.</span>
+<span class="sd">        fig_width: int, optional</span>
+<span class="sd">            Width of figure, if creating one.</span>
+<span class="sd">        aspect: int, optional</span>
+<span class="sd">            Aspect ratio of figure, if creating one.</span>
+<span class="sd">        width_field: str or int</span>
+<span class="sd">            The ``Bed.data``` field or ``Bed.values`` column used to define polyon widths.</span>
+<span class="sd">        depth_field :</span>
+<span class="sd">            The ``Bed.data`` field or ``Bed.values`` column defining depths of ``width_field`` samples</span>
+<span class="sd">        wentworth: one of {&#39;fine&#39;, &#39;coarse&#39;}</span>
+<span class="sd">            Which Wentworth scale to use for xlabels/ticks.</span>
+<span class="sd">        exxon_style: bool, optional</span>
+<span class="sd">            Set to true to invert the x-axis (so GS increases to the left).</span>
+<span class="sd">        yticks_right: bool, optional</span>
+<span class="sd">            If True, will move yticks/labels to right side. Defualt=False.</span>
+<span class="sd">        set_ylim: bool, optional</span>
+<span class="sd">            Whether to set the y-limits of the ax to [self.start, self.stop]. Default=True.</span>
+<span class="sd">        **kwargs : optional</span>
+<span class="sd">            ylabelsize, yticksize, xlabelsize, xlabelrotation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">legend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If beds have lithology, use litholegend</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="p">,</span> <span class="s1">&#39;lithology&#39;</span><span class="p">):</span>
+                <span class="n">legend</span> <span class="o">=</span> <span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span>
+            <span class="c1"># Fall back to random legend if not</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">legend</span> <span class="o">=</span> <span class="n">Legend</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">)</span>
+
+        <span class="c1"># Set up an ax if necessary</span>
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">return_ax</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">aspect</span><span class="o">*</span><span class="n">fig_width</span><span class="p">))</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">return_ax</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">set_ylim</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="o">.</span><span class="n">z</span><span class="p">])</span>
+            <span class="c1">#print(&#39;Set_ylim: &#39;, [self.start.z, self.stop.z])</span>
+
+        <span class="c1"># Determine xlimits</span>
+        <span class="k">if</span> <span class="n">width_field</span><span class="p">:</span>
+            <span class="c1"># Set from the data if possible</span>
+            <span class="n">min_width</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_field</span><span class="p">(</span><span class="n">width_field</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">max_width</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_field</span><span class="p">(</span><span class="n">width_field</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Fall back to component decors if not</span>
+            <span class="n">min_width</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">width</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">legend</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">max_width</span> <span class="o">=</span> <span class="n">legend</span><span class="o">.</span><span class="n">max_width</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">])</span>
+        <span class="n">set_wentworth_ticks</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">,</span> <span class="n">wentworth</span><span class="o">=</span><span class="n">wentworth</span><span class="p">)</span>
+
+        <span class="c1"># Plot the individual Beds as patches</span>
+        <span class="k">for</span> <span class="n">bed</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">bed</span><span class="o">.</span><span class="n">as_patch</span><span class="p">(</span><span class="n">legend</span><span class="p">,</span> <span class="n">width_field</span><span class="p">,</span> <span class="n">depth_field</span><span class="p">,</span>
+                                      <span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+        <span class="c1"># Finalize axis settings</span>
+        <span class="n">ybase</span><span class="p">,</span> <span class="n">ytop</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="ow">is</span> <span class="s1">&#39;depth&#39;</span> <span class="ow">and</span> <span class="n">ytop</span> <span class="o">&gt;</span> <span class="n">ybase</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">yticks_right</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_right</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">exxon_style</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+
+        <span class="c1"># Tick params settable with kwargs</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span>
+            <span class="n">labelsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ylabelsize&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;yticksize&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;minor&#39;</span><span class="p">,</span>
+            <span class="n">labelsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xlabelsize&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+            <span class="n">labelrotation</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xlabelrotation&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_ax</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ax</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ross Meyer, Zane Jobe.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

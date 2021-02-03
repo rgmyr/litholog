@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>litholog.wentworth &mdash; litholog 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> litholog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">litholog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>litholog.wentworth</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for litholog.wentworth</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utility functions for Wentworth/Krumbein logarithmic grainsize scale.</span>
+
+<span class="sd">See this link for a nice chart:</span>
+<span class="sd">    https://en.wikipedia.org/wiki/Grain_size#/media/File:Wentworth_scale.png</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span><span class="p">,</span> <span class="n">ceil</span>
+
+<span class="c1"># Reference diameter (mm)</span>
+<span class="n">D0</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># (name : upper PSI limit) ... upper limits taken as inclusive</span>
+<span class="n">fine_scale</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;colloid&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;clay&#39;</span><span class="p">,</span>    <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;vf_silt&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;f_silt&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;m_silt&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;c_silt&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;vf_sand&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;f_sand&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;m_sand&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;c_sand&#39;</span><span class="p">,</span>   <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;vc_sand&#39;</span><span class="p">,</span>  <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;vf_gravel&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;f_gravel&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;m_gravel&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;c_gravel&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;vc_gravel&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;cobble&#39;</span><span class="p">,</span>   <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;boulder&#39;</span><span class="p">,</span>  <span class="kc">None</span><span class="p">)</span>  <span class="c1"># anything bigger than 8</span>
+<span class="p">]</span>
+
+<span class="n">medium_scale</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;mud&#39;</span><span class="p">,</span>     <span class="o">-</span><span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;vf_sand&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;f_sand&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;m_sand&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;c_sand&#39;</span><span class="p">,</span>   <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;vc_sand&#39;</span><span class="p">,</span>  <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;gravel&#39;</span><span class="p">,</span>   <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;cobble&#39;</span><span class="p">,</span>   <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;boulder&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">coarse_scale</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;clay&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;silt&#39;</span><span class="p">,</span>  <span class="o">-</span><span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;sand&#39;</span><span class="p">,</span>   <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;gravel&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;cobble&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;boulder&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1">#wentworth_names, wentworth_psis = zip(*wentworth_scale)</span>
+
+<span class="c1"># PSI functions</span>
+<div class="viewcode-block" id="gs2psi"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.gs2psi">[docs]</a><span class="k">def</span> <span class="nf">gs2psi</span><span class="p">(</span><span class="n">gs</span><span class="p">):</span>
+    <span class="c1"># TODO: handle zeros?</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">gs</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">gs</span> <span class="o">/</span> <span class="n">D0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="psi2gs"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.psi2gs">[docs]</a><span class="k">def</span> <span class="nf">psi2gs</span><span class="p">(</span><span class="n">psi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">D0</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">psi</span></div>
+
+<div class="viewcode-block" id="psi2phi"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.psi2phi">[docs]</a><span class="k">def</span> <span class="nf">psi2phi</span><span class="p">(</span><span class="n">psi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">psi</span></div>
+
+
+<span class="c1"># PHI functions</span>
+<div class="viewcode-block" id="gs2phi"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.gs2phi">[docs]</a><span class="k">def</span> <span class="nf">gs2phi</span><span class="p">(</span><span class="n">gs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">gs</span> <span class="o">/</span> <span class="n">D0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="phi2gs"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.phi2gs">[docs]</a><span class="k">def</span> <span class="nf">phi2gs</span><span class="p">(</span><span class="n">phi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">D0</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">phi</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="phi2psi"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.phi2psi">[docs]</a><span class="k">def</span> <span class="nf">phi2psi</span><span class="p">(</span><span class="n">phi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">phi</span></div>
+
+
+<span class="c1"># Name funcs</span>
+<div class="viewcode-block" id="psi2name"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.psi2name">[docs]</a><span class="k">def</span> <span class="nf">psi2name</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">fine_scale</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Map single `psi` value to Wentworth bin name.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">upper_psi</span> <span class="ow">in</span> <span class="n">scale</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">psi</span> <span class="o">&lt;=</span> <span class="n">upper_psi</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name</span>
+    <span class="k">return</span> <span class="n">scale</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="phi2name"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.phi2name">[docs]</a><span class="k">def</span> <span class="nf">phi2name</span><span class="p">(</span><span class="n">phi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">psi2name</span><span class="p">(</span><span class="o">-</span><span class="n">phi</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="gs2name"><a class="viewcode-back" href="../../source/litholog.html#litholog.wentworth.gs2name">[docs]</a><span class="k">def</span> <span class="nf">gs2name</span><span class="p">(</span><span class="n">gs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">psi2name</span><span class="p">(</span><span class="n">gs2psi</span><span class="p">(</span><span class="n">gs</span><span class="p">))</span></div>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">def psirange2names(min_psi, max_psi, return_tick_locs=False):</span>
+<span class="sd">    min_idx = wentworth_names.index(psi2name(min_psi))</span>
+<span class="sd">    max_idx = wentworth_names.index(psi2name(max_psi))</span>
+<span class="sd">    max_idx = min(max_idx, len(wentworth_names)-2)</span>
+
+<span class="sd">    names = wentworth_names[min_idx:max_idx+1]</span>
+
+<span class="sd">    return wentworth_names[min_idx:max_idx+1]</span>
+
+
+<span class="sd">class WentworthAxis():</span>
+
+<span class="sd">    def __init__(self, scale=&#39;fine&#39;, fig_width=1.5, aspect=10):</span>
+
+<span class="sd">        self.scale = wentworth_scale_coarse if scale == &#39;coarse&#39; else wentworth_scale_fine</span>
+<span class="sd">        self.names, self.psis = zip(*self.scale)</span>
+
+<span class="sd">        # change this... index won&#39;t work like that</span>
+<span class="sd">        self.lower_psi = self.psis[self.names.index(min_bin_name)] if min_bin_name else floor(min(gs_psi))</span>
+<span class="sd">        self.upper_psi = self.psis[self.names.index(max_bin_name)] if max_bin_name else ceil(max(gs_psi))</span>
+
+
+<span class="sd">    def transform(self, gs_psi):</span>
+
+<span class="sd">        pass</span>
+
+
+<span class="sd">    def prepare_ax(self, ax):</span>
+
+<span class="sd">        ax.set_xlim([0.0, self.upper_psi - self.lower_psi])</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1">#psi = [x for _, x in wentworth_scale[:-1]] + [9]</span>
+    <span class="c1">#for x in psi:</span>
+    <span class="c1">#    print(x, psi2phi(x), psi2name(x), psi2gs(x))</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ross Meyer, Zane Jobe.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

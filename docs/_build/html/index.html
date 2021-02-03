@@ -32,12 +32,15 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="litholog basics" href="litholog_basics.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,12 +85,47 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to litholog’s documentation!</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
 </ul>
-</div>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -153,9 +191,106 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-litholog-s-documentation">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="welcome-to-litholog-s-documentation">
 <h1>Welcome to litholog’s documentation!<a class="headerlink" href="#welcome-to-litholog-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">litholog</span></code> is focused on providing a framework to digitize, store, plot, and analyze sedimentary graphic logs (example log shown below).</p>
+<p>Graphic logs are the most common way geologists characterize and communicate the composition and variability of clastic sedimentary successions; through a simple drawing, a graphic log imparts complex geological concepts (e.g., the Bouma turbidite sequence or a shoreface parasequence). The term ‘graphic log’ originates from a geologist graphically drawing (i.e., ‘logging’) an outcrop or core; other synonymous terms include measured section and stratigraphic column.</p>
+<p><code class="docutils literal notranslate"><span class="pre">litholog</span></code> is a package-level extension of <a class="reference external" href="https://github.com/agile-geoscience/striplog/">agile-geoscience/striplog</a>, with additional features that focus on lithology, and an API that is geared toward facilitating machine learning and quantitative analysis.</p>
+<p>The package provides two primary data structures:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Bed</span></code>, which stores data from one lithologic bed or unit (e.g., top, base, lithology, thickness, grain size, etc). <code class="docutils literal notranslate"><span class="pre">Bed</span></code> is equivalent to a <code class="docutils literal notranslate"><span class="pre">striplog.Interval</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>, which stores a collection of <code class="docutils literal notranslate"><span class="pre">Beds</span></code> in stratigraphic order (either elevation or depth order). <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> is equivalent to a <code class="docutils literal notranslate"><span class="pre">striplog.Striplog</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
+<p>Several utilities for working with graphic logs are included with litholog:</p>
+<ul class="simple">
+<li><p>default lithology colors for Beds that can be easily modified</p></li>
+<li><p>transformations for grain-size data from millimeter (mm) to log2 (a.k.a. <em>psi</em>) units, which are far easier to work with than mm.</p></li>
+<li><p>calculation of the following metrics at the BedSequence level:</p>
+<ul>
+<li><p>net-to-gross</p></li>
+<li><p>amalgamation ratio</p></li>
+<li><p>psuedo gamma ray log</p></li>
+<li><p>Hurst statistics (for determining facies clustering)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="data">
+<h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
+<p>The data provided with this demo come from two papers, and all logs were digitized using the Matlab digitizer included with this release.</p>
+<ul class="simple">
+<li><p>7 logs from Jobe et al. 2012 (<a class="reference external" href="https://doi.org/10.1111/j.1365-3091.2011.01283.x">html</a>, <a class="reference external" href="https://www.dropbox.com/s/sgzmc1exd5vjd3h/2012%20Jobe%20et%20al%20Sed-%20Climbing%20ripple%20successions%20in%20turbidite%20systems.pdf?dl=0">pdf</a>).</p></li>
+<li><p>6 logs from Jobe et al. 2010 (<a class="reference external" href="https://doi.org/10.2110/jsr.2010.092">html</a>, <a class="reference external" href="https://www.dropbox.com/s/zo12v3ixm86yt7e/2010%20Jobe%20et%20al%20JSR%20-%20Submarine%20channel%20asymmetry.pdf?dl=0">pdf</a>).</p></li>
+</ul>
+<hr class="docutils" />
 <div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -172,6 +307,9 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="litholog_basics.html" class="btn btn-neutral float-right" title="litholog basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

@@ -32,6 +32,8 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -82,19 +84,47 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">litholog.sequence package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-litholog.sequence.io">litholog.sequence.io module</a></li>
-<li><a class="reference internal" href="#module-litholog.sequence.sequence">litholog.sequence.sequence module</a></li>
-<li><a class="reference internal" href="#module-litholog.sequence.stats">litholog.sequence.stats module</a></li>
-<li><a class="reference internal" href="#module-litholog.sequence.viz">litholog.sequence.viz module</a></li>
-<li><a class="reference internal" href="#module-litholog.sequence">Module contents</a></li>
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -160,7 +190,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="litholog-sequence-package">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="litholog-sequence-package">
 <h1>litholog.sequence package<a class="headerlink" href="#litholog-sequence-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
@@ -170,12 +224,12 @@
 <p>IO classes &amp; functions</p>
 <dl class="py class">
 <dt id="litholog.sequence.io.SequenceIOMixin">
-<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">SequenceIOMixin</code><a class="headerlink" href="#litholog.sequence.io.SequenceIOMixin" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">SequenceIOMixin</code><a class="reference internal" href="../_modules/litholog/sequence/io.html#SequenceIOMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.io.SequenceIOMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Defines the IO interface for <cite>BedSequence</cite>.</p>
 <dl class="py method">
 <dt id="litholog.sequence.io.SequenceIOMixin.from_dataframe">
-<em class="property">classmethod </em><code class="sig-name descname">from_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span><span class="o">=</span><span class="default_value">'tops'</span></em>, <em class="sig-param"><span class="n">basecol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">thickcol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">component_map</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">datacols</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">metacols</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">metasafe</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.io.SequenceIOMixin.from_dataframe" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span><span class="o">=</span><span class="default_value">'tops'</span></em>, <em class="sig-param"><span class="n">basecol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">thickcol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">component_map</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">datacols</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">metacols</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">metasafe</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/io.html#SequenceIOMixin.from_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.io.SequenceIOMixin.from_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an instance from a pd.DataFrame or subclass (e.g., a GroupBy object).
 Must provide <cite>topcol</cite> and one of <cite>basecol</cite> or <cite>thickcol</cite>.</p>
 <dl class="field-list simple">
@@ -196,7 +250,7 @@ TODO: if <cite>func</cite> is a str with ‘wentworth’, maybe just map using g
 
 <dl class="py method">
 <dt id="litholog.sequence.io.SequenceIOMixin.from_numpy">
-<em class="property">classmethod </em><code class="sig-name descname">from_numpy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">other</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">component_map</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.io.SequenceIOMixin.from_numpy" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_numpy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">other</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">component_map</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/io.html#SequenceIOMixin.from_numpy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.io.SequenceIOMixin.from_numpy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implement a method to convert numpy (e.g., from GAN) to <cite>BedSequence</cite> instance.</p>
 <p>Use keys from <cite>other</cite>, or provide list of <cite>keys</cite>.
 Provide a <cite>component_map</cite> to group samples into <a href="#id1"><span class="problematic" id="id2">`</span></a>Bed`s.</p>
@@ -206,14 +260,14 @@ Provide a <cite>component_map</cite> to group samples into <a href="#id1"><span 
 
 <dl class="py function">
 <dt id="litholog.sequence.io.check_order">
-<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">check_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span></em>, <em class="sig-param"><span class="n">basecol</span></em>, <em class="sig-param"><span class="n">raise_error</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.io.check_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">check_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span></em>, <em class="sig-param"><span class="n">basecol</span></em>, <em class="sig-param"><span class="n">raise_error</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/io.html#check_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.io.check_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check that all rows are either depth ordered or elevation_ordered.
 Returns ‘elevation’ or ‘depth’.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="litholog.sequence.io.check_samples">
-<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">check_samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">depthcol</span></em>, <em class="sig-param"><span class="n">valuecol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.io.check_samples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">check_samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">depthcol</span></em>, <em class="sig-param"><span class="n">valuecol</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/io.html#check_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.io.check_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check that <cite>depth_col</cite> and <cite>sample_col</cite> have equal number of entries per bed,
 (and that <cite>depths</cite> fall between <cite>topcol</cite> and <cite>basecol</cite>?)</p>
 <dl class="field-list simple">
@@ -228,7 +282,7 @@ Returns ‘elevation’ or ‘depth’.</p>
 
 <dl class="py function">
 <dt id="litholog.sequence.io.check_thicknesses">
-<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">check_thicknesses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span></em>, <em class="sig-param"><span class="n">thickcol</span></em>, <em class="sig-param"><span class="n">order</span></em>, <em class="sig-param"><span class="n">basecol</span><span class="o">=</span><span class="default_value">'bases'</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.io.check_thicknesses" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">check_thicknesses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span></em>, <em class="sig-param"><span class="n">thickcol</span></em>, <em class="sig-param"><span class="n">order</span></em>, <em class="sig-param"><span class="n">basecol</span><span class="o">=</span><span class="default_value">'bases'</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/io.html#check_thicknesses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.io.check_thicknesses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check that gap between tops and adjacent bases implied by ‘th’ are consistent and small.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -243,7 +297,7 @@ Returns ‘elevation’ or ‘depth’.</p>
 
 <dl class="py function">
 <dt id="litholog.sequence.io.preprocess_dataframe">
-<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">preprocess_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span></em>, <em class="sig-param"><span class="n">basecol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">thickcol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.io.preprocess_dataframe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.sequence.io.</code><code class="sig-name descname">preprocess_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">topcol</span></em>, <em class="sig-param"><span class="n">basecol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">thickcol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/io.html#preprocess_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.io.preprocess_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check for position order + consistency in <cite>df</cite>, return preprocessed DataFrame.</p>
 <p>This doesn’t check for all possible inconsistencies, just the most obvious ones.</p>
 </dd></dl>
@@ -259,38 +313,38 @@ Returns ‘elevation’ or ‘depth’.</p>
 </dl>
 <dl class="py class">
 <dt id="litholog.sequence.sequence.BedSequence">
-<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.sequence.</code><code class="sig-name descname">BedSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_of_Beds</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.sequence.</code><code class="sig-name descname">BedSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_of_Beds</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#litholog.sequence.io.SequenceIOMixin" title="litholog.sequence.io.SequenceIOMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">litholog.sequence.io.SequenceIOMixin</span></code></a>, <a class="reference internal" href="#litholog.sequence.viz.SequenceVizMixin" title="litholog.sequence.viz.SequenceVizMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">litholog.sequence.viz.SequenceVizMixin</span></code></a>, <a class="reference internal" href="#litholog.sequence.stats.SequenceStatsMixin" title="litholog.sequence.stats.SequenceStatsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">litholog.sequence.stats.SequenceStatsMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">striplog.striplog.Striplog</span></code></p>
 <p>Ordered collection of <code class="docutils literal notranslate"><span class="pre">Bed</span></code> instances.</p>
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.flip_convention">
-<code class="sig-name descname">flip_convention</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depth_key</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.flip_convention" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">flip_convention</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depth_key</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.flip_convention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.flip_convention" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the depth convention (elevation &lt;-&gt; depth), setting to base or top to 0.0, respectively.</p>
 <p>If <cite>depth_key</cite> is given, that data column in each bed should be shifted the same amount.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.get_field">
-<code class="sig-name descname">get_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">lithology</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.get_field" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">lithology</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.get_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.get_field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get ‘vertical’ array of <code class="docutils literal notranslate"><span class="pre">field</span></code> values.</p>
 <p>If <cite>lithology</cite> provided, will only use the beds matching that lithology (in primary component).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.get_values">
-<code class="sig-name descname">get_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exclude_keys</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.get_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exclude_keys</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.get_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.get_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter for <code class="docutils literal notranslate"><span class="pre">values</span></code> that allows dropping <code class="docutils literal notranslate"><span class="pre">exclude_keys</span></code> (e.g., sample depths) from array</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.max_field">
-<code class="sig-name descname">max_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.max_field" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">max_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.max_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.max_field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override method from <code class="docutils literal notranslate"><span class="pre">striplog.Striplog</span></code> to account for iterable <code class="docutils literal notranslate"><span class="pre">Bed</span></code> data.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.min_field">
-<code class="sig-name descname">min_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.min_field" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">min_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.min_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.min_field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override method from <code class="docutils literal notranslate"><span class="pre">striplog.Striplog</span></code> to account for iterable <code class="docutils literal notranslate"><span class="pre">Bed</span></code> data.</p>
 </dd></dl>
 
@@ -309,13 +363,13 @@ NOTE: <code class="docutils literal notranslate"><span class="pre">len(striplog.
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.reduce_field">
-<code class="sig-name descname">reduce_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">fn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.reduce_field" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reduce_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.reduce_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.reduce_field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply <code class="docutils literal notranslate"><span class="pre">fn</span></code> to the output of <code class="docutils literal notranslate"><span class="pre">get_field(field)</span></code></p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.reduce_fields">
-<code class="sig-name descname">reduce_fields</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field_fn_dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.reduce_fields" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reduce_fields</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field_fn_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.reduce_fields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.reduce_fields" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return array, result of applying <cite>fn</cite> values to <cite>field</cite> keys.</p>
 <p>The funcs can return scalars or arrays, but all of the return values
 should be numpy-concatable. The concatenation</p>
@@ -323,7 +377,7 @@ should be numpy-concatable. The concatenation</p>
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.resample_data">
-<code class="sig-name descname">resample_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depth_key</span></em>, <em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'linear'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.resample_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">resample_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depth_key</span></em>, <em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'linear'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.resample_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.resample_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resample the data at approximate depth intervals of size <cite>step</cite>.
 <cite>depth_key</cite> can be a <cite>str</cite> (for dict-like bed data) or column index (for array bed data).</p>
 <p>I think we probably want to maintain top/base samples, and sample to the nearest <cite>step</cite> b/t.
@@ -333,7 +387,7 @@ Maybe this could be the default of multiple options? Implement it as the default
 
 <dl class="py method">
 <dt id="litholog.sequence.sequence.BedSequence.shift">
-<code class="sig-name descname">shift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depth_key</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.shift" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">shift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depth_key</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/sequence.html#BedSequence.shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.sequence.BedSequence.shift" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shift all the intervals by <cite>delta</cite> (negative numbers are ‘up’), or by setting a new start depth.
 Returns a new copy of the BedSequence.</p>
 </dd></dl>
@@ -352,7 +406,7 @@ Returns a new copy of the BedSequence.</p>
 <p>Sequence stats + related.</p>
 <dl class="py class">
 <dt id="litholog.sequence.stats.SequenceStatsMixin">
-<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.stats.</code><code class="sig-name descname">SequenceStatsMixin</code><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.stats.</code><code class="sig-name descname">SequenceStatsMixin</code><a class="reference internal" href="../_modules/litholog/sequence/stats.html#SequenceStatsMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Defines the plot/viz interface for <cite>BedSequence</cite>.</p>
 <dl class="py method">
@@ -367,7 +421,7 @@ Returns a new copy of the BedSequence.</p>
 
 <dl class="py method">
 <dt id="litholog.sequence.stats.SequenceStatsMixin.hurst_D">
-<code class="sig-name descname">hurst_D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">lithology</span></em>, <em class="sig-param"><span class="n">take_log</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">safe</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">nsamples</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">return_K</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin.hurst_D" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hurst_D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">lithology</span></em>, <em class="sig-param"><span class="n">take_log</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">safe</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">nsamples</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">return_K</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/stats.html#SequenceStatsMixin.hurst_D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin.hurst_D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns (D, p, K) if <code class="docutils literal notranslate"><span class="pre">return_K</span></code>, else (D, p)
 where:</p>
 <blockquote>
@@ -379,7 +433,7 @@ K : Hurst K value with original values</p>
 
 <dl class="py method">
 <dt id="litholog.sequence.stats.SequenceStatsMixin.hurst_K">
-<code class="sig-name descname">hurst_K</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">lithology</span></em>, <em class="sig-param"><span class="n">safe</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin.hurst_K" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hurst_K</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">lithology</span></em>, <em class="sig-param"><span class="n">safe</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/stats.html#SequenceStatsMixin.hurst_K"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin.hurst_K" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hurst K value for data from a sequence <code class="docutils literal notranslate"><span class="pre">field</span></code>.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">safe</span></code>, will only accept fields with at least 20 values.</p>
 </dd></dl>
@@ -398,7 +452,7 @@ K : Hurst K value with original values</p>
 
 <dl class="py method">
 <dt id="litholog.sequence.stats.SequenceStatsMixin.pseudo_gamma_simple">
-<code class="sig-name descname">pseudo_gamma_simple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs_field</span><span class="o">=</span><span class="default_value">'grain_size_mm'</span></em>, <em class="sig-param"><span class="n">depth_field</span><span class="o">=</span><span class="default_value">'depth_m'</span></em>, <em class="sig-param"><span class="n">resolution</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">gs_cutoff</span><span class="o">=</span><span class="default_value">0.0625</span></em>, <em class="sig-param"><span class="n">gamma_range</span><span class="o">=</span><span class="default_value">(30, 180)</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">noise</span><span class="o">=</span><span class="default_value">10.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin.pseudo_gamma_simple" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pseudo_gamma_simple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs_field</span><span class="o">=</span><span class="default_value">'grain_size_mm'</span></em>, <em class="sig-param"><span class="n">depth_field</span><span class="o">=</span><span class="default_value">'depth_m'</span></em>, <em class="sig-param"><span class="n">resolution</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">gs_cutoff</span><span class="o">=</span><span class="default_value">0.0625</span></em>, <em class="sig-param"><span class="n">gamma_range</span><span class="o">=</span><span class="default_value">30, 180</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">noise</span><span class="o">=</span><span class="default_value">10.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/stats.html#SequenceStatsMixin.pseudo_gamma_simple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.stats.SequenceStatsMixin.pseudo_gamma_simple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a ‘pseudo’ gamma ray log by thresholding <cite>gs_field</cite> + Gaussian convolution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -419,7 +473,7 @@ K : Hurst K value with original values</p>
 
 <dl class="py function">
 <dt id="litholog.sequence.stats.filter_nan_gaussian">
-<code class="sig-prename descclassname">litholog.sequence.stats.</code><code class="sig-name descname">filter_nan_gaussian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">noise</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.stats.filter_nan_gaussian" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.sequence.stats.</code><code class="sig-name descname">filter_nan_gaussian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">noise</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/stats.html#filter_nan_gaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.stats.filter_nan_gaussian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gaussian convolution. (Allows intensity to leak into the NaN area.)</p>
 <p>If <cite>noise</cite> magnitude given, adds uniform noise.</p>
 <dl class="simple">
@@ -434,12 +488,12 @@ K : Hurst K value with original values</p>
 <p>Visualization funcs and the <cite>SequenceVizMixin</cite> interface for <cite>BedSequence</cite>.</p>
 <dl class="py class">
 <dt id="litholog.sequence.viz.SequenceVizMixin">
-<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.viz.</code><code class="sig-name descname">SequenceVizMixin</code><a class="headerlink" href="#litholog.sequence.viz.SequenceVizMixin" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">litholog.sequence.viz.</code><code class="sig-name descname">SequenceVizMixin</code><a class="reference internal" href="../_modules/litholog/sequence/viz.html#SequenceVizMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.viz.SequenceVizMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Defines the plot/viz interface for <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>.</p>
 <dl class="py method">
 <dt id="litholog.sequence.viz.SequenceVizMixin.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">legend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fig_width</span><span class="o">=</span><span class="default_value">1.5</span></em>, <em class="sig-param"><span class="n">aspect</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">width_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depth_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">wentworth</span><span class="o">=</span><span class="default_value">'fine'</span></em>, <em class="sig-param"><span class="n">exxon_style</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">yticks_right</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_ylim</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.viz.SequenceVizMixin.plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">legend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fig_width</span><span class="o">=</span><span class="default_value">1.5</span></em>, <em class="sig-param"><span class="n">aspect</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">width_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depth_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">wentworth</span><span class="o">=</span><span class="default_value">'fine'</span></em>, <em class="sig-param"><span class="n">exxon_style</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">yticks_right</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_ylim</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/viz.html#SequenceVizMixin.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.viz.SequenceVizMixin.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot as a <code class="docutils literal notranslate"><span class="pre">Striplog</span></code> of <a href="#id3"><span class="problematic" id="id4">``</span></a>Bed``s.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -463,13 +517,13 @@ K : Hurst K value with original values</p>
 
 <dl class="py function">
 <dt id="litholog.sequence.viz.make_pair_figure">
-<code class="sig-prename descclassname">litholog.sequence.viz.</code><code class="sig-name descname">make_pair_figure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.viz.make_pair_figure" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.sequence.viz.</code><code class="sig-name descname">make_pair_figure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/viz.html#make_pair_figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.viz.make_pair_figure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a figure with two column axes and no space horizontal between them.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="litholog.sequence.viz.set_wentworth_ticks">
-<code class="sig-prename descclassname">litholog.sequence.viz.</code><code class="sig-name descname">set_wentworth_ticks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ax</span></em>, <em class="sig-param"><span class="n">min_psi</span></em>, <em class="sig-param"><span class="n">max_psi</span></em>, <em class="sig-param"><span class="n">wentworth</span><span class="o">=</span><span class="default_value">'fine'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.sequence.viz.set_wentworth_ticks" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.sequence.viz.</code><code class="sig-name descname">set_wentworth_ticks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ax</span></em>, <em class="sig-param"><span class="n">min_psi</span></em>, <em class="sig-param"><span class="n">max_psi</span></em>, <em class="sig-param"><span class="n">wentworth</span><span class="o">=</span><span class="default_value">'fine'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/sequence/viz.html#set_wentworth_ticks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.sequence.viz.set_wentworth_ticks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the <cite>xticks</cite> of <cite>ax</cite> for Wentworth grainsizes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

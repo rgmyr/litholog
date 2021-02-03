@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>litholog.defaults &mdash; litholog 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> litholog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">litholog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>litholog.defaults</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for litholog.defaults</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Define default `striplog.Decor`s when using grainsize as the width field.</span>
+<span class="sd">Also specify default csv/DataFrame fields to map to `Bed` attributes/data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Zane comments:</span>
+    <span class="c1"># Added missing interval decor, but we also need to assign these a default grain size so that they plot. I would assign them a grain size of -4 Psi</span>
+    <span class="c1"># added a comment in gs2litho - at the beginning of that comment, there is a f&#39; - is that on purpose?</span>
+    <span class="c1"># I didnt yet add missing_interval_decor to component part of gs2litho becasue I&#39;m not sure how we should deal with the grain size of a missing interval...</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">striplog</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Decor</span><span class="p">,</span> <span class="n">Legend</span>
+
+<span class="kn">from</span> <span class="nn">litholog</span> <span class="kn">import</span> <span class="n">wentworth</span>
+
+
+<span class="c1">###+++++++++++++++++++++###</span>
+<span class="c1">### Default viz objects ###</span>
+<span class="c1">###+++++++++++++++++++++###</span>
+<span class="n">mud_decor</span> <span class="o">=</span> <span class="n">Decor</span><span class="p">({</span>
+    <span class="s1">&#39;component&#39;</span> <span class="p">:</span> <span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;mud&#39;</span><span class="p">}),</span>
+    <span class="s1">&#39;colour&#39;</span> <span class="p">:</span> <span class="s1">&#39;#ad8150&#39;</span><span class="p">,</span> <span class="c1"># &#39;xkcd:LightBrown&#39;</span>
+    <span class="s1">&#39;hatch&#39;</span> <span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;width&#39;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">sand_decor</span> <span class="o">=</span> <span class="n">Decor</span><span class="p">({</span>
+    <span class="s1">&#39;component&#39;</span> <span class="p">:</span> <span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;sand&#39;</span><span class="p">}),</span>
+    <span class="s1">&#39;colour&#39;</span> <span class="p">:</span> <span class="s1">&#39;#fffe7a&#39;</span><span class="p">,</span> <span class="c1"># &#39;xkcd:LightYellow&#39;</span>
+    <span class="s1">&#39;hatch&#39;</span> <span class="p">:</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;width&#39;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+<span class="p">})</span>
+
+<span class="n">gravel_decor</span> <span class="o">=</span> <span class="n">Decor</span><span class="p">({</span>
+    <span class="s1">&#39;component&#39;</span> <span class="p">:</span> <span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;gravel&#39;</span><span class="p">}),</span>
+    <span class="s1">&#39;colour&#39;</span> <span class="p">:</span> <span class="s1">&#39;#ff9408&#39;</span><span class="p">,</span> <span class="c1"># &#39;xkcd:tangerine&#39;</span>
+    <span class="s1">&#39;hatch&#39;</span> <span class="p">:</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;width&#39;</span> <span class="p">:</span> <span class="mi">4</span>
+<span class="p">})</span>
+
+<span class="n">missing_decor</span> <span class="o">=</span> <span class="n">Decor</span><span class="p">({</span>
+    <span class="s1">&#39;component&#39;</span> <span class="p">:</span> <span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;missing&#39;</span><span class="p">}),</span>
+    <span class="s1">&#39;colour&#39;</span> <span class="p">:</span> <span class="s1">&#39;#ffffff&#39;</span><span class="p">,</span> <span class="c1"># &#39;xkcd:white&#39;</span>
+    <span class="s1">&#39;hatch&#39;</span> <span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;width&#39;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+<span class="p">})</span>
+
+<span class="n">litholegend</span> <span class="o">=</span> <span class="n">Legend</span><span class="p">([</span><span class="n">mud_decor</span><span class="p">,</span> <span class="n">sand_decor</span><span class="p">,</span> <span class="n">gravel_decor</span><span class="p">,</span> <span class="n">missing_decor</span><span class="p">])</span>
+
+
+<span class="c1">###++++++++++++++++++++###</span>
+<span class="c1">### Default csv fields ###</span>
+<span class="c1">###++++++++++++++++++++###</span>
+<span class="n">DEFAULT_FIELDS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;top&#39;</span> <span class="p">:</span> <span class="s1">&#39;tops&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;base&#39;</span> <span class="p">:</span> <span class="s1">&#39;bases&#39;</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="gs2litho"><a class="viewcode-back" href="../../source/litholog.html#litholog.defaults.gs2litho">[docs]</a><span class="k">def</span> <span class="nf">gs2litho</span><span class="p">(</span><span class="n">gs</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;psi&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map grainsize value `gs` to `striplog.Component`.</span>
+
+<span class="sd">    If `gs` is None or np.nan, maps to &#39;missing&#39; Component.</span>
+
+<span class="sd">    If `units` is &#39;mm&#39; or &#39;phi&#39;, will convert to &#39;psi&#39; first.</span>
+
+<span class="sd">    Psi is log2(gs_mm), so medium sand is -1 to -2.</span>
+<span class="sd">    See more at https://en.wikipedia.org/wiki/Grain_size#/media/File:Wentworth_scale.png</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">gs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">gs</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">missing_decor</span><span class="o">.</span><span class="n">component</span>
+
+    <span class="k">if</span> <span class="n">units</span> <span class="ow">is</span> <span class="s1">&#39;mm&#39;</span><span class="p">:</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">wentworth</span><span class="o">.</span><span class="n">gs2psi</span><span class="p">(</span><span class="n">gs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">units</span> <span class="ow">is</span> <span class="s1">&#39;phi&#39;</span><span class="p">:</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">wentworth</span><span class="o">.</span><span class="n">phi2psi</span><span class="p">(</span><span class="n">gs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">gs</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">11</span> <span class="ow">or</span> <span class="n">gs</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">UserWarning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;gs value of </span><span class="si">{</span><span class="n">gs</span><span class="si">}</span><span class="s1"> is suspect... is this in `psi` units?&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">gs</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mud_decor</span><span class="o">.</span><span class="n">component</span>
+    <span class="k">elif</span> <span class="n">gs</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sand_decor</span><span class="o">.</span><span class="n">component</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gravel_decor</span><span class="o">.</span><span class="n">component</span></div>
+
+
+<span class="n">DEFAULT_COMPONENT_MAP</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;max_gs_mm&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">gs</span><span class="p">:</span> <span class="n">gs2litho</span><span class="p">(</span><span class="n">gs</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;mm&#39;</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ross Meyer, Zane Jobe.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

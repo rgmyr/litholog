@@ -1,0 +1,932 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>litholog basics &mdash; litholog 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Demo of litholog functionality using the included demo data" href="litholog_demo_data.html" />
+    <link rel="prev" title="Welcome to litholog’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> litholog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Other-plotting-methods">Other plotting methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">litholog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/litholog_basics.nblink.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="litholog-basics">
+<h1><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics<a class="headerlink" href="#litholog-basics" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># import some libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">litholog</span>
+<span class="kn">from</span> <span class="nn">litholog</span> <span class="kn">import</span> <span class="n">utils</span><span class="p">,</span> <span class="n">Bed</span>
+<span class="kn">from</span> <span class="nn">litholog.sequence</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">BedSequence</span>
+
+<span class="kn">from</span> <span class="nn">striplog</span> <span class="kn">import</span> <span class="n">Component</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Default-Colors-and-Legend">
+<h2>Default Colors and Legend<a class="headerlink" href="#Default-Colors-and-Legend" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#defaults legend for plotting</span>
+<span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table><tr><th>width</th><th>colour</th><th>component</th><th>hatch</th></tr><tr><td style="color:black; background-color:white">-6.0</td><td style="color:#000000; background-color:#ad8150">#ad8150</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>mud</td></tr></table></td><td style="color:black; background-color:white">None</td></tr><tr><td style="color:black; background-color:white">-1.0</td><td style="color:#000000; background-color:#fffe7a">#fffe7a</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>sand</td></tr></table></td><td style="color:black; background-color:white">.</td></tr><tr><td style="color:black; background-color:white">4.0</td><td style="color:#000000; background-color:#ff9408">#ff9408</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>gravel</td></tr></table></td><td style="color:black; background-color:white">o</td></tr><tr><td style="color:black; background-color:white">-1.0</td><td style="color:#000000; background-color:#ffffff">#ffffff</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>missing</td></tr></table></td><td style="color:black; background-color:white">x</td></tr></table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># and this is how Beds will look when plotted</span>
+<span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/litholog_basics_4_0.png" src="_images/litholog_basics_4_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># modify the legend</span>
+<span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">sand_decor</span><span class="o">.</span><span class="n">colour</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span>
+
+<span class="c1"># and see if it worked</span>
+<span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table><tr><th>width</th><th>colour</th><th>component</th><th>hatch</th></tr><tr><td style="color:black; background-color:white">-6.0</td><td style="color:#000000; background-color:#ad8150">#ad8150</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>mud</td></tr></table></td><td style="color:black; background-color:white">None</td></tr><tr><td style="color:black; background-color:white">-1.0</td><td style="color:#ffffff; background-color:#0000ff">#0000ff</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>sand</td></tr></table></td><td style="color:black; background-color:white">.</td></tr><tr><td style="color:black; background-color:white">4.0</td><td style="color:#000000; background-color:#ff9408">#ff9408</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>gravel</td></tr></table></td><td style="color:black; background-color:white">o</td></tr><tr><td style="color:black; background-color:white">-1.0</td><td style="color:#000000; background-color:#ffffff">#ffffff</td><td style="color:black; background-color:white"><table><tr><td><strong>lithology</strong></td><td>missing</td></tr></table></td><td style="color:black; background-color:white">x</td></tr></table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># modify things again</span>
+<span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">sand_decor</span><span class="o">.</span><span class="n">colour</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span>
+<span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">sand_decor</span><span class="o">.</span><span class="n">hatch</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># call the plot function - note sand doesnt have dots any more</span>
+<span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/litholog_basics_6_0.png" src="_images/litholog_basics_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Make-a-Bed-and-a-BedSequence-from-scratch">
+<h2>Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch<a class="headerlink" href="#Make-a-Bed-and-a-BedSequence-from-scratch" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Make a Bed</span>
+
+<span class="c1"># make some fake data</span>
+<span class="n">top</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lit1&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;arr1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;arr2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]}</span>
+
+<span class="c1"># assign to a Bed</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">litholog</span><span class="o">.</span><span class="n">Bed</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="c1"># litholog determines order based on whether the top is larger than the base (see more below)</span>
+<span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+depth
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table><tr><td style="width:2em; background-color:#DDDDDD" rowspan="6"></td><td><strong>top</strong></td><td>1.0</td></tr><tr><td><strong>primary</strong></td><td>None</td></tr><tr><td><strong>summary</strong></td><td>None</td></tr><tr><td><strong>description</strong></td><td></td></tr><tr><td><strong>data</strong></td><td><table><tr><td><strong>lit1</strong></td><td>5</td></tr><tr><td><strong>arr1</strong></td><td>[1, 2, 3]</td></tr><tr><td><strong>arr2</strong></td><td>[4, 5, 6]</td></tr></table></td></tr><tr><td><strong>base</strong></td><td>2.0</td></tr></table></div>
+</div>
+<p>If we want to make a more realistic example, here is one below. We need the <code class="docutils literal notranslate"><span class="pre">Component</span></code> from <code class="docutils literal notranslate"><span class="pre">striplog</span></code> to assign the <code class="docutils literal notranslate"><span class="pre">primary</span></code> lithology to each bed. We also use <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">metadata</span></code> from litholog to store other data, and could also add <code class="docutils literal notranslate"><span class="pre">metadata</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">bed1</span> <span class="o">=</span> <span class="n">Bed</span><span class="p">(</span><span class="n">top</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">:</span><span class="mf">0.125</span><span class="p">},</span> <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;sand&#39;</span><span class="p">})])</span>
+<span class="n">bed2</span> <span class="o">=</span> <span class="n">Bed</span><span class="p">(</span><span class="n">top</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">:</span><span class="mf">0.02</span><span class="p">},</span> <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;mud&#39;</span><span class="p">})])</span>
+<span class="n">bed3</span> <span class="o">=</span> <span class="n">Bed</span><span class="p">(</span><span class="n">top</span> <span class="o">=</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">},</span> <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;gravel&#39;</span><span class="p">})])</span>
+
+<span class="n">bed_x</span> <span class="o">=</span> <span class="n">Bed</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;lithology&#39;</span><span class="p">:</span><span class="s1">&#39;sand&#39;</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">bed2</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">bed1</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bed_x</span><span class="o">.</span><span class="n">order</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">bed1</span><span class="p">[</span><span class="s1">&#39;lithology&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;data&#39;: {&#39;grain_size_mm&#39;: 0.02}, &#39;top&#39;: Position({&#39;middle&#39;: 1.1, &#39;units&#39;: &#39;m&#39;}), &#39;base&#39;: Position({&#39;middle&#39;: 1.0, &#39;units&#39;: &#39;m&#39;}), &#39;description&#39;: &#39;&#39;, &#39;components&#39;: [Component({&#39;lithology&#39;: &#39;mud&#39;})]}
+
+elevation
+depth
+
+None
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">seq1</span> <span class="o">=</span> <span class="n">BedSequence</span><span class="p">([</span><span class="n">bed1</span><span class="p">,</span> <span class="n">bed2</span><span class="p">,</span> <span class="n">bed3</span><span class="p">],</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;litholog test BedSequence&#39;</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">seq1</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+
+<span class="c1"># let&#39;s access the first bed in the sequence</span>
+<span class="n">seq1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># first bed is the uppermost because elevation-ordered</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;name&#39;: &#39;litholog test BedSequence&#39;}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table><tr><td style="width:2em; background-color:#DDDDDD" rowspan="6"></td><td><strong>top</strong></td><td>1.8</td></tr><tr><td><strong>primary</strong></td><td><table><tr><td><strong>lithology</strong></td><td>gravel</td></tr></table></td></tr><tr><td><strong>summary</strong></td><td>0.70 m of gravel</td></tr><tr><td><strong>description</strong></td><td></td></tr><tr><td><strong>data</strong></td><td><table><tr><td><strong>grain_size_mm</strong></td><td>50</td></tr></table></td></tr><tr><td><strong>base</strong></td><td>1.1</td></tr></table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#access the tops in the sequence using list comprehension</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bed tops:&#39;</span><span class="p">,[</span><span class="n">bed</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">upper</span> <span class="k">for</span> <span class="n">bed</span> <span class="ow">in</span> <span class="n">seq1</span><span class="p">],</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># To access the data fields, use &quot;get_field&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;grain size data:&#39;</span><span class="p">,</span><span class="n">seq1</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># you can also look at the summary of a bed</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;uppermost bed summary:&#39;</span><span class="p">,</span><span class="n">seq1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">summary</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># or all the summaries</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summaries&#39;</span><span class="p">,[</span><span class="n">bed</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span> <span class="k">for</span> <span class="n">bed</span> <span class="ow">in</span> <span class="n">seq1</span><span class="p">],</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Bed tops: [1.8, 1.1, 1.0]
+
+grain size data: [5.00e+01 2.00e-02 1.25e-01]
+
+uppermost bed summary: 0.70 m of gravel
+
+Summaries [&#39;0.70 m of gravel&#39;, &#39;0.10 m of mud&#39;, &#39;1.00 m of sand&#39;]
+
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Plotting-a-BedSequence">
+<h2>Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code><a class="headerlink" href="#Plotting-a-BedSequence" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Simple-plotting">
+<h3>Simple plotting<a class="headerlink" href="#Simple-plotting" title="Permalink to this headline">¶</a></h3>
+<p>With no arguments, the aspect of the figure is default to 10 and the width of each bed (i.e., the grain size) is the default for the lithology given in <code class="docutils literal notranslate"><span class="pre">primary</span></code>, not the data in <code class="docutils literal notranslate"><span class="pre">grain_size_mm</span></code>. See below on how to further control this:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">seq1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/litholog_basics_14_0.png" src="_images/litholog_basics_14_0.png" />
+</div>
+</div>
+<p>If we want to make a nicer plot that usess the exaact grain size, we need to make a log2 grain-size, which is much easier to plot and visualize rather than using millimeters. We use the functions of <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to do this, and we will create PSI units instead of PHI units, because they increase with increasing grain size:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># make a grain_size_psi column</span>
+<span class="k">for</span> <span class="n">bed</span> <span class="ow">in</span> <span class="n">seq1</span><span class="p">:</span>
+    <span class="n">bed</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;grain_size_psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">litholog</span><span class="o">.</span><span class="n">wentworth</span><span class="o">.</span><span class="n">gs2psi</span><span class="p">(</span><span class="n">bed</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">])</span>
+
+<span class="n">seq1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># see that it happened for the lowermost bed</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table><tr><td style="width:2em; background-color:#DDDDDD" rowspan="6"></td><td><strong>top</strong></td><td>1.0</td></tr><tr><td><strong>primary</strong></td><td><table><tr><td><strong>lithology</strong></td><td>sand</td></tr></table></td></tr><tr><td><strong>summary</strong></td><td>1.00 m of sand</td></tr><tr><td><strong>description</strong></td><td></td></tr><tr><td><strong>data</strong></td><td><table><tr><td><strong>grain_size_mm</strong></td><td>0.125</td></tr><tr><td><strong>grain_size_psi</strong></td><td>-3.0</td></tr></table></td></tr><tr><td><strong>base</strong></td><td>0.0</td></tr></table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Now we can make a nicer looking plot that uses the grain size data</span>
+
+<span class="c1"># set up a figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># call the plot method, using the grain_size_psi as the width_field</span>
+<span class="n">seq1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+          <span class="n">legend</span><span class="o">=</span><span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span><span class="p">,</span>
+          <span class="n">width_field</span><span class="o">=</span><span class="s1">&#39;grain_size_psi&#39;</span><span class="p">,</span>
+          <span class="n">wentworth</span><span class="o">=</span><span class="s1">&#39;fine&#39;</span>
+         <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># The plot below might not look drastically different from the one above, but it is several PSI units different...</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/litholog_basics_17_0.png" src="_images/litholog_basics_17_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Adding-intra-Bed-grain-size-data-to-a-plot">
+<h3>Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot<a class="headerlink" href="#Adding-intra-Bed-grain-size-data-to-a-plot" title="Permalink to this headline">¶</a></h3>
+<p>What if you want to display grain-size profiles within a bed? Not to worry, you just need to feed litholog that data:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># let&#39;s just change the lower sand bed to have a fining-up profile. I chose exact PSI units here, but you get the idea</span>
+<span class="n">bed1</span> <span class="o">=</span> <span class="n">Bed</span><span class="p">(</span><span class="n">top</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;depth_m&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.0625</span><span class="p">]},</span> <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;sand&#39;</span><span class="p">})])</span>
+
+<span class="c1"># and let&#39;s also add a missing (i.e., covered) interval at the top:</span>
+<span class="c1"># NOTE - you can make whatever grain size you want for missing intervals... I choose 0.125 so it plots nicely</span>
+<span class="n">bed4</span> <span class="o">=</span> <span class="n">Bed</span><span class="p">(</span><span class="n">top</span> <span class="o">=</span> <span class="mf">2.1</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">:</span><span class="mf">0.125</span><span class="p">},</span> <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">Component</span><span class="p">({</span><span class="s1">&#39;lithology&#39;</span> <span class="p">:</span> <span class="s1">&#39;missing&#39;</span><span class="p">})])</span>
+
+<span class="c1"># make a new BedSequence</span>
+<span class="n">seq2</span> <span class="o">=</span> <span class="n">BedSequence</span><span class="p">([</span><span class="n">bed1</span><span class="p">,</span> <span class="n">bed2</span><span class="p">,</span> <span class="n">bed3</span><span class="p">,</span> <span class="n">bed4</span><span class="p">])</span>
+
+<span class="c1"># create grain_size_psi</span>
+<span class="k">for</span> <span class="n">bed</span> <span class="ow">in</span> <span class="n">seq2</span><span class="p">:</span>
+    <span class="n">bed</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;grain_size_psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">litholog</span><span class="o">.</span><span class="n">wentworth</span><span class="o">.</span><span class="n">gs2psi</span><span class="p">(</span><span class="n">bed</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">])</span>
+
+<span class="c1"># and look at the covered &#39;bed&#39;</span>
+<span class="n">seq2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table><tr><td style="width:2em; background-color:#DDDDDD" rowspan="6"></td><td><strong>top</strong></td><td>2.1</td></tr><tr><td><strong>primary</strong></td><td><table><tr><td><strong>lithology</strong></td><td>missing</td></tr></table></td></tr><tr><td><strong>summary</strong></td><td>0.30 m of missing</td></tr><tr><td><strong>description</strong></td><td></td></tr><tr><td><strong>data</strong></td><td><table><tr><td><strong>grain_size_mm</strong></td><td>0.125</td></tr><tr><td><strong>grain_size_psi</strong></td><td>-3.0</td></tr></table></td></tr><tr><td><strong>base</strong></td><td>1.8</td></tr></table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot it just like before, but we need to add a depth field</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="n">seq2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+          <span class="n">legend</span><span class="o">=</span><span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span><span class="p">,</span>
+          <span class="n">width_field</span><span class="o">=</span><span class="s1">&#39;grain_size_psi&#39;</span><span class="p">,</span>
+          <span class="n">depth_field</span><span class="o">=</span><span class="s1">&#39;depth_m&#39;</span><span class="p">,</span>
+          <span class="n">wentworth</span><span class="o">=</span><span class="s1">&#39;fine&#39;</span>
+         <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/litholog_basics_20_0.png" src="_images/litholog_basics_20_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Other-plotting-methods">
+<h3>Other plotting methods<a class="headerlink" href="#Other-plotting-methods" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># And if you want to plot it Exxon-style, just add that argument</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="n">seq2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+          <span class="n">legend</span><span class="o">=</span><span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span><span class="p">,</span>
+          <span class="n">width_field</span><span class="o">=</span><span class="s1">&#39;grain_size_psi&#39;</span><span class="p">,</span>
+          <span class="n">depth_field</span><span class="o">=</span><span class="s1">&#39;depth_m&#39;</span><span class="p">,</span>
+          <span class="n">wentworth</span><span class="o">=</span><span class="s1">&#39;fine&#39;</span><span class="p">,</span>
+          <span class="n">exxon_style</span><span class="o">=</span><span class="kc">True</span>
+         <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/litholog_basics_22_0.png" src="_images/litholog_basics_22_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Or if you want to make the x-axis simpler (can use fine, medium, or coarse):</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="n">seq2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+          <span class="n">legend</span><span class="o">=</span><span class="n">litholog</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">litholegend</span><span class="p">,</span>
+          <span class="n">width_field</span><span class="o">=</span><span class="s1">&#39;grain_size_psi&#39;</span><span class="p">,</span>
+          <span class="n">depth_field</span><span class="o">=</span><span class="s1">&#39;depth_m&#39;</span><span class="p">,</span>
+          <span class="n">wentworth</span><span class="o">=</span><span class="s1">&#39;coarse&#39;</span><span class="p">,</span>
+          <span class="n">exxon_style</span><span class="o">=</span><span class="kc">False</span>
+         <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/litholog_basics_23_0.png" src="_images/litholog_basics_23_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="litholog_demo_data.html" class="btn btn-neutral float-right" title="Demo of litholog functionality using the included demo data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to litholog’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ross Meyer, Zane Jobe.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

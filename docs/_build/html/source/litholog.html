@@ -32,6 +32,8 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -82,20 +84,47 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">litholog package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-litholog.bed">litholog.bed module</a></li>
-<li><a class="reference internal" href="#module-litholog.defaults">litholog.defaults module</a></li>
-<li><a class="reference internal" href="#module-litholog.utils">litholog.utils module</a></li>
-<li><a class="reference internal" href="#module-litholog.wentworth">litholog.wentworth module</a></li>
-<li><a class="reference internal" href="#module-litholog">Module contents</a></li>
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -161,7 +190,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="litholog-package">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="litholog-package">
 <h1>litholog package<a class="headerlink" href="#litholog-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
@@ -186,14 +239,14 @@
 <span id="litholog-bed-module"></span><h2>litholog.bed module<a class="headerlink" href="#module-litholog.bed" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="litholog.bed.Bed">
-<em class="property">class </em><code class="sig-prename descclassname">litholog.bed.</code><code class="sig-name descname">Bed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">top</span></em>, <em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">litholog.bed.</code><code class="sig-name descname">Bed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">top</span></em>, <em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">striplog.interval.Interval</span></code></p>
 <p>Represents an individual bed or layer.</p>
 <p>Essentially a <code class="docutils literal notranslate"><span class="pre">striplog.Interval</span></code> with some additional restrictions and logic.</p>
 <p>Beds are required to have a <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">base</span></code>, and <code class="docutils literal notranslate"><span class="pre">data</span></code> (which can be an array or dict-like).</p>
 <dl class="py method">
 <dt id="litholog.bed.Bed.as_patch">
-<code class="sig-name descname">as_patch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">legend</span></em>, <em class="sig-param"><span class="n">width_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depth_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_width</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">max_width</span><span class="o">=</span><span class="default_value">1.5</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed.as_patch" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_patch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">legend</span></em>, <em class="sig-param"><span class="n">width_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depth_field</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_width</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">max_width</span><span class="o">=</span><span class="default_value">1.5</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed.as_patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed.as_patch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representation of the <code class="docutils literal notranslate"><span class="pre">Bed</span></code> as a <code class="docutils literal notranslate"><span class="pre">matplotlib.patches</span></code> object [<code class="docutils literal notranslate"><span class="pre">Polygon</span></code> or <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -216,14 +269,14 @@ Ignored if <code class="docutils literal notranslate"><span class="pre">width_fi
 
 <dl class="py method">
 <dt id="litholog.bed.Bed.compatible_with">
-<code class="sig-name descname">compatible_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed.compatible_with" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compatible_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed.compatible_with"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed.compatible_with" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check that <code class="docutils literal notranslate"><span class="pre">self.data</span></code> and <code class="docutils literal notranslate"><span class="pre">other.data</span></code> have compatible <code class="docutils literal notranslate"><span class="pre">values</span></code> shapes and matching <code class="docutils literal notranslate"><span class="pre">data</span></code> key order.</p>
 <p>NOTE: Should both have to be constructed from similar dtypes, or just have concatable <cite>values</cite>?</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="litholog.bed.Bed.get_values">
-<code class="sig-name descname">get_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exclude_keys</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed.get_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exclude_keys</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed.get_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed.get_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter for <code class="docutils literal notranslate"><span class="pre">values</span></code> that allows dropping <code class="docutils literal notranslate"><span class="pre">exclude_keys</span></code> (e.g., sample depths) from array</p>
 </dd></dl>
 
@@ -235,13 +288,13 @@ Ignored if <code class="docutils literal notranslate"><span class="pre">width_fi
 
 <dl class="py method">
 <dt id="litholog.bed.Bed.max_field">
-<code class="sig-name descname">max_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed.max_field" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">max_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed.max_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed.max_field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the maximum value of <code class="docutils literal notranslate"><span class="pre">data[key]</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it doesn’t exist.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="litholog.bed.Bed.min_field">
-<code class="sig-name descname">min_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed.min_field" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">min_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed.min_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed.min_field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the minimum value of <code class="docutils literal notranslate"><span class="pre">data[key]</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it doesn’t exist.</p>
 </dd></dl>
 
@@ -259,7 +312,7 @@ Ignored if <code class="docutils literal notranslate"><span class="pre">width_fi
 
 <dl class="py method">
 <dt id="litholog.bed.Bed.resample_data">
-<code class="sig-name descname">resample_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depth_key</span></em>, <em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'linear'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed.resample_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">resample_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depth_key</span></em>, <em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'linear'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed.resample_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed.resample_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resample data to approximately <code class="docutils literal notranslate"><span class="pre">step</span></code>, but preserving at least top/base samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -274,7 +327,7 @@ Ignored if <code class="docutils literal notranslate"><span class="pre">width_fi
 
 <dl class="py method">
 <dt id="litholog.bed.Bed.spans">
-<code class="sig-name descname">spans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.bed.Bed.spans" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">spans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/bed.html#Bed.spans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.bed.Bed.spans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines if position <code class="docutils literal notranslate"><span class="pre">d</span></code> is within this <code class="docutils literal notranslate"><span class="pre">Bed</span></code>.
 Overridden from <code class="docutils literal notranslate"><span class="pre">striplog.Interval</span></code> to accomodate small tolerance <code class="docutils literal notranslate"><span class="pre">eps</span></code></p>
 <dl class="field-list simple">
@@ -304,7 +357,7 @@ Overridden from <code class="docutils literal notranslate"><span class="pre">str
 Also specify default csv/DataFrame fields to map to `Bed</cite> attributes/data.</p>
 <dl class="py function">
 <dt id="litholog.defaults.gs2litho">
-<code class="sig-prename descclassname">litholog.defaults.</code><code class="sig-name descname">gs2litho</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">'psi'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.defaults.gs2litho" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.defaults.</code><code class="sig-name descname">gs2litho</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">'psi'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/defaults.html#gs2litho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.defaults.gs2litho" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map grainsize value <cite>gs</cite> to <cite>striplog.Component</cite>.</p>
 <p>If <cite>gs</cite> is None or np.nan, maps to ‘missing’ Component.</p>
 <p>If <cite>units</cite> is ‘mm’ or ‘phi’, will convert to ‘psi’ first.</p>
@@ -318,31 +371,31 @@ See more at <a class="reference external" href="https://en.wikipedia.org/wiki/Gr
 <p>Utility functions.</p>
 <dl class="py function">
 <dt id="litholog.utils.safelen">
-<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">safelen</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.utils.safelen" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">safelen</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/utils.html#safelen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.utils.safelen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the length of an array or iterable, or 1 for literals.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="litholog.utils.saferep">
-<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">saferep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.utils.saferep" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">saferep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/utils.html#saferep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.utils.saferep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Repeat <cite>x</cite> to array of length <cite>n</cite> if it’s a literal, or check that <cite>len(x) == n</cite> if it’s iterable.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="litholog.utils.string2array_matlab">
-<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">string2array_matlab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.utils.string2array_matlab" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">string2array_matlab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/utils.html#string2array_matlab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.utils.string2array_matlab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse matlab-style array string (e.g., “1.0, 2.0, 3.0”) to float array.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="litholog.utils.string2array_pandas">
-<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">string2array_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.utils.string2array_pandas" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">string2array_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/utils.html#string2array_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.utils.string2array_pandas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse pandas-style array string (e.g, “[1.0 2.0 3.0]”) to float array.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="litholog.utils.strings2array">
-<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">strings2array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elems</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.utils.strings2array" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.utils.</code><code class="sig-name descname">strings2array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elems</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/utils.html#strings2array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.utils.strings2array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert iterable of numeric strings to (float) array.</p>
 </dd></dl>
 
@@ -356,48 +409,48 @@ See more at <a class="reference external" href="https://en.wikipedia.org/wiki/Gr
 </dl>
 <dl class="py function">
 <dt id="litholog.wentworth.gs2name">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">gs2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.gs2name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">gs2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#gs2name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.gs2name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.gs2phi">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">gs2phi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.gs2phi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">gs2phi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#gs2phi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.gs2phi" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.gs2psi">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">gs2psi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.gs2psi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">gs2psi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#gs2psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.gs2psi" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.phi2gs">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">phi2gs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.phi2gs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">phi2gs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#phi2gs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.phi2gs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.phi2name">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">phi2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.phi2name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">phi2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#phi2name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.phi2name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.phi2psi">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">phi2psi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.phi2psi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">phi2psi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#phi2psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.phi2psi" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.psi2gs">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2gs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.psi2gs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2gs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#psi2gs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.psi2gs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.psi2name">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">[('colloid', - 10), ('clay', - 8), ('vf_silt', - 7), ('f_silt', - 6), ('m_silt', - 5), ('c_silt', - 4), ('vf_sand', - 3), ('f_sand', - 2), ('m_sand', - 1), ('c_sand', 0), ('vc_sand', 1), ('vf_gravel', 2), ('f_gravel', 3), ('m_gravel', 4), ('c_gravel', 5), ('vc_gravel', 6), ('cobble', 8), ('boulder', None)]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.psi2name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">['colloid', - 10, 'clay', - 8, 'vf_silt', - 7, 'f_silt', - 6, 'm_silt', - 5, 'c_silt', - 4, 'vf_sand', - 3, 'f_sand', - 2, 'm_sand', - 1, 'c_sand', 0, 'vc_sand', 1, 'vf_gravel', 2, 'f_gravel', 3, 'm_gravel', 4, 'c_gravel', 5, 'vc_gravel', 6, 'cobble', 8, 'boulder', None]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#psi2name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.psi2name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map single <cite>psi</cite> value to Wentworth bin name.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="litholog.wentworth.psi2phi">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2phi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#litholog.wentworth.psi2phi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2phi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#psi2phi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.psi2phi" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

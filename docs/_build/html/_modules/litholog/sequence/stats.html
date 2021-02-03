@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>litholog.sequence.stats &mdash; litholog 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> litholog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_basics.html#Plotting-a-BedSequence">Plotting a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_basics.html#Simple-plotting">Simple plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_basics.html#Adding-intra-Bed-grain-size-data-to-a-plot">Adding intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data to a plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_basics.html#Other-plotting-methods">Other plotting methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../litholog_demo_data.html">Demo of <code class="docutils literal notranslate"><span class="pre">litholog</span></code> functionality using the included demo data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Load-the-demo-data-from-a-csv-using-pandas">Load the demo data from a csv using pandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Use-wentworth-to-make-log2-grain-size-data">Use <code class="docutils literal notranslate"><span class="pre">wentworth</span></code> to make log2 grain size data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Convert-dataframe-to-BedSequences">Convert dataframe to <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code>s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Basic-data-retrieval-from-a-BedSequence-and-its-Beds">Basic data retrieval from a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> and its <code class="docutils literal notranslate"><span class="pre">Bed</span></code>s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#BedSequence"><code class="docutils literal notranslate"><span class="pre">BedSequence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Bed"><code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Basic-plotting">Basic plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Including-intra-Bed-grain-size-data-in-a-plot">Including intra-<code class="docutils literal notranslate"><span class="pre">Bed</span></code> grain-size data in a plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../litholog_demo_data.html#Extracting-fining-upwards-profiles-from-a-Bed">Extracting fining-upwards profiles from a <code class="docutils literal notranslate"><span class="pre">Bed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Flipping-the-order-of-a-BedSequence">Flipping the order of a BedSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../litholog_demo_data.html#Plot-mulitple-logs-at-the-same-scale-(i.e.,-a-correlation-panel)">Plot mulitple logs at the same scale (i.e., a correlation panel)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">litholog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>litholog.sequence.stats</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for litholog.sequence.stats</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Sequence stats + related.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">gaussian_filter1d</span>
+
+
+<div class="viewcode-block" id="filter_nan_gaussian"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.stats.filter_nan_gaussian">[docs]</a><span class="k">def</span> <span class="nf">filter_nan_gaussian</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gaussian convolution. (Allows intensity to leak into the NaN area.)</span>
+
+<span class="sd">    If `noise` magnitude given, adds uniform noise.</span>
+
+<span class="sd">    Implementation from stackoverflow answer:</span>
+<span class="sd">        https://stackoverflow.com/a/36307291/7128154</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gauss</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">gauss</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">gauss</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">gauss</span> <span class="o">=</span> <span class="n">gaussian_filter1d</span><span class="p">(</span><span class="n">gauss</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="n">cval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">norm</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">arr</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">gaussian_filter1d</span><span class="p">(</span><span class="n">norm</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="n">cval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># avoid RuntimeWarning: invalid value encountered in true_divide</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">norm</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="p">)</span>
+    <span class="n">gauss</span> <span class="o">=</span> <span class="n">gauss</span> <span class="o">/</span> <span class="n">norm</span>
+
+    <span class="c1"># Add uniform noise, restricted positive</span>
+    <span class="k">if</span> <span class="n">noise</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gauss</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">noise</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">gauss</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">gauss</span><span class="p">[</span><span class="n">gauss</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Restore NaN</span>
+    <span class="n">gauss</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">arr</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="k">return</span> <span class="n">gauss</span></div>
+
+
+
+<div class="viewcode-block" id="SequenceStatsMixin"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.stats.SequenceStatsMixin">[docs]</a><span class="k">class</span> <span class="nc">SequenceStatsMixin</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the plot/viz interface for `BedSequence`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all pairs of adjacent Beds, ignoring any pairs with either Bed &#39;missing&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">non_missing</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="s1">&#39;missing&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lithology</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lithology</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="n">non_missing</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">net_to_gross</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns (total thickness of &#39;sand&#39; Beds) / (total thickness of all Beds)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">is_sand</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">bed</span><span class="p">:</span> <span class="n">bed</span><span class="o">.</span><span class="n">lithology</span> <span class="o">==</span> <span class="s1">&#39;sand&#39;</span>
+        <span class="n">sand_th</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">bed</span><span class="o">.</span><span class="n">thickness</span> <span class="k">for</span> <span class="n">bed</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="n">is_sand</span><span class="p">,</span> <span class="bp">self</span><span class="p">)])</span>
+
+        <span class="n">not_missing</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">bed</span><span class="p">:</span> <span class="n">bed</span><span class="o">.</span><span class="n">lithology</span> <span class="o">!=</span> <span class="s1">&#39;missing&#39;</span>
+        <span class="n">total_th</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">bed</span><span class="o">.</span><span class="n">thickness</span> <span class="k">for</span> <span class="n">bed</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="n">not_missing</span><span class="p">,</span> <span class="bp">self</span><span class="p">)])</span>
+
+        <span class="k">return</span> <span class="n">sand_th</span> <span class="o">/</span> <span class="n">total_th</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">amalgamation_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        1. dont count mud on mud contacts</span>
+<span class="sd">        2. find sand on sand contacts</span>
+<span class="sd">        3. divide sand-on-sand contacts by total number of contacts</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total_contacts</span><span class="p">,</span> <span class="n">sand_contacts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">upper</span><span class="p">,</span> <span class="n">lower</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">upper</span><span class="o">.</span><span class="n">lithology</span> <span class="o">==</span> <span class="n">lower</span><span class="o">.</span><span class="n">lithology</span> <span class="o">==</span> <span class="s1">&#39;sand&#39;</span><span class="p">:</span>
+                <span class="n">sand_contacts</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">upper</span><span class="o">.</span><span class="n">lithology</span> <span class="o">==</span> <span class="n">lower</span><span class="o">.</span><span class="n">lithology</span> <span class="o">==</span> <span class="s1">&#39;mud&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">upper</span><span class="o">.</span><span class="n">lithology</span> <span class="o">==</span> <span class="s1">&#39;missing&#39;</span> <span class="ow">or</span> <span class="n">lower</span><span class="o">.</span><span class="n">lithology</span> <span class="o">==</span> <span class="s1">&#39;missing&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">total_contacts</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sand_contacts</span> <span class="o">/</span> <span class="n">total_contacts</span>
+        <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.</span>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_hurst_K</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">take_log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes Hurst K ``log(R(n)/S(n)) / log(x.size / 2)`` for 1D array ``x``</span>
+
+<span class="sd">        Used below in public ``hurst_K`` and ``hurst_D`` methods.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Can only compute _rescaled_range on 1D series `x`&#39;</span>
+        <span class="k">if</span> <span class="n">safe</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">UserWarning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cannot use field of size </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1"> with ``safe=True``&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">take_log</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="n">Rn</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">Sn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">Rn</span> <span class="o">/</span> <span class="n">Sn</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="SequenceStatsMixin.hurst_K"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.stats.SequenceStatsMixin.hurst_K">[docs]</a>    <span class="k">def</span> <span class="nf">hurst_K</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">lithology</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Hurst K value for data from a sequence ``field``.</span>
+
+<span class="sd">        If ``safe``, will only accept fields with at least 20 values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">lithology</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hurst_K</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="n">safe</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SequenceStatsMixin.hurst_D"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.stats.SequenceStatsMixin.hurst_D">[docs]</a>    <span class="k">def</span> <span class="nf">hurst_D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">lithology</span><span class="p">,</span> <span class="n">take_log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">return_K</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns (D, p, K) if ``return_K``, else (D, p)</span>
+<span class="sd">        where:</span>
+<span class="sd">            D : Bootstrapped Hurst value from ``nsamples`` resamples</span>
+<span class="sd">            p : p-value of ``D``</span>
+<span class="sd">            K : Hurst K value with original values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">lithology</span><span class="p">)</span>
+        <span class="n">K</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hurst_K</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">take_log</span><span class="o">=</span><span class="n">take_log</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="n">safe</span><span class="p">)</span>
+
+        <span class="n">ks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsamples</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsamples</span><span class="p">):</span>
+            <span class="n">_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">ks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hurst_K</span><span class="p">(</span><span class="n">_sample</span><span class="p">,</span> <span class="n">take_log</span><span class="o">=</span><span class="n">take_log</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="n">safe</span><span class="p">)</span>
+
+        <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">ks</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">ks</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ks</span> <span class="o">&gt;=</span> <span class="n">K</span><span class="p">)</span> <span class="o">/</span> <span class="n">nsamples</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_K</span> <span class="k">else</span> <span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SequenceStatsMixin.pseudo_gamma_simple"><a class="viewcode-back" href="../../../source/litholog.sequence.html#litholog.sequence.stats.SequenceStatsMixin.pseudo_gamma_simple">[docs]</a>    <span class="k">def</span> <span class="nf">pseudo_gamma_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">gs_field</span><span class="o">=</span><span class="s1">&#39;grain_size_mm&#39;</span><span class="p">,</span>
+                        <span class="n">depth_field</span><span class="o">=</span><span class="s1">&#39;depth_m&#39;</span><span class="p">,</span>
+                        <span class="n">resolution</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                        <span class="n">gs_cutoff</span><span class="o">=</span><span class="mf">0.0625</span><span class="p">,</span>
+                        <span class="n">gamma_range</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span>
+                        <span class="n">sigma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                        <span class="n">noise</span><span class="o">=</span><span class="mf">10.</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute a &#39;pseudo&#39; gamma ray log by thresholding `gs_field` + Gaussian convolution.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        gs_field: str</span>
+<span class="sd">            Which field to use for grainsize</span>
+<span class="sd">        depth_field: str</span>
+<span class="sd">            Which field to use for depth</span>
+<span class="sd">        resolution: float</span>
+<span class="sd">            Scale at which to resample (in `depth_field` units)</span>
+<span class="sd">        gs_cutoff: float</span>
+<span class="sd">            Cutoff for `gs_field` thresholding. Values above/below get mapped to `gamma_range`.</span>
+<span class="sd">        gamma_range: tuple or list</span>
+<span class="sd">            (low, high) sample values for `gs_field` values (above, below) `gs_cuttoff`.</span>
+<span class="sd">        sigma: float</span>
+<span class="sd">            Width of Gaussian, in depth units.</span>
+<span class="sd">        noise: float or None</span>
+<span class="sd">            Magnitude of uniform noise to add, or None to add no noise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ds</span><span class="p">,</span> <span class="n">gs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">depth_field</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">gs_field</span><span class="p">)</span>
+
+        <span class="c1"># Make sure depth field is monotonic</span>
+        <span class="n">step_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">step_pos</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{depth_field}</span><span class="s1"> data is non-monotonic&#39;</span>
+
+        <span class="c1"># Must be increasing to use `np.interp`</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">step_pos</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">ds</span><span class="p">,</span> <span class="n">gs</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">gs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Resample `gs_field` at `resolution`</span>
+        <span class="n">nsamples</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">z</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="o">.</span><span class="n">z</span><span class="p">)</span> <span class="o">//</span> <span class="n">resolution</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">sampled_ds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">nsamples</span><span class="p">),</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">sampled_gs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">sampled_ds</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">gs</span><span class="p">)</span>
+
+        <span class="c1"># Threshold `sampled_gs` to `gamma_range`</span>
+        <span class="n">nan_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">sampled_gs</span><span class="p">))</span>
+        <span class="n">sampled_gs</span><span class="p">[</span><span class="n">nan_idxs</span><span class="p">]</span> <span class="o">=</span> <span class="n">gamma_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pseudo_gr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sampled_gs</span> <span class="o">&lt;</span> <span class="n">gs_cutoff</span><span class="p">,</span> <span class="n">gamma_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma_range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># Convolution</span>
+        <span class="n">pseudo_gr</span> <span class="o">=</span> <span class="n">gaussian_filter1d</span><span class="p">(</span><span class="n">pseudo_gr</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">noise</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pseudo_gr</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">noise</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">pseudo_gr</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+            <span class="n">pseudo_gr</span><span class="p">[</span><span class="n">pseudo_gr</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">pseudo_gr</span><span class="p">[</span><span class="n">nan_idxs</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="k">return</span> <span class="n">sampled_ds</span><span class="p">,</span> <span class="n">pseudo_gr</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ross Meyer, Zane Jobe.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

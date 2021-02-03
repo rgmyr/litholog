@@ -35,7 +35,11 @@ master_doc = 'index'
 # ones.
 extensions = [
     'sphinx.ext.napoleon',
+    'nbsphinx',
+    'nbsphinx_link',
+    'sphinx.ext.viewcode'
 ]
+
 napoleon_google_docstring = False
 napoleon_use_param = False
 
