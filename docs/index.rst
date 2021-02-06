@@ -44,6 +44,7 @@ The data provided with this demo come from two papers, and all logs were digitiz
 
    litholog_basics
    litholog_demo_data
+   source/modules
 
 Indices and tables
 ==================

@@ -32,14 +32,15 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="litholog.sequence package" href="litholog.sequence.html" />
+    <link rel="prev" title="litholog" href="modules.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,7 +86,7 @@
             
             
               <p class="caption"><span class="caption-text">Tutorials:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../litholog_basics.html"><code class="docutils literal notranslate"><span class="pre">litholog</span></code> basics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Default-Colors-and-Legend">Default Colors and Legend</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../litholog_basics.html#Make-a-Bed-and-a-BedSequence-from-scratch">Make a <code class="docutils literal notranslate"><span class="pre">Bed</span></code> and a <code class="docutils literal notranslate"><span class="pre">BedSequence</span></code> from scratch</a></li>
@@ -121,6 +122,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Statistics-for-BedSequences">Statistics for BedSequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Pseudo-gamma-ray-log">Pseudo gamma-ray log</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../litholog_demo_data.html#Other-methods-not-demonstrated-here">Other methods not demonstrated here</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">litholog</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">litholog package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="litholog.sequence.html">litholog.sequence package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-litholog.bed">litholog.bed module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-litholog.defaults">litholog.defaults module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-litholog.utils">litholog.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-litholog.wentworth">litholog.wentworth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-litholog">Module contents</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -170,6 +187,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">litholog</a> &raquo;</li>
         
       <li>litholog package</li>
     
@@ -444,7 +463,7 @@ See more at <a class="reference external" href="https://en.wikipedia.org/wiki/Gr
 
 <dl class="py function">
 <dt id="litholog.wentworth.psi2name">
-<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">['colloid', - 10, 'clay', - 8, 'vf_silt', - 7, 'f_silt', - 6, 'm_silt', - 5, 'c_silt', - 4, 'vf_sand', - 3, 'f_sand', - 2, 'm_sand', - 1, 'c_sand', 0, 'vc_sand', 1, 'vf_gravel', 2, 'f_gravel', 3, 'm_gravel', 4, 'c_gravel', 5, 'vc_gravel', 6, 'cobble', 8, 'boulder', None]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#psi2name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.psi2name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">litholog.wentworth.</code><code class="sig-name descname">psi2name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">psi</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">[('colloid', - 10), ('clay', - 8), ('vf_silt', - 7), ('f_silt', - 6), ('m_silt', - 5), ('c_silt', - 4), ('vf_sand', - 3), ('f_sand', - 2), ('m_sand', - 1), ('c_sand', 0), ('vc_sand', 1), ('vf_gravel', 2), ('f_gravel', 3), ('m_gravel', 4), ('c_gravel', 5), ('vc_gravel', 6), ('cobble', 8), ('boulder', None)]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/litholog/wentworth.html#psi2name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#litholog.wentworth.psi2name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map single <cite>psi</cite> value to Wentworth bin name.</p>
 </dd></dl>
 
@@ -464,6 +483,10 @@ See more at <a class="reference external" href="https://en.wikipedia.org/wiki/Gr
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="litholog.sequence.html" class="btn btn-neutral float-right" title="litholog.sequence package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-left" title="litholog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
