@@ -1,5 +1,7 @@
 # LithoLog
 
+See documentation at https://litholog.readthedocs.io
+
 ### Overview
 
 `litholog` is focused on providing a framework to digitize, store, plot, and analyze sedimentary graphic logs (example log shown below).
