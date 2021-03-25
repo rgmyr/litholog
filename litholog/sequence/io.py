@@ -100,6 +100,7 @@ def preprocess_dataframe(df, topcol, basecol=None, thickcol=None, tol=1e-3):
         if depth_good:
             return depth_sorted
 
+        print('Problem with `df`:\n', df)
         raise UserWarning('Check that thicknesses are consistent!')
 
 
