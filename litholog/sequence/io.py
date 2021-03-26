@@ -30,7 +30,6 @@ def check_order(df, topcol, basecol, raise_error=True):
 def check_samples(df, depthcol, valuecol):
     """
     Check that `depth_col` and `sample_col` have equal number of entries per bed,
-    (and that `depths` fall between `topcol` and `basecol`?)
 
     Returns
     -------
@@ -40,10 +39,7 @@ def check_samples(df, depthcol, valuecol):
     dsizes = df[depthcol].apply(utils.safelen)
     vsizes = df[valuecol].apply(utils.safelen)
 
-    if (dsizes == vsizes).all():
-        return True
-    else:
-        return False
+    return (dsizes == vsizes).all()
 
 
 def check_thicknesses(df, topcol, thickcol, order, basecol='bases', tol=1e-3):
@@ -137,9 +133,10 @@ class SequenceIOMixin(ABC):
         datacols : list(str), optional
             Columns to use as `Bed` data. Should reference numeric columns only.
         metacols : list(str), optional
-            Columns to read into `metadata` dict attribute. Should reference columns with a single unique value?
+            Columns to read into `metadata` dict attribute.
         metasafe : bool, optional
-            If True, enforce that df[metacols] have a single unique value per-column. Otherwise attach all unique values.
+            If True, enforces that df[metacols] have a single unique value per column.
+            If False, just attaches any + all unique values.
         """
         # Check for data/meta column presence
         missing_data_cols = [c for c in datacols if c not in df.columns]
@@ -152,7 +149,7 @@ class SequenceIOMixin(ABC):
         try:
             df = preprocess_dataframe(df, topcol, basecol=basecol, thickcol=thickcol, tol=tol)
         except Exception as e:
-            print('Problem with:', df)
+            print('Problem with DataFrame:\n', df)
             raise(e)
 
         basecol = basecol or 'bases'
@@ -182,9 +179,9 @@ class SequenceIOMixin(ABC):
     @classmethod
     def from_numpy(self, arr, other=None, keys=None, split_key=None, component_map=None):
         """
-        Implement a method to convert numpy (e.g., from GAN) to `BedSequence` instance.
+        TODO: Implement a method to convert numpy (e.g., from GAN) to `BedSequence` instance.
 
         Use keys from `other`, or provide list of `keys`.
-        Provide a `component_map` to group samples into `Bed`s.
+        Provide a `component_map` to group samples into `Bed`s?
         """
         pass
