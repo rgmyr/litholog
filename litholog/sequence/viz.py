@@ -83,6 +83,7 @@ class SequenceVizMixin(ABC):
              exxon_style=False,
              yticks_right=False,
              set_ylim=True,
+             xlim=None,
              ax=None,
              **kwargs):
         """
@@ -132,7 +133,10 @@ class SequenceVizMixin(ABC):
             #print('Set_ylim: ', [self.start.z, self.stop.z])
 
         # Determine xlimits
-        if width_field:
+        if xlim is not None:
+            min_width, max_width = xlim
+            assert min_width < max_width, f'Is {xlim} a valid `xlim`?'
+        elif width_field:
             # Set from the data if possible
             min_width = floor(self.min_field(width_field) - 1)
             max_width = ceil(self.max_field(width_field) + 1)
