@@ -60,11 +60,15 @@ class SequenceStatsMixin(ABC):
         """
         is_sand = lambda bed: bed.lithology == 'sand'
         sand_th = sum([bed.thickness for bed in filter(is_sand, self)])
+        
+        is_gravel = lambda bed: bed.lithology=='gravel'
+        gravel_th = sum([bed.thickness for bed in filter(is_gravel, self)])
+
 
         not_missing = lambda bed: bed.lithology != 'missing'
         total_th = sum([bed.thickness for bed in filter(not_missing, self)])
 
-        return sand_th / total_th
+        return (sand_th + gravel_th) / total_th
 
 
     @property
