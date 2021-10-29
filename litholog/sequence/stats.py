@@ -56,14 +56,13 @@ class SequenceStatsMixin(ABC):
     @property
     def net_to_gross(self):
         """
-        Returns (total thickness of 'sand' Beds) / (total thickness of all Beds)
+        Returns (total thickness of 'sand' & 'gravel' Beds) / (total thickness of all Beds)
         """
         is_sand = lambda bed: bed.lithology == 'sand'
         sand_th = sum([bed.thickness for bed in filter(is_sand, self)])
-        
-        is_gravel = lambda bed: bed.lithology=='gravel'
-        gravel_th = sum([bed.thickness for bed in filter(is_gravel, self)])
 
+        is_gravel = lambda bed: bed.lithology == 'gravel'
+        gravel_th = sum([bed.thickness for bed in filter(is_gravel, self)])
 
         not_missing = lambda bed: bed.lithology != 'missing'
         total_th = sum([bed.thickness for bed in filter(not_missing, self)])
@@ -77,10 +76,14 @@ class SequenceStatsMixin(ABC):
         1. dont count mud on mud contacts
         2. find sand on sand contacts
         3. divide sand-on-sand contacts by total number of contacts
+
+        NOTE: 'gravel' counts as a 'sand'
         """
+        sand_like = ('sand', 'gravel')
+
         total_contacts, sand_contacts = 0, 0
         for upper, lower in self.interfaces:
-            if upper.lithology == lower.lithology == 'sand':
+            if all(litho in sand_like for litho in (upper.lithology, lower.lithology)):
                 sand_contacts += 1
             elif upper.lithology == lower.lithology == 'mud':
                 continue
