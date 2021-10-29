@@ -1,2 +1,2 @@
 *.ipynb linguist-documentation=Python
-*.m linguist-vendored=false
+StratCoreProcessor_Matlab/* linguist-vendored
